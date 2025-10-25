@@ -54,7 +54,7 @@ export default function SiteNavbar() {
         {/* Logo + Brand */}
         <Link href="/" className="flex items-center gap-2" aria-label="Solvix Core Home">
           <Image
-            src="/images/solvixlogo.png"
+            src="/solvixlogo.png"
             alt="Solvix Core logo"
             width={56}
             height={48}
