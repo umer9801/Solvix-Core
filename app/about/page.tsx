@@ -20,22 +20,23 @@ export default function AboutPage() {
       </Head>
 
       <main className="relative overflow-hidden bg-background text-foreground">
-       {/* 🌟 Hero Section */}
+    {/* 🌟 Hero Section */}
 <section className="relative h-[90vh] w-full flex items-center justify-center text-center">
+
   {/* Autoplay Background Video */}
   <video
     autoPlay
     loop
     muted
     playsInline
-    className="absolute inset-0 h-full w-full object-cover opacity-50"
+    className="absolute inset-0 h-full w-full object-cover"
   >
-    <source src="/videos/Solvix core.mp4" type="video/mp4" />
+    <source src="/videos/about.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
-  {/* Dark Gradient Overlay */}
-  <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+  {/* ✅ SOFT TRANSPARENT OVERLAY + BLUR */}
+  <div className="absolute inset-0 bg-black/20 backdrop-blur-[2px]" />
 
   <div className="relative z-10 px-4">
     <motion.h1
@@ -63,6 +64,7 @@ export default function AboutPage() {
 
   </div>
 </section>
+
 
         {/* Mission */}
         <section className="mx-auto max-w-5xl px-6 py-20 text-center animate-fade-up">
