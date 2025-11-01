@@ -72,21 +72,21 @@ export default function SiteFooter() {
             {/* Mail */}
             <li>
               <a
-                href="mailto:hello@solvixcore.com"
+                href="mailto:info@solvixcore.com"
                 className="flex items-center gap-2 text-sky-600 hover:text-sky-700 transition-colors hover:underline"
               >
-                <Mail className="h-4 w-4" /> hello@solvixcore.com
+                <Mail className="h-4 w-4" /> info@solvixcore.com
               </a>
             </li>
             {/* WhatsApp */}
             <li>
               <a
-                href="https://wa.me/15551234567"
+                href="https://wa.me/14315335035"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-green-600 hover:text-green-700 transition-colors hover:underline"
               >
-                <MessageCircle className="h-4 w-4" /> WhatsApp: +1 555 123 4567
+                <MessageCircle className="h-4 w-4" /> WhatsApp: +1 (431) 533-5035
               </a>
             </li>
           </ul>
