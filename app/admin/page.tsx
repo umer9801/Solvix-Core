@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import ErrorBoundary from "@/components/error-boundary"
 
 interface Contact {
   _id: string
@@ -26,7 +27,7 @@ interface DashboardStats {
   conversionRate: number
 }
 
-export default function AdminDashboard() {
+function AdminDashboardContent() {
   const [stats, setStats] = useState<DashboardStats>({
     totalContacts: 0,
     newContacts: 0,
@@ -42,49 +43,116 @@ export default function AdminDashboard() {
   const [currentTime, setCurrentTime] = useState(new Date())
 
   useEffect(() => {
-    fetchDashboardData()
-    const timer = setInterval(() => setCurrentTime(new Date()), 1000)
-    return () => clearInterval(timer)
+    try {
+      fetchDashboardData()
+      const timer = setInterval(() => {
+        try {
+          setCurrentTime(new Date())
+        } catch (error) {
+          console.error('Error updating time:', error)
+        }
+      }, 1000)
+      return () => clearInterval(timer)
+    } catch (error) {
+      console.error('Error in useEffect:', error)
+    }
   }, [])
 
   const fetchDashboardData = async () => {
     try {
       setLoading(true)
-      const response = await fetch('/api/admin/contacts?limit=5')
-      const data = await response.json()
+      console.log('Fetching dashboard data...')
       
-      if (response.ok && data.contacts) {
+      const response = await fetch('/api/admin/contacts?limit=5')
+      console.log('Response status:', response.status)
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      
+      const data = await response.json()
+      console.log('Response data:', data)
+      
+      if (data.contacts && Array.isArray(data.contacts)) {
         const contacts = data.contacts
         setRecentContacts(contacts)
         
-        // Calculate comprehensive stats
-        const now = new Date()
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-        const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000)
-        const monthAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000)
+        // Calculate comprehensive stats with error handling
+        try {
+          const now = new Date()
+          const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+          const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000)
+          const monthAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000)
 
-        const totalContacts = contacts.length
-        const newContacts = contacts.filter((c: Contact) => c.status === 'new').length
-        const contactedContacts = contacts.filter((c: Contact) => c.status === 'contacted').length
-        const closedContacts = contacts.filter((c: Contact) => c.status === 'closed').length
-        const todayContacts = contacts.filter((c: Contact) => new Date(c.createdAt) >= today).length
-        const weekContacts = contacts.filter((c: Contact) => new Date(c.createdAt) >= weekAgo).length
-        const monthContacts = contacts.filter((c: Contact) => new Date(c.createdAt) >= monthAgo).length
-        const conversionRate = totalContacts > 0 ? Math.round((closedContacts / totalContacts) * 100) : 0
+          const totalContacts = contacts.length || 0
+          const newContacts = contacts.filter((c: Contact) => c?.status === 'new').length || 0
+          const contactedContacts = contacts.filter((c: Contact) => c?.status === 'contacted').length || 0
+          const closedContacts = contacts.filter((c: Contact) => c?.status === 'closed').length || 0
+          const todayContacts = contacts.filter((c: Contact) => {
+            try {
+              return c?.createdAt && new Date(c.createdAt) >= today
+            } catch {
+              return false
+            }
+          }).length || 0
+          const weekContacts = contacts.filter((c: Contact) => {
+            try {
+              return c?.createdAt && new Date(c.createdAt) >= weekAgo
+            } catch {
+              return false
+            }
+          }).length || 0
+          const monthContacts = contacts.filter((c: Contact) => {
+            try {
+              return c?.createdAt && new Date(c.createdAt) >= monthAgo
+            } catch {
+              return false
+            }
+          }).length || 0
+          const conversionRate = totalContacts > 0 ? Math.round((closedContacts / totalContacts) * 100) : 0
 
-        setStats({
-          totalContacts,
-          newContacts,
-          contactedContacts,
-          closedContacts,
-          todayContacts,
-          weekContacts,
-          monthContacts,
-          conversionRate
-        })
+          setStats({
+            totalContacts,
+            newContacts,
+            contactedContacts,
+            closedContacts,
+            todayContacts,
+            weekContacts,
+            monthContacts,
+            conversionRate
+          })
+        } catch (statsError) {
+          console.error('Error calculating stats:', statsError)
+          // Set default stats on error
+          setStats({
+            totalContacts: 0,
+            newContacts: 0,
+            contactedContacts: 0,
+            closedContacts: 0,
+            todayContacts: 0,
+            weekContacts: 0,
+            monthContacts: 0,
+            conversionRate: 0
+          })
+        }
+      } else {
+        console.warn('No contacts data received or invalid format')
+        setRecentContacts([])
       }
     } catch (error) {
       console.error('Failed to fetch dashboard data:', error)
+      // Set default values on error
+      setRecentContacts([])
+      setStats({
+        totalContacts: 0,
+        newContacts: 0,
+        contactedContacts: 0,
+        closedContacts: 0,
+        todayContacts: 0,
+        weekContacts: 0,
+        monthContacts: 0,
+        conversionRate: 0
+      })
     } finally {
       setLoading(false)
     }
@@ -115,14 +183,20 @@ export default function AdminDashboard() {
                 <div>
                   <h1 className="text-xl font-bold text-slate-900">Solvix Core Admin</h1>
                   <p className="text-sm text-slate-500">
-                    {currentTime.toLocaleDateString('en-US', { 
-                      weekday: 'short', 
-                      month: 'short', 
-                      day: 'numeric'
-                    })} • {currentTime.toLocaleTimeString('en-US', { 
-                      hour: '2-digit', 
-                      minute: '2-digit'
-                    })}
+                    {(() => {
+                      try {
+                        return `${currentTime.toLocaleDateString('en-US', { 
+                          weekday: 'short', 
+                          month: 'short', 
+                          day: 'numeric'
+                        })} • ${currentTime.toLocaleTimeString('en-US', { 
+                          hour: '2-digit', 
+                          minute: '2-digit'
+                        })}`
+                      } catch {
+                        return 'Dashboard'
+                      }
+                    })()}
                   </p>
                 </div>
               </div>
@@ -351,7 +425,13 @@ export default function AdminDashboard() {
                           {contact.status}
                         </Badge>
                         <p className="text-xs text-slate-500">
-                          {new Date(contact.createdAt).toLocaleDateString()}
+                          {(() => {
+                            try {
+                              return new Date(contact.createdAt).toLocaleDateString()
+                            } catch {
+                              return 'Unknown date'
+                            }
+                          })()}
                         </p>
                       </div>
                     </div>
@@ -414,15 +494,25 @@ export default function AdminDashboard() {
               <Button 
                 onClick={async () => {
                   try {
+                    console.log('Running system check...')
                     const response = await fetch('/api/test-yahoo')
+                    console.log('System check response:', response.status)
+                    
+                    if (!response.ok) {
+                      throw new Error(`HTTP error! status: ${response.status}`)
+                    }
+                    
                     const result = await response.json()
+                    console.log('System check result:', result)
+                    
                     if (result.success) {
                       alert('✅ All systems operational!')
                     } else {
-                      alert('⚠️ System check failed')
+                      alert('⚠️ System check failed: ' + (result.error || 'Unknown error'))
                     }
                   } catch (error) {
-                    alert('❌ System check error')
+                    console.error('System check error:', error)
+                    alert('❌ System check error: ' + (error instanceof Error ? error.message : 'Unknown error'))
                   }
                 }}
                 variant="outline" 
@@ -435,5 +525,13 @@ export default function AdminDashboard() {
         </Card>
       </div>
     </div>
+  )
+}
+
+export default function AdminDashboard() {
+  return (
+    <ErrorBoundary>
+      <AdminDashboardContent />
+    </ErrorBoundary>
   )
 }
