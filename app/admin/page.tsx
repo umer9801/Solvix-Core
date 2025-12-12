@@ -1,0 +1,439 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+
+interface Contact {
+  _id: string
+  name: string
+  email: string
+  service?: string
+  status: 'new' | 'contacted' | 'closed'
+  createdAt: string
+}
+
+interface DashboardStats {
+  totalContacts: number
+  newContacts: number
+  contactedContacts: number
+  closedContacts: number
+  todayContacts: number
+  weekContacts: number
+  monthContacts: number
+  conversionRate: number
+}
+
+export default function AdminDashboard() {
+  const [stats, setStats] = useState<DashboardStats>({
+    totalContacts: 0,
+    newContacts: 0,
+    contactedContacts: 0,
+    closedContacts: 0,
+    todayContacts: 0,
+    weekContacts: 0,
+    monthContacts: 0,
+    conversionRate: 0
+  })
+  const [recentContacts, setRecentContacts] = useState<Contact[]>([])
+  const [loading, setLoading] = useState(true)
+  const [currentTime, setCurrentTime] = useState(new Date())
+
+  useEffect(() => {
+    fetchDashboardData()
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const fetchDashboardData = async () => {
+    try {
+      setLoading(true)
+      const response = await fetch('/api/admin/contacts?limit=5')
+      const data = await response.json()
+      
+      if (response.ok && data.contacts) {
+        const contacts = data.contacts
+        setRecentContacts(contacts)
+        
+        // Calculate comprehensive stats
+        const now = new Date()
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+        const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000)
+        const monthAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000)
+
+        const totalContacts = contacts.length
+        const newContacts = contacts.filter((c: Contact) => c.status === 'new').length
+        const contactedContacts = contacts.filter((c: Contact) => c.status === 'contacted').length
+        const closedContacts = contacts.filter((c: Contact) => c.status === 'closed').length
+        const todayContacts = contacts.filter((c: Contact) => new Date(c.createdAt) >= today).length
+        const weekContacts = contacts.filter((c: Contact) => new Date(c.createdAt) >= weekAgo).length
+        const monthContacts = contacts.filter((c: Contact) => new Date(c.createdAt) >= monthAgo).length
+        const conversionRate = totalContacts > 0 ? Math.round((closedContacts / totalContacts) * 100) : 0
+
+        setStats({
+          totalContacts,
+          newContacts,
+          contactedContacts,
+          closedContacts,
+          todayContacts,
+          weekContacts,
+          monthContacts,
+          conversionRate
+        })
+      }
+    } catch (error) {
+      console.error('Failed to fetch dashboard data:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="text-slate-600 font-medium">Loading Dashboard...</p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-50">
+      {/* Header */}
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">🛡️</span>
+                </div>
+                <div>
+                  <h1 className="text-xl font-bold text-slate-900">Solvix Core Admin</h1>
+                  <p className="text-sm text-slate-500">
+                    {currentTime.toLocaleDateString('en-US', { 
+                      weekday: 'short', 
+                      month: 'short', 
+                      day: 'numeric'
+                    })} • {currentTime.toLocaleTimeString('en-US', { 
+                      hour: '2-digit', 
+                      minute: '2-digit'
+                    })}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-3">
+              <Button variant="outline" size="sm" className="gap-2">
+                🔔 Notifications
+              </Button>
+              <Button onClick={fetchDashboardData} variant="outline" size="sm" className="gap-2">
+                🔄 Refresh
+              </Button>
+              <Badge variant="secondary" className="bg-green-100 text-green-700">
+                🟢 Online
+              </Badge>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div className="max-w-7xl mx-auto px-6 py-8 space-y-8">
+        {/* Key Metrics */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="border-0 shadow-sm bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-blue-100 text-sm font-medium">Total Contacts</p>
+                  <p className="text-3xl font-bold mt-1">{stats.totalContacts}</p>
+                  <p className="text-blue-200 text-xs mt-1">All time</p>
+                </div>
+                <span className="text-4xl">👥</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-sm bg-gradient-to-r from-amber-500 to-orange-500 text-white">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-amber-100 text-sm font-medium">New Inquiries</p>
+                  <p className="text-3xl font-bold mt-1">{stats.newContacts}</p>
+                  <p className="text-amber-200 text-xs mt-1">Pending review</p>
+                </div>
+                <span className="text-4xl">⏰</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-sm bg-gradient-to-r from-purple-500 to-indigo-500 text-white">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-purple-100 text-sm font-medium">In Progress</p>
+                  <p className="text-3xl font-bold mt-1">{stats.contactedContacts}</p>
+                  <p className="text-purple-200 text-xs mt-1">Being handled</p>
+                </div>
+                <span className="text-4xl">💬</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-sm bg-gradient-to-r from-emerald-500 to-green-500 text-white">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-emerald-100 text-sm font-medium">Completed</p>
+                  <p className="text-3xl font-bold mt-1">{stats.closedContacts}</p>
+                  <p className="text-emerald-200 text-xs mt-1">{stats.conversionRate}% success rate</p>
+                </div>
+                <span className="text-4xl">✅</span>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Analytics Overview */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <Card className="border-0 shadow-sm">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                📅 Today's Activity
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center py-4">
+                <div className="text-4xl font-bold text-slate-900 mb-2">{stats.todayContacts}</div>
+                <p className="text-slate-600 text-sm">New contacts today</p>
+                <div className="mt-4 bg-slate-100 rounded-full h-2">
+                  <div 
+                    className="bg-blue-600 h-2 rounded-full transition-all duration-500"
+                    style={{ width: `${Math.min((stats.todayContacts / 10) * 100, 100)}%` }}
+                  ></div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-sm">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                📊 This Week
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center py-4">
+                <div className="text-4xl font-bold text-slate-900 mb-2">{stats.weekContacts}</div>
+                <p className="text-slate-600 text-sm">Weekly inquiries</p>
+                <div className="mt-4 bg-slate-100 rounded-full h-2">
+                  <div 
+                    className="bg-purple-600 h-2 rounded-full transition-all duration-500"
+                    style={{ width: `${Math.min((stats.weekContacts / 25) * 100, 100)}%` }}
+                  ></div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-sm">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                📈 This Month
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center py-4">
+                <div className="text-4xl font-bold text-slate-900 mb-2">{stats.monthContacts}</div>
+                <p className="text-slate-600 text-sm">Monthly growth</p>
+                <div className="mt-4 bg-slate-100 rounded-full h-2">
+                  <div 
+                    className="bg-green-600 h-2 rounded-full transition-all duration-500"
+                    style={{ width: `${Math.min((stats.monthContacts / 50) * 100, 100)}%` }}
+                  ></div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Quick Actions */}
+          <Card className="border-0 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center gap-2">
+                ⚡ Quick Actions
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button asChild className="w-full justify-between h-12 bg-blue-600 hover:bg-blue-700">
+                <Link href="/admin/contacts?status=new">
+                  <div className="flex items-center gap-3">
+                    <span className="text-xl">⏰</span>
+                    <div className="text-left">
+                      <div className="font-medium">Review New Contacts</div>
+                      <div className="text-sm opacity-90">{stats.newContacts} pending</div>
+                    </div>
+                  </div>
+                  <span className="text-xl">→</span>
+                </Link>
+              </Button>
+
+              <Button asChild variant="outline" className="w-full justify-between h-12">
+                <Link href="/admin/contacts">
+                  <div className="flex items-center gap-3">
+                    <span className="text-xl">👥</span>
+                    <div className="text-left">
+                      <div className="font-medium">Manage All Contacts</div>
+                      <div className="text-sm text-slate-600">{stats.totalContacts} total</div>
+                    </div>
+                  </div>
+                  <span className="text-xl">→</span>
+                </Link>
+              </Button>
+
+              <Button asChild variant="outline" className="w-full justify-between h-12">
+                <Link href="mailto:solvixcore@yahoo.com">
+                  <div className="flex items-center gap-3">
+                    <span className="text-xl">📧</span>
+                    <div className="text-left">
+                      <div className="font-medium">Send Email</div>
+                      <div className="text-sm text-slate-600">Quick compose</div>
+                    </div>
+                  </div>
+                  <span className="text-xl">→</span>
+                </Link>
+              </Button>
+
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                <Button variant="outline" size="sm" className="gap-2">
+                  📥 Export Data
+                </Button>
+                <Button variant="outline" size="sm" className="gap-2">
+                  🔍 Advanced Filter
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Recent Activity */}
+          <Card className="border-0 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center gap-2">
+                📊 Recent Activity
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {recentContacts.length > 0 ? (
+                <div className="space-y-4">
+                  {recentContacts.slice(0, 4).map((contact) => (
+                    <div key={contact._id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-medium">
+                          {contact.name.charAt(0).toUpperCase()}
+                        </div>
+                        <div>
+                          <p className="font-medium text-slate-900">{contact.name}</p>
+                          <p className="text-sm text-slate-600">{contact.email}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <Badge 
+                          variant={contact.status === 'new' ? 'destructive' : contact.status === 'contacted' ? 'default' : 'secondary'}
+                          className="mb-1"
+                        >
+                          {contact.status}
+                        </Badge>
+                        <p className="text-xs text-slate-500">
+                          {new Date(contact.createdAt).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  <Button asChild variant="outline" className="w-full mt-4">
+                    <Link href="/admin/contacts">
+                      View All Contacts
+                    </Link>
+                  </Button>
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <span className="text-6xl mb-4 block">📭</span>
+                  <p className="text-slate-600 mb-4">No recent activity</p>
+                  <Button asChild variant="outline" size="sm">
+                    <Link href="/contact">Visit Contact Form</Link>
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* System Status */}
+        <Card className="border-0 shadow-sm">
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center gap-2">
+              🛡️ System Status
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  <span className="font-medium text-green-800">Email System</span>
+                </div>
+                <Badge className="bg-green-100 text-green-700">Active</Badge>
+              </div>
+
+              <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                  <span className="font-medium text-blue-800">Database</span>
+                </div>
+                <Badge className="bg-blue-100 text-blue-700">Connected</Badge>
+              </div>
+
+              <div className="flex items-center justify-between p-4 bg-purple-50 rounded-lg border border-purple-200">
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                  <span className="font-medium text-purple-800">Contact Form</span>
+                </div>
+                <Badge className="bg-purple-100 text-purple-700">Online</Badge>
+              </div>
+            </div>
+
+            <div className="mt-6 flex justify-center">
+              <Button 
+                onClick={async () => {
+                  try {
+                    const response = await fetch('/api/test-yahoo')
+                    const result = await response.json()
+                    if (result.success) {
+                      alert('✅ All systems operational!')
+                    } else {
+                      alert('⚠️ System check failed')
+                    }
+                  } catch (error) {
+                    alert('❌ System check error')
+                  }
+                }}
+                variant="outline" 
+                className="gap-2"
+              >
+                🔧 Run System Check
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
+}
