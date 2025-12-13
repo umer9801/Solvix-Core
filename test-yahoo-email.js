@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 async function testYahooEmail() {
   console.log('🧪 Testing Yahoo Email Configuration...');
   
-  const transporter = nodemailer.createTransporter({
+  const transporter = nodemailer.createTransport({
     host: 'smtp.mail.yahoo.com',
     port: 587,
     secure: false,
