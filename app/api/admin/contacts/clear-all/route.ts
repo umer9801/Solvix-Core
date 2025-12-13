@@ -6,8 +6,8 @@ import Contact from "@/lib/models/Contact"
 // Check admin authentication
 async function checkAuth() {
   const cookieStore = await cookies()
-  const hasAuth = cookieStore.get("admin_auth")?.value === "1"
-  return hasAuth
+  const sessionToken = cookieStore.get("admin_session")?.value
+  return !!sessionToken // Return true if session token exists
 }
 
 export async function DELETE() {

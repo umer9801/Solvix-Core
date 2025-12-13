@@ -41,29 +41,56 @@ function AdminDashboardContent() {
   const [recentContacts, setRecentContacts] = useState<Contact[]>([])
   const [loading, setLoading] = useState(true)
   const [currentTime, setCurrentTime] = useState(new Date())
+  const [lastRefresh, setLastRefresh] = useState<Date | null>(null)
+  const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
     try {
       fetchDashboardData()
-      const timer = setInterval(() => {
+      
+      // Update time every second
+      const timeTimer = setInterval(() => {
         try {
           setCurrentTime(new Date())
         } catch (error) {
           console.error('Error updating time:', error)
         }
       }, 1000)
-      return () => clearInterval(timer)
+      
+      // Auto-refresh dashboard data every 30 seconds
+      const refreshTimer = setInterval(() => {
+        try {
+          console.log('Auto-refreshing dashboard data...')
+          fetchDashboardData()
+        } catch (error) {
+          console.error('Error auto-refreshing:', error)
+        }
+      }, 30000) // 30 seconds
+      
+      return () => {
+        clearInterval(timeTimer)
+        clearInterval(refreshTimer)
+      }
     } catch (error) {
       console.error('Error in useEffect:', error)
     }
   }, [])
 
-  const fetchDashboardData = async () => {
+  const fetchDashboardData = async (isManualRefresh = false) => {
     try {
-      setLoading(true)
+      if (isManualRefresh) {
+        setRefreshing(true)
+      } else {
+        setLoading(true)
+      }
       console.log('Fetching dashboard data...')
       
-      const response = await fetch('/api/admin/contacts?limit=100')
+      const response = await fetch('/api/admin/contacts?limit=100', {
+        cache: 'no-store', // Prevent caching
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      })
       console.log('Response status:', response.status)
       
       if (!response.ok) {
@@ -72,6 +99,7 @@ function AdminDashboardContent() {
       
       const data = await response.json()
       console.log('Response data:', data)
+      setLastRefresh(new Date())
       
       if (data.contacts && Array.isArray(data.contacts)) {
         const contacts = data.contacts
@@ -155,6 +183,7 @@ function AdminDashboardContent() {
       })
     } finally {
       setLoading(false)
+      setRefreshing(false)
     }
   }
 
@@ -208,15 +237,28 @@ function AdminDashboardContent() {
               </Button>
               <Button 
                 onClick={() => {
-                  console.log('Force refreshing dashboard data...')
-                  fetchDashboardData()
+                  console.log('Manual refresh triggered...')
+                  fetchDashboardData(true)
                 }} 
                 variant="outline" 
                 size="sm" 
                 className="gap-2"
+                disabled={refreshing}
               >
-                🔄 Refresh Data
+                {refreshing ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                    Refreshing...
+                  </>
+                ) : (
+                  <>🔄 Refresh Data</>
+                )}
               </Button>
+              {lastRefresh && (
+                <span className="text-xs text-slate-500">
+                  Last updated: {lastRefresh.toLocaleTimeString()}
+                </span>
+              )}
               <Badge variant="secondary" className="bg-green-100 text-green-700">
                 🟢 Online
               </Badge>
@@ -394,8 +436,42 @@ function AdminDashboardContent() {
               </Button>
 
               <div className="grid grid-cols-2 gap-3 pt-2">
-                <Button variant="outline" size="sm" className="gap-2">
-                  📥 Export Data
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="gap-2"
+                  onClick={async () => {
+                    try {
+                      const testData = {
+                        name: `Test Contact ${Date.now()}`,
+                        email: 'c4rigniter@gmail.com',
+                        company: 'Admin Test',
+                        service: 'customized-websites',
+                        budget: '$5,000 - $10,000',
+                        preferred: 'email',
+                        message: 'This is a test contact created from admin dashboard.',
+                        country: 'canada'
+                      }
+                      
+                      const response = await fetch('/api/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(testData)
+                      })
+                      
+                      if (response.ok) {
+                        alert('✅ Test contact created successfully!')
+                        fetchDashboardData(true) // Refresh immediately
+                      } else {
+                        alert('❌ Failed to create test contact')
+                      }
+                    } catch (error) {
+                      console.error('Error creating test contact:', error)
+                      alert('❌ Error creating test contact')
+                    }
+                  }}
+                >
+                  🧪 Test Contact
                 </Button>
                 <Button 
                   variant="destructive" 
@@ -403,22 +479,20 @@ function AdminDashboardContent() {
                   className="gap-2"
                   onClick={async () => {
                     if (confirm('⚠️ Are you sure you want to delete ALL contact data? This action cannot be undone!')) {
-                      if (confirm('🚨 FINAL WARNING: This will permanently delete all contacts from the database. Type "DELETE" to confirm.')) {
-                        try {
-                          const response = await fetch('/api/admin/contacts/clear-all', {
-                            method: 'DELETE'
-                          })
-                          const result = await response.json()
-                          if (response.ok) {
-                            alert(`✅ Successfully deleted ${result.deletedCount} contacts`)
-                            fetchDashboardData() // Refresh the dashboard
-                          } else {
-                            alert('❌ Failed to delete contacts: ' + result.error)
-                          }
-                        } catch (error) {
-                          console.error('Error deleting contacts:', error)
-                          alert('❌ Error deleting contacts')
+                      try {
+                        const response = await fetch('/api/admin/contacts/clear-all', {
+                          method: 'DELETE'
+                        })
+                        const result = await response.json()
+                        if (response.ok) {
+                          alert(`✅ Successfully deleted ${result.deletedCount} contacts`)
+                          fetchDashboardData(true) // Refresh the dashboard
+                        } else {
+                          alert('❌ Failed to delete contacts: ' + result.error)
                         }
+                      } catch (error) {
+                        console.error('Error deleting contacts:', error)
+                        alert('❌ Error deleting contacts')
                       }
                     }
                   }}
