@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -33,7 +33,12 @@ export default function SiteNavbar() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const { country, setCountry, config } = useCountry()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const linkClass = (target: string) =>
     cn(
@@ -50,19 +55,19 @@ export default function SiteNavbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             
-            {/* Logo */}
+            {/* Logo - Larger Size */}
             <Link href="/" className="flex items-center space-x-3 group">
               <div className="relative">
                 <Image
                   src="/logo.png"
                   alt="Solvix Core"
-                  width={40}
-                  height={40}
-                  className="rounded-lg transition-all duration-500 drop-shadow-lg group-hover:drop-shadow-xl logo-flip"
+                  width={48}
+                  height={48}
+                  className="rounded-lg transition-all duration-500 drop-shadow-lg group-hover:drop-shadow-xl group-hover:scale-110 logo-flip"
                   priority
                 />
               </div>
-              <span className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+              <span className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
                 Solvix Core
               </span>
             </Link>
@@ -114,38 +119,44 @@ export default function SiteNavbar() {
                 </DropdownMenuContent>
               </DropdownMenu>
 
+              <Link href="/blog" className={linkClass("/blog")}>
+                Blog
+              </Link>
+
               <Link href="/contact" className={linkClass("/contact")}>
                 Contact
               </Link>
 
               {/* Country Selector */}
-              <DropdownMenu key="country-dropdown">
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className="px-3 py-2 text-sm font-medium rounded-xl transition-all duration-300 text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50"
-                  >
-                    <Globe className="w-4 h-4 mr-2" />
-                    {config.flag} {config.name}
-                    <ChevronDown className="ml-1 h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48">
-                  {Object.entries(countryConfigs).map(([key, countryConfig]) => (
-                    <DropdownMenuItem 
-                      key={key} 
-                      onClick={() => setCountry(key as Country)}
-                      className={cn(
-                        "cursor-pointer",
-                        country === key ? "bg-blue-50 text-blue-600" : ""
-                      )}
+              {mounted && (
+                <DropdownMenu key="country-dropdown">
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      className="px-3 py-2 text-sm font-medium rounded-xl transition-all duration-300 text-gray-700 hover:text-blue-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50"
                     >
-                      <span className="mr-2">{countryConfig.flag}</span>
-                      {countryConfig.name}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
+                      <Globe className="w-4 h-4 mr-2" />
+                      {config.flag} {config.name}
+                      <ChevronDown className="ml-1 h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48">
+                    {Object.entries(countryConfigs).map(([key, countryConfig]) => (
+                      <DropdownMenuItem 
+                        key={key} 
+                        onClick={() => setCountry(key as Country)}
+                        className={cn(
+                          "cursor-pointer",
+                          country === key ? "bg-blue-50 text-blue-600" : ""
+                        )}
+                      >
+                        <span className="mr-2">{countryConfig.flag}</span>
+                        {countryConfig.name}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
             </div>
 
             {/* Modern Mobile menu button */}
@@ -238,6 +249,19 @@ export default function SiteNavbar() {
                 </div>
 
                 <Link
+                  href="/blog"
+                  className={cn(
+                    "block px-4 py-3 text-sm font-medium rounded-lg",
+                    pathname === "/blog" || pathname.startsWith("/blog/")
+                      ? "bg-blue-600 text-white"
+                      : "text-gray-700 hover:bg-gray-100"
+                  )}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Blog
+                </Link>
+
+                <Link
                   href="/contact"
                   className={cn(
                     "block px-4 py-3 text-sm font-medium rounded-lg",
@@ -251,33 +275,35 @@ export default function SiteNavbar() {
                 </Link>
 
                 {/* Mobile Country Selector - Dropdown Style */}
-                <div className="border-t border-gray-200 mt-2 pt-2">
-                  <div className="px-4 py-2">
-                    <div className="text-sm font-semibold text-gray-900 flex items-center mb-2">
-                      <Globe className="w-4 h-4 mr-2" />
-                      Select Country
-                    </div>
-                    <div className="relative">
-                      <select
-                        value={country}
-                        onChange={(e) => {
-                          setCountry(e.target.value as Country)
-                          setIsOpen(false)
-                        }}
-                        className="w-full px-3 py-2 text-sm bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer"
-                      >
-                        {Object.entries(countryConfigs).map(([key, countryConfig]) => (
-                          <option key={key} value={key}>
-                            {countryConfig.flag} {countryConfig.name}
-                          </option>
-                        ))}
-                      </select>
-                      <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                        <ChevronDown className="w-4 h-4 text-gray-400" />
+                {mounted && (
+                  <div className="border-t border-gray-200 mt-2 pt-2">
+                    <div className="px-4 py-2">
+                      <div className="text-sm font-semibold text-gray-900 flex items-center mb-2">
+                        <Globe className="w-4 h-4 mr-2" />
+                        Select Country
+                      </div>
+                      <div className="relative">
+                        <select
+                          value={country}
+                          onChange={(e) => {
+                            setCountry(e.target.value as Country)
+                            setIsOpen(false)
+                          }}
+                          className="w-full px-3 py-2 text-sm bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer"
+                        >
+                          {Object.entries(countryConfigs).map(([key, countryConfig]) => (
+                            <option key={key} value={key}>
+                              {countryConfig.flag} {countryConfig.name}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                          <ChevronDown className="w-4 h-4 text-gray-400" />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           )}

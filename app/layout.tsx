@@ -13,17 +13,17 @@ import MobileOptimizations from "@/components/mobile-optimizations"
 // public/logo.png
 
 export const metadata: Metadata = {
-  title: "Solvix Core — AI-Powered Digital Solutions",
+  title: "Solvix Core — AI-Powered Digital Solutions | Canada & Pakistan",
   description:
-    "Transform your business with Solvix Core's cutting-edge AI automation, modern web development, and digital innovation services. Empowering Canadian businesses to thrive in the digital age.",
+    "Leading AI automation and digital transformation company serving Canada and Pakistan. Expert web development, AI consulting, and business automation solutions. Transform your business with cutting-edge technology and drive growth in competitive markets.",
   generator: "Next.js",
   metadataBase: new URL('https://solvixcore.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: "Solvix Core — AI-Powered Digital Solutions",
-    description: "Transform your business with cutting-edge AI automation, modern web development, and digital innovation services.",
+    title: "Solvix Core — AI-Powered Digital Solutions | Canada & Pakistan",
+    description: "Leading AI automation and digital transformation company serving Canada and Pakistan. Expert web development, AI consulting, and business automation solutions.",
     url: 'https://solvixcore.com',
     siteName: 'Solvix Core',
     images: [
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Solvix Core — AI-Powered Digital Solutions",
-    description: "Transform your business with cutting-edge AI automation and digital innovation services.",
+    title: "Solvix Core — AI-Powered Digital Solutions | Canada & Pakistan",
+    description: "Leading AI automation and digital transformation company serving Canada and Pakistan. Expert web development, AI consulting, and business automation solutions.",
     images: ['/logo.png'],
   },
   robots: {
@@ -55,108 +55,163 @@ export const metadata: Metadata = {
     },
   },
   keywords: [
-    // AI + Automation
+    // Primary Brand Keywords
+    "Solvix Core",
+    "AI automation company",
+    "digital transformation services",
+    "business automation solutions",
+    
+    // CANADA - High-Volume Keywords
     "AI business solutions Canada",
+    "digital transformation Canada",
+    "web development services Canada",
     "AI automation services Canada",
-    "AI for small business Canada",
-    "AI consulting Canada",
-    "AI workflow automation Canada",
-    "Machine learning consulting Canada",
-    "Agentic AI solutions Canada",
-    "LangChain developers Canada",
-    "OpenAI agent developers Canada",
-    "AI chatbot development Canada",
-    "AI integration services Canada",
-    "AI SaaS development Canada",
-    "AI business empowerment Canada",
-    "AI adoption Canada",
-    "AI-driven productivity Canada",
-    "AI automation consulting Canada",
-
-    // Business Empowerment (Trending)
-    "Business empowerment solutions Canada",
-    "Business process automation Canada",
-    "SMB business growth Canada",
-    "SME tech solutions Canada",
-    "Business digital empowerment Canada",
-    "Business workflow optimization Canada",
-    "Business technology modernization Canada",
-    "Business AI adoption consulting Canada",
-    "Digital workflow automation Canada",
-
-    // Digital Transformation
-    "Digital transformation Canada",
-    "AI digital transformation Canada",
-    "Business digital transformation Canada",
-    "Technology adoption for business Canada",
-    "Enterprise modernization Canada",
-    "Digital transformation consulting Canada",
-    "Cloud transformation services Canada",
-    "Cloud modernization Canada",
-
-    // Web + Software Dev
-    "Custom website development Canada",
-    "Next.js development Canada",
-    "Web application development Canada",
-    "Affordable web development Canada",
-    "Custom CRM development Canada",
-    "API integration services Canada",
-    "Landing page development Canada",
-    "Full stack development Canada",
-    "Custom dashboard development Canada",
-
-    // Ecommerce (Hot in Canada)
-    "Ecommerce website development Canada",
+    "business process automation Canada",
+    "custom software development Canada",
+    "AI consulting services Canada",
+    "machine learning consulting Canada",
+    "cloud solutions Canada",
+    "ecommerce development Canada",
     "Shopify development Canada",
-    "Ecommerce automation Canada",
-    "Product catalog development Canada",
-    "Ecommerce growth solutions Canada",
-    "Online store branding Canada",
-
-    // Cybersecurity (Rising trend)
-    "Cybersecurity services Canada",
-    "IT security consulting Canada",
-    "Cloud security services Canada",
-    "Business data protection Canada",
-    "Cyber protection for SMB Canada",
-
-    // Cloud + Infrastructure
-    "Cloud solutions Canada",
-    "Cloud migration services Canada",
-    "Cloud-native applications Canada",
-    "Serverless development Canada",
-
-    // Business Apps
-    "Mobile app development Canada",
-    "Cross platform app development Canada",
-    "Progressive web app development Canada",
-
-    // Marketing & Lead Growth
-    "Business lead generation Canada",
-    "Search engine optimization Canada",
-    "SEO services for business Canada",
-    "Paid advertising management Canada",
-    "Digital media marketing Canada",
-
-    // Branding & Media
-    "Graphic design services Canada",
-    "Business branding Canada",
-    "Video editing services Canada",
-    "Short-form content editing Canada",
-    "Business promotional videos Canada",
-    "Social media branding Canada",
-
-    // Workforce + AI Training
-    "AI workforce enablement Canada",
-    "AI employee training Canada",
-    "AI business consulting Canada",
-    "Workforce automation Canada",
-
-    // General
-    "Digital agency Canada",
-    "Tech services Canada",
-    "IT support for business Canada",
-    "Software company Canada",
+    "mobile app development Canada",
+    "SEO services Canada",
+    "digital marketing Canada",
+    "IT consulting Canada",
+    "cybersecurity services Canada",
+    "data analytics Canada",
+    "CRM development Canada",
+    "API integration Canada",
+    "cloud migration Canada",
+    
+    // CANADA - City-Specific (High Search Volume)
+    "AI services Toronto",
+    "web development Vancouver",
+    "digital transformation Montreal",
+    "AI consulting Calgary",
+    "software development Ottawa",
+    "IT services Edmonton",
+    "tech solutions Winnipeg",
+    "AI automation Halifax",
+    
+    // PAKISTAN - High-Volume Keywords
+    "AI business solutions Pakistan",
+    "digital transformation Pakistan",
+    "web development services Pakistan",
+    "AI automation services Pakistan",
+    "software development Pakistan",
+    "IT services Pakistan",
+    "ecommerce development Pakistan",
+    "mobile app development Pakistan",
+    "digital marketing Pakistan",
+    "SEO services Pakistan",
+    "business automation Pakistan",
+    "cloud solutions Pakistan",
+    "AI consulting Pakistan",
+    "machine learning Pakistan",
+    "data science Pakistan",
+    "cybersecurity Pakistan",
+    "fintech solutions Pakistan",
+    "edtech development Pakistan",
+    "startup solutions Pakistan",
+    "SME digitization Pakistan",
+    
+    // PAKISTAN - City-Specific (High Search Volume)
+    "AI services Karachi",
+    "web development Lahore",
+    "software development Islamabad",
+    "IT services Rawalpindi",
+    "digital marketing Faisalabad",
+    "AI consulting Multan",
+    "tech solutions Peshawar",
+    "app development Quetta",
+    
+    // Trending Technologies (Both Markets)
+    "ChatGPT integration",
+    "OpenAI development",
+    "LangChain development",
+    "AI chatbot development",
+    "machine learning models",
+    "natural language processing",
+    "computer vision solutions",
+    "predictive analytics",
+    "blockchain development",
+    "IoT solutions",
+    "AR VR development",
+    "progressive web apps",
+    "React development",
+    "Next.js development",
+    "Node.js development",
+    "Python development",
+    
+    // Industry-Specific (High Demand)
+    "healthcare AI solutions",
+    "fintech development",
+    "edtech platforms",
+    "retail automation",
+    "manufacturing AI",
+    "logistics optimization",
+    "real estate tech",
+    "agriculture technology",
+    "government digitization",
+    "nonprofit tech solutions",
+    
+    // Business Types (Both Markets)
+    "startup development services",
+    "SME digital transformation",
+    "enterprise AI solutions",
+    "small business automation",
+    "corporate digital strategy",
+    "franchise technology solutions",
+    "B2B software development",
+    "B2C app development",
+    "SaaS development",
+    "marketplace development",
+    
+    // Service-Specific Long-tail
+    "custom AI chatbot development",
+    "automated workflow solutions",
+    "intelligent document processing",
+    "predictive maintenance systems",
+    "customer behavior analytics",
+    "inventory management systems",
+    "CRM automation solutions",
+    "social media automation",
+    "email marketing automation",
+    "lead generation systems",
+    
+    // Competitive Keywords
+    "best AI company Canada",
+    "top web development Pakistan",
+    "leading digital agency",
+    "affordable AI solutions",
+    "enterprise software development",
+    "custom business applications",
+    "scalable cloud solutions",
+    "secure web applications",
+    "mobile-first development",
+    "responsive web design",
+    
+    // Local Business Keywords
+    "Canadian AI startup",
+    "Pakistan tech company",
+    "North American AI services",
+    "South Asian digital solutions",
+    "cross-border technology services",
+    "international software development",
+    "remote AI consulting",
+    "global digital transformation",
+    
+    // Emerging Trends (2024-2025)
+    "generative AI solutions",
+    "AI-powered automation",
+    "intelligent process automation",
+    "conversational AI development",
+    "AI ethics consulting",
+    "responsible AI implementation",
+    "AI governance frameworks",
+    "sustainable technology solutions",
+    "green tech development",
+    "carbon-neutral software",
   ],
   icons: {
     icon: [
@@ -232,11 +287,28 @@ export default function RootLayout({
               "name": "Solvix Core",
               "url": "https://solvixcore.com",
               "logo": "https://solvixcore.com/logo.png",
-              "description": "AI-Powered Digital Solutions - Transform your business with cutting-edge AI automation, modern web development, and digital innovation services.",
-              "address": {
-                "@type": "PostalAddress",
-                "addressCountry": "CA"
-              },
+              "description": "Leading AI automation and digital transformation company serving Canada and Pakistan. Expert web development, AI consulting, and business automation solutions.",
+              "address": [
+                {
+                  "@type": "PostalAddress",
+                  "addressCountry": "CA",
+                  "addressRegion": "Manitoba"
+                },
+                {
+                  "@type": "PostalAddress", 
+                  "addressCountry": "PK"
+                }
+              ],
+              "areaServed": [
+                {
+                  "@type": "Country",
+                  "name": "Canada"
+                },
+                {
+                  "@type": "Country", 
+                  "name": "Pakistan"
+                }
+              ],
               "contactPoint": {
                 "@type": "ContactPoint",
                 "telephone": "+1-431-533-5035",
