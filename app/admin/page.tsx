@@ -63,7 +63,7 @@ function AdminDashboardContent() {
       setLoading(true)
       console.log('Fetching dashboard data...')
       
-      const response = await fetch('/api/admin/contacts?limit=5')
+      const response = await fetch('/api/admin/contacts?limit=100')
       console.log('Response status:', response.status)
       
       if (!response.ok) {
@@ -206,8 +206,16 @@ function AdminDashboardContent() {
               <Button variant="outline" size="sm" className="gap-2">
                 🔔 Notifications
               </Button>
-              <Button onClick={fetchDashboardData} variant="outline" size="sm" className="gap-2">
-                🔄 Refresh
+              <Button 
+                onClick={() => {
+                  console.log('Force refreshing dashboard data...')
+                  fetchDashboardData()
+                }} 
+                variant="outline" 
+                size="sm" 
+                className="gap-2"
+              >
+                🔄 Refresh Data
               </Button>
               <Badge variant="secondary" className="bg-green-100 text-green-700">
                 🟢 Online
@@ -389,8 +397,33 @@ function AdminDashboardContent() {
                 <Button variant="outline" size="sm" className="gap-2">
                   📥 Export Data
                 </Button>
-                <Button variant="outline" size="sm" className="gap-2">
-                  🔍 Advanced Filter
+                <Button 
+                  variant="destructive" 
+                  size="sm" 
+                  className="gap-2"
+                  onClick={async () => {
+                    if (confirm('⚠️ Are you sure you want to delete ALL contact data? This action cannot be undone!')) {
+                      if (confirm('🚨 FINAL WARNING: This will permanently delete all contacts from the database. Type "DELETE" to confirm.')) {
+                        try {
+                          const response = await fetch('/api/admin/contacts/clear-all', {
+                            method: 'DELETE'
+                          })
+                          const result = await response.json()
+                          if (response.ok) {
+                            alert(`✅ Successfully deleted ${result.deletedCount} contacts`)
+                            fetchDashboardData() // Refresh the dashboard
+                          } else {
+                            alert('❌ Failed to delete contacts: ' + result.error)
+                          }
+                        } catch (error) {
+                          console.error('Error deleting contacts:', error)
+                          alert('❌ Error deleting contacts')
+                        }
+                      }
+                    }
+                  }}
+                >
+                  🗑️ Clear All Data
                 </Button>
               </div>
             </CardContent>
@@ -491,35 +524,75 @@ function AdminDashboardContent() {
             </div>
 
             <div className="mt-6 flex justify-center">
-              <Button 
-                onClick={async () => {
-                  try {
-                    console.log('Running system check...')
-                    const response = await fetch('/api/test-yahoo')
-                    console.log('System check response:', response.status)
-                    
-                    if (!response.ok) {
-                      throw new Error(`HTTP error! status: ${response.status}`)
+              <div className="flex gap-2">
+                <Button 
+                  onClick={async () => {
+                    try {
+                      console.log('Running comprehensive system test...')
+                      const response = await fetch('/api/admin/test-system')
+                      console.log('System test response:', response.status)
+                      
+                      if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`)
+                      }
+                      
+                      const result = await response.json()
+                      console.log('System test result:', result)
+                      
+                      if (result.success) {
+                        const { database, contacts, email, environment } = result.results
+                        let message = '✅ System Test Results:\n\n'
+                        message += `📊 Database: ${database.status} (${database.details})\n`
+                        message += `👥 Contacts: ${contacts.count} found\n`
+                        message += `📧 Email: ${email.status} (${email.details})\n`
+                        message += `🔧 Environment: ${Object.entries(environment).map(([k,v]) => `${k}: ${v ? '✅' : '❌'}`).join(', ')}`
+                        alert(message)
+                      } else {
+                        alert('⚠️ System test failed: ' + (result.error || 'Unknown error'))
+                      }
+                    } catch (error) {
+                      console.error('System test error:', error)
+                      alert('❌ System test error: ' + (error instanceof Error ? error.message : 'Unknown error'))
                     }
-                    
-                    const result = await response.json()
-                    console.log('System check result:', result)
-                    
-                    if (result.success) {
-                      alert('✅ All systems operational!')
-                    } else {
-                      alert('⚠️ System check failed: ' + (result.error || 'Unknown error'))
+                  }}
+                  variant="outline" 
+                  size="sm"
+                  className="gap-2"
+                >
+                  🔧 System Test
+                </Button>
+                
+                <Button 
+                  onClick={async () => {
+                    try {
+                      console.log('Creating test contact...')
+                      const response = await fetch('/api/admin/test-system', { method: 'POST' })
+                      
+                      if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`)
+                      }
+                      
+                      const result = await response.json()
+                      console.log('Test contact result:', result)
+                      
+                      if (result.success) {
+                        alert(`✅ Test contact created!\nID: ${result.testContact.id}\nEmail test: ${result.emailTest?.success ? 'Success' : 'Failed'}`)
+                        fetchDashboardData() // Refresh dashboard
+                      } else {
+                        alert('⚠️ Test contact failed: ' + (result.error || 'Unknown error'))
+                      }
+                    } catch (error) {
+                      console.error('Test contact error:', error)
+                      alert('❌ Test contact error: ' + (error instanceof Error ? error.message : 'Unknown error'))
                     }
-                  } catch (error) {
-                    console.error('System check error:', error)
-                    alert('❌ System check error: ' + (error instanceof Error ? error.message : 'Unknown error'))
-                  }
-                }}
-                variant="outline" 
-                className="gap-2"
-              >
-                🔧 Run System Check
-              </Button>
+                  }}
+                  variant="outline" 
+                  size="sm"
+                  className="gap-2"
+                >
+                  🧪 Test Contact
+                </Button>
+              </div>
             </div>
           </CardContent>
         </Card>
