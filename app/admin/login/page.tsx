@@ -21,26 +21,57 @@ export default function AdminLoginPage() {
     setError(null)
     
     try {
+      console.log("Attempting login with:", { username: username.trim() })
+      
       const res = await fetch("/api/admin/login", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
         },
+        credentials: "include", // Important for cookies
         body: JSON.stringify({
           username: username.trim(),
           password: password.trim()
         }),
       })
       
+      console.log("Login response status:", res.status)
+      
       if (res.ok) {
         const data = await res.json()
+        console.log("Login response data:", data)
+        
         if (data.success) {
-          window.location.href = "/admin"
+          console.log("Login successful, redirecting to /admin")
+          
+          // Show success message briefly
+          setError(null)
+          
+          // Try multiple redirect methods
+          try {
+            console.log("Attempting router.push...")
+            router.push("/admin")
+            console.log("Router.push completed")
+          } catch (routerError) {
+            console.error("Router.push failed:", routerError)
+            console.log("Falling back to window.location...")
+            window.location.href = "/admin"
+          }
+          
+          // Additional fallback
+          setTimeout(() => {
+            console.log("Timeout fallback redirect...")
+            if (window.location.pathname === "/admin/login") {
+              window.location.replace("/admin")
+            }
+          }, 1000)
         } else {
           setError("Login failed. Please try again.")
         }
       } else {
         const data = await res.json().catch(() => ({}))
+        console.log("Login failed with data:", data)
+        
         if (res.status === 429) {
           setError("Too many failed attempts. Please wait 15 minutes before trying again.")
         } else {
