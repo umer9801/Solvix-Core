@@ -43,27 +43,21 @@ export default function AdminLoginPage() {
         
         if (data.success) {
           console.log("Login successful, redirecting to /admin")
+          console.log("Response headers:", res.headers)
           
-          // Show success message briefly
-          setError(null)
+          // Show success message
+          setError("Login successful! Redirecting...")
           
-          // Try multiple redirect methods
-          try {
-            console.log("Attempting router.push...")
-            router.push("/admin")
-            console.log("Router.push completed")
-          } catch (routerError) {
-            console.error("Router.push failed:", routerError)
-            console.log("Falling back to window.location...")
-            window.location.href = "/admin"
-          }
+          // Check if cookie was set
+          console.log("Current cookies:", document.cookie)
           
-          // Additional fallback
+          // Wait a moment for cookie to be set, then redirect
           setTimeout(() => {
-            console.log("Timeout fallback redirect...")
-            if (window.location.pathname === "/admin/login") {
-              window.location.replace("/admin")
-            }
+            console.log("Checking cookies before redirect:", document.cookie)
+            console.log("Redirecting to admin dashboard...")
+            
+            // Force a hard redirect to ensure cookies are sent
+            window.location.replace("/admin")
           }, 1000)
         } else {
           setError("Login failed. Please try again.")
@@ -171,10 +165,34 @@ export default function AdminLoginPage() {
             </Button>
           </form>
 
-          <div className="text-center pt-4 border-t border-white/10">
+          <div className="text-center pt-4 border-t border-white/10 space-y-3">
             <p className="text-xs text-slate-400">
               Secured with enterprise-grade encryption
             </p>
+            
+            {/* Debug buttons */}
+            <div className="flex gap-2 justify-center">
+              <button
+                type="button"
+                onClick={() => {
+                  console.log("Current cookies:", document.cookie)
+                  console.log("Current URL:", window.location.href)
+                }}
+                className="text-xs text-slate-400 hover:text-slate-200 underline"
+              >
+                Check Cookies
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  console.log("Manual redirect to /admin")
+                  window.location.href = "/admin"
+                }}
+                className="text-xs text-slate-400 hover:text-slate-200 underline"
+              >
+                Manual Redirect
+              </button>
+            </div>
           </div>
         </CardContent>
       </Card>

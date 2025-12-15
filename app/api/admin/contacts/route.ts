@@ -117,7 +117,10 @@ export async function PATCH(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
+    console.log('DELETE request received')
+    
     if (!await checkAuth()) {
+      console.log('DELETE: Authentication failed')
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
@@ -125,7 +128,16 @@ export async function DELETE(request: NextRequest) {
     }
 
     const body = await request.json()
+    console.log('DELETE request body:', body)
     const { contactId, contactIds } = body
+
+    if (!contactId && !contactIds) {
+      console.log('DELETE: Missing contactId or contactIds')
+      return NextResponse.json(
+        { error: 'Missing contactId or contactIds' },
+        { status: 400 }
+      )
+    }
 
     await client.connect()
     const db = client.db('solvixcore')
@@ -134,17 +146,16 @@ export async function DELETE(request: NextRequest) {
     let result
     if (contactIds && Array.isArray(contactIds)) {
       // Bulk delete
+      console.log('DELETE: Bulk delete for IDs:', contactIds)
       const objectIds = contactIds.map(id => new ObjectId(id))
       result = await collection.deleteMany({ _id: { $in: objectIds } })
     } else if (contactId) {
       // Single delete
+      console.log('DELETE: Single delete for ID:', contactId)
       result = await collection.deleteOne({ _id: new ObjectId(contactId) })
-    } else {
-      return NextResponse.json(
-        { error: 'Missing contactId or contactIds' },
-        { status: 400 }
-      )
     }
+
+    console.log('DELETE result:', result)
 
     return NextResponse.json({
       success: true,

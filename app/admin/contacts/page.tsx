@@ -43,6 +43,7 @@ export default function AdminContactsPage() {
   const [filter, setFilter] = useState('all')
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null)
   const [updating, setUpdating] = useState<string | null>(null)
+  const [deleting, setDeleting] = useState<string | null>(null)
 
   const fetchContacts = async () => {
     try {
@@ -50,11 +51,20 @@ export default function AdminContactsPage() {
       const params = new URLSearchParams()
       if (filter !== 'all') params.append('status', filter)
       
-      const response = await fetch(`/api/admin/contacts?${params}`)
+      console.log('Fetching contacts with filter:', filter)
+      const response = await fetch(`/api/admin/contacts?${params}`, {
+        credentials: 'include'
+      })
+      
+      console.log('Fetch contacts response status:', response.status)
       const data = await response.json()
+      console.log('Fetch contacts data:', data)
       
       if (data.success) {
-        setContacts(data.contacts)
+        setContacts(data.contacts || [])
+        console.log('Updated contacts state with', data.contacts?.length || 0, 'contacts')
+      } else {
+        console.error('Failed to fetch contacts:', data.error)
       }
     } catch (error) {
       console.error('Error fetching contacts:', error)
@@ -90,18 +100,39 @@ export default function AdminContactsPage() {
     if (!confirm('Are you sure you want to delete this contact?')) return
     
     try {
+      setDeleting(id)
+      console.log('Deleting contact with ID:', id)
+      
       const response = await fetch('/api/admin/contacts', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
         body: JSON.stringify({ contactId: id })
       })
 
+      console.log('Delete response status:', response.status)
+      
       if (response.ok) {
-        await fetchContacts()
+        const result = await response.json()
+        console.log('Delete result:', result)
+        
+        // Update UI immediately
+        setContacts(prev => prev.filter(contact => contact._id !== id))
         setSelectedContact(null)
+        
+        alert('Contact deleted successfully!')
+      } else {
+        const errorData = await response.json().catch(() => ({}))
+        console.error('Delete failed:', errorData)
+        alert(`Failed to delete contact: ${errorData.error || 'Unknown error'}`)
       }
     } catch (error) {
       console.error('Error deleting contact:', error)
+      alert('Network error while deleting contact')
+    } finally {
+      setDeleting(null)
     }
   }
 
@@ -305,8 +336,13 @@ export default function AdminContactsPage() {
                         size="sm"
                         variant="destructive"
                         onClick={() => deleteContact(contact._id)}
+                        disabled={deleting === contact._id}
                       >
-                        <Trash2 className="w-4 h-4" />
+                        {deleting === contact._id ? (
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                          <Trash2 className="w-4 h-4" />
+                        )}
                       </Button>
                     </div>
                   </div>
