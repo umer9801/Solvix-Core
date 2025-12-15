@@ -51,10 +51,12 @@ export default function AdminDashboard() {
   const [blogs, setBlogs] = useState<BlogSubmission[]>([])
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const fetchData = async () => {
     try {
       setRefreshing(true)
+      setError(null)
       console.log('Fetching admin data...')
       
       // Fetch contacts
@@ -67,13 +69,14 @@ export default function AdminDashboard() {
       if (contactsResponse.ok) {
         const contactsData = await contactsResponse.json()
         console.log('Contacts data:', contactsData)
-        setContacts(contactsData.contacts || [])
+        setContacts(Array.isArray(contactsData.contacts) ? contactsData.contacts : [])
       } else {
         console.error('Failed to fetch contacts:', contactsResponse.status)
         if (contactsResponse.status === 401) {
           window.location.href = '/admin/login'
           return
         }
+        setError(`Failed to fetch contacts: ${contactsResponse.status}`)
       }
 
       // Fetch blog submissions
@@ -86,18 +89,19 @@ export default function AdminDashboard() {
       if (blogsResponse.ok) {
         const blogsData = await blogsResponse.json()
         console.log('Blogs data:', blogsData)
-        setBlogs(blogsData.submissions || [])
+        setBlogs(Array.isArray(blogsData.submissions) ? blogsData.submissions : [])
       } else {
         console.error('Failed to fetch blog submissions:', blogsResponse.status)
         if (blogsResponse.status === 401) {
           window.location.href = '/admin/login'
           return
         }
+        setError(`Failed to fetch blog submissions: ${blogsResponse.status}`)
       }
 
     } catch (error) {
       console.error('Error fetching data:', error)
-      // Don't redirect on network errors, just log them
+      setError(error instanceof Error ? error.message : 'Unknown error occurred')
     } finally {
       setLoading(false)
       setRefreshing(false)
@@ -109,15 +113,20 @@ export default function AdminDashboard() {
   }, [])
 
   const stats = {
-    totalContacts: contacts.length,
-    newContacts: contacts.filter(c => c.status === 'new').length,
-    totalBlogs: blogs.length,
-    pendingBlogs: blogs.filter(b => b.status === 'pending').length,
-    approvedBlogs: blogs.filter(b => b.status === 'approved').length,
-    todayContacts: contacts.filter(c => {
-      const today = new Date().toDateString()
-      return new Date(c.createdAt).toDateString() === today
-    }).length
+    totalContacts: contacts?.length || 0,
+    newContacts: contacts?.filter(c => c?.status === 'new')?.length || 0,
+    totalBlogs: blogs?.length || 0,
+    pendingBlogs: blogs?.filter(b => b?.status === 'pending')?.length || 0,
+    approvedBlogs: blogs?.filter(b => b?.status === 'approved')?.length || 0,
+    todayContacts: contacts?.filter(c => {
+      try {
+        if (!c?.createdAt) return false
+        const today = new Date().toDateString()
+        return new Date(c.createdAt).toDateString() === today
+      } catch {
+        return false
+      }
+    })?.length || 0
   }
 
   const getStatusColor = (status: string) => {
@@ -162,6 +171,17 @@ export default function AdminDashboard() {
             Refresh
           </Button>
         </div>
+
+        {/* Error Display */}
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <div className="flex items-center gap-2 text-red-700">
+              <AlertCircle className="w-5 h-5" />
+              <span className="font-medium">Error:</span>
+              <span>{error}</span>
+            </div>
+          </div>
+        )}
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -278,21 +298,21 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {contacts.slice(0, 5).map((contact) => (
-                  <div key={contact._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                {contacts?.slice(0, 5)?.map((contact) => (
+                  <div key={contact?._id || Math.random()} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div className="flex-1">
-                      <p className="font-medium text-gray-900">{contact.name}</p>
-                      <p className="text-sm text-gray-600">{contact.email}</p>
+                      <p className="font-medium text-gray-900">{contact?.name || 'Unknown'}</p>
+                      <p className="text-sm text-gray-600">{contact?.email || 'No email'}</p>
                       <p className="text-xs text-gray-500">
-                        {new Date(contact.createdAt).toLocaleDateString()}
+                        {contact?.createdAt ? new Date(contact.createdAt).toLocaleDateString() : 'No date'}
                       </p>
                     </div>
-                    <Badge className={getStatusColor(contact.status)}>
-                      {contact.status}
+                    <Badge className={getStatusColor(contact?.status || 'new')}>
+                      {contact?.status || 'new'}
                     </Badge>
                   </div>
-                ))}
-                {contacts.length === 0 && (
+                )) || []}
+                {(!contacts || contacts.length === 0) && (
                   <p className="text-gray-500 text-center py-4">No contacts yet</p>
                 )}
               </div>
@@ -306,21 +326,21 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {blogs.slice(0, 5).map((blog) => (
-                  <div key={blog._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                {blogs?.slice(0, 5)?.map((blog) => (
+                  <div key={blog?._id || Math.random()} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div className="flex-1">
-                      <p className="font-medium text-gray-900">{blog.title}</p>
-                      <p className="text-sm text-gray-600">by {blog.authorName}</p>
+                      <p className="font-medium text-gray-900">{blog?.title || 'Untitled'}</p>
+                      <p className="text-sm text-gray-600">by {blog?.authorName || 'Unknown'}</p>
                       <p className="text-xs text-gray-500">
-                        {new Date(blog.submittedAt).toLocaleDateString()}
+                        {blog?.submittedAt ? new Date(blog.submittedAt).toLocaleDateString() : 'No date'}
                       </p>
                     </div>
-                    <Badge className={getStatusColor(blog.status)}>
-                      {blog.status}
+                    <Badge className={getStatusColor(blog?.status || 'pending')}>
+                      {blog?.status || 'pending'}
                     </Badge>
                   </div>
-                ))}
-                {blogs.length === 0 && (
+                )) || []}
+                {(!blogs || blogs.length === 0) && (
                   <p className="text-gray-500 text-center py-4">No blog posts yet</p>
                 )}
               </div>
