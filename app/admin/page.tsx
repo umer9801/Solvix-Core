@@ -55,23 +55,49 @@ export default function AdminDashboard() {
   const fetchData = async () => {
     try {
       setRefreshing(true)
+      console.log('Fetching admin data...')
       
       // Fetch contacts
-      const contactsResponse = await fetch('/api/admin/contacts')
+      console.log('Fetching contacts...')
+      const contactsResponse = await fetch('/api/admin/contacts', {
+        credentials: 'include'
+      })
+      console.log('Contacts response status:', contactsResponse.status)
+      
       if (contactsResponse.ok) {
         const contactsData = await contactsResponse.json()
+        console.log('Contacts data:', contactsData)
         setContacts(contactsData.contacts || [])
+      } else {
+        console.error('Failed to fetch contacts:', contactsResponse.status)
+        if (contactsResponse.status === 401) {
+          window.location.href = '/admin/login'
+          return
+        }
       }
 
       // Fetch blog submissions
-      const blogsResponse = await fetch('/api/admin/blog-submissions')
+      console.log('Fetching blog submissions...')
+      const blogsResponse = await fetch('/api/admin/blog-submissions', {
+        credentials: 'include'
+      })
+      console.log('Blogs response status:', blogsResponse.status)
+      
       if (blogsResponse.ok) {
         const blogsData = await blogsResponse.json()
+        console.log('Blogs data:', blogsData)
         setBlogs(blogsData.submissions || [])
+      } else {
+        console.error('Failed to fetch blog submissions:', blogsResponse.status)
+        if (blogsResponse.status === 401) {
+          window.location.href = '/admin/login'
+          return
+        }
       }
 
     } catch (error) {
       console.error('Error fetching data:', error)
+      // Don't redirect on network errors, just log them
     } finally {
       setLoading(false)
       setRefreshing(false)

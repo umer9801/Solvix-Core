@@ -6,7 +6,7 @@ const uri = process.env.MONGODB_URI
 const client = new MongoClient(uri!)
 
 async function checkAuth() {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const sessionToken = cookieStore.get("admin_session")?.value
   return !!sessionToken
 }
