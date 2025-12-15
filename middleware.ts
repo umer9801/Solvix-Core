@@ -12,9 +12,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(httpsUrl, 301)
   }
 
-  // Only guard /admin pages; allow the login page itself.
+  // Protect admin routes
   if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
-    const hasAuth = request.cookies.get("admin_auth")?.value === "1"
+    const hasAuth = request.cookies.get("admin_session")?.value
     if (!hasAuth) {
       const url = new URL("/admin/login", request.url)
       return NextResponse.redirect(url)

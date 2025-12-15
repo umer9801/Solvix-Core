@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server"
 import crypto from "crypto"
 
-// Use environment variables for security
 const ADMIN_USER = process.env.ADMIN_USER || "admin"
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123"
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-in-production"
+const JWT_SECRET = process.env.JWT_SECRET || "default-secret"
 
-// Rate limiting storage (in production, use Redis)
+// Rate limiting storage
 const loginAttempts = new Map<string, { count: number; lastAttempt: number }>()
 
 function hashPassword(password: string): string {
@@ -35,7 +34,6 @@ function isRateLimited(ip: string): boolean {
     return false
   }
   
-  // Block after 5 failed attempts
   return attempts.count >= 5
 }
 
@@ -52,7 +50,6 @@ export async function POST(req: Request) {
   try {
     const clientIP = getClientIP(req)
     
-    // Check rate limiting
     if (isRateLimited(clientIP)) {
       return NextResponse.json(
         { message: "Too many failed attempts. Please try again in 15 minutes." }, 
@@ -72,35 +69,27 @@ export async function POST(req: Request) {
     const expectedHash = hashPassword(ADMIN_PASSWORD)
     
     if (username === ADMIN_USER && hashedPassword === expectedHash) {
-      // Generate secure session token
       const sessionToken = generateToken()
       
-      // Create response
       const response = NextResponse.json({ 
         success: true, 
         message: "Login successful",
         user: { username: ADMIN_USER, role: "admin" }
       })
       
-      // Set secure cookie
       response.cookies.set("admin_session", sessionToken, {
         httpOnly: true,
         sameSite: "strict",
         secure: process.env.NODE_ENV === "production",
-        path: "/admin",
+        path: "/",
         maxAge: 60 * 60 * 8, // 8 hours
       })
       
-      // Clear failed attempts on successful login
       loginAttempts.delete(clientIP)
-      
       return response
     }
 
-    // Record failed attempt
     recordFailedAttempt(clientIP)
-    
-    // Add delay to prevent timing attacks
     await new Promise(resolve => setTimeout(resolve, 1000))
     
     return NextResponse.json({ message: "Invalid credentials" }, { status: 401 })

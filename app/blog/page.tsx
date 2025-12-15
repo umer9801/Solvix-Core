@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
@@ -185,8 +186,30 @@ const blogPosts = [
 ]
 
 export default function BlogPage() {
+  const [userBlogs, setUserBlogs] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchUserBlogs = async () => {
+      try {
+        const response = await fetch('/api/blog/approved')
+        const data = await response.json()
+        if (data.success) {
+          setUserBlogs(data.blogs)
+        }
+      } catch (error) {
+        console.error('Error fetching user blogs:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchUserBlogs()
+  }, [])
+
   const featuredPosts = blogPosts.filter(post => post.featured)
-  const regularPosts = blogPosts.filter(post => !post.featured)
+  const allRegularPosts = [...blogPosts.filter(post => !post.featured), ...userBlogs]
+  const regularPosts = allRegularPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
   const getColorClasses = (color: string) => {
     const colorMap = {
@@ -285,6 +308,15 @@ export default function BlogPage() {
                   <Link href="/contact">
                     <Mail className="w-4 h-4 mr-2" />
                     Subscribe Newsletter
+                  </Link>
+                </Button>
+              </motion.div>
+              
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button asChild size="lg" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 shadow-xl hover:shadow-2xl transition-all duration-300">
+                  <Link href="/blog/submit">
+                    <BookOpen className="w-4 h-4 mr-2" />
+                    Submit Your Blog
                   </Link>
                 </Button>
               </motion.div>

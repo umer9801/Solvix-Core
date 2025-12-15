@@ -1,11 +1,27 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import Link from "next/link"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Mail, MessageCircle, Calendar, Building, DollarSign, Trash2, Users, TrendingUp, Clock, CheckCircle2, ArrowLeft } from "lucide-react"
+import { 
+  ArrowLeft, 
+  Users, 
+  Mail, 
+  Phone, 
+  Building, 
+  DollarSign, 
+  MessageSquare,
+  Calendar,
+  Filter,
+  RefreshCw,
+  Eye,
+  Trash2,
+  CheckCircle,
+  Clock,
+  XCircle
+} from "lucide-react"
 
 interface Contact {
   _id: string
@@ -14,7 +30,7 @@ interface Contact {
   company?: string
   service?: string
   budget?: string
-  preferred: 'email' | 'whatsapp'
+  preferred: string
   whatsapp?: string
   message: string
   status: 'new' | 'contacted' | 'closed'
@@ -24,20 +40,9 @@ interface Contact {
 export default function AdminContactsPage() {
   const [contacts, setContacts] = useState<Contact[]>([])
   const [loading, setLoading] = useState(true)
-  const [filter, setFilter] = useState<string>('all')
-  const [deleting, setDeleting] = useState<string | null>(null)
-  const [selectedContacts, setSelectedContacts] = useState<string[]>([])
-  const [bulkDeleting, setBulkDeleting] = useState(false)
-  const [stats, setStats] = useState({
-    total: 0,
-    new: 0,
-    contacted: 0,
-    closed: 0
-  })
-
-  useEffect(() => {
-    fetchContacts()
-  }, [filter])
+  const [filter, setFilter] = useState('all')
+  const [selectedContact, setSelectedContact] = useState<Contact | null>(null)
+  const [updating, setUpdating] = useState<string | null>(null)
 
   const fetchContacts = async () => {
     try {
@@ -48,421 +53,322 @@ export default function AdminContactsPage() {
       const response = await fetch(`/api/admin/contacts?${params}`)
       const data = await response.json()
       
-      if (response.ok) {
+      if (data.success) {
         setContacts(data.contacts)
-        // Calculate stats
-        const allContacts = data.contacts
-        setStats({
-          total: allContacts.length,
-          new: allContacts.filter((c: Contact) => c.status === 'new').length,
-          contacted: allContacts.filter((c: Contact) => c.status === 'contacted').length,
-          closed: allContacts.filter((c: Contact) => c.status === 'closed').length
-        })
-      } else if (response.status === 401) {
-        alert('Session expired. Please login again.')
-        window.location.href = '/admin/login'
-      } else {
-        console.error('Failed to fetch contacts:', response.status)
       }
     } catch (error) {
-      console.error('Failed to fetch contacts:', error)
+      console.error('Error fetching contacts:', error)
     } finally {
       setLoading(false)
     }
   }
 
+  useEffect(() => {
+    fetchContacts()
+  }, [filter])
+
   const updateStatus = async (id: string, status: string) => {
     try {
+      setUpdating(id)
       const response = await fetch('/api/admin/contacts', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, status })
+        body: JSON.stringify({ contactId: id, status })
       })
 
       if (response.ok) {
-        fetchContacts() // Refresh the list
+        await fetchContacts()
       }
     } catch (error) {
-      console.error('Failed to update status:', error)
+      console.error('Error updating contact:', error)
+    } finally {
+      setUpdating(null)
     }
   }
 
   const deleteContact = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this contact? This action cannot be undone.')) {
-      return
-    }
-
-    try {
-      setDeleting(id)
-      console.log('Deleting contact with ID:', id)
-      
-      const response = await fetch('/api/admin/contacts', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id })
-      })
-      
-      console.log('Delete response status:', response.status)
-
-      if (response.ok) {
-        fetchContacts() // Refresh the list
-        // Remove from selected if it was selected
-        setSelectedContacts(prev => prev.filter(contactId => contactId !== id))
-        alert('Contact deleted successfully')
-      } else {
-        const errorData = await response.json().catch(() => ({}))
-        if (response.status === 401) {
-          alert('Session expired. Please login again.')
-          window.location.href = '/admin/login'
-        } else {
-          alert(errorData.error || 'Failed to delete contact')
-        }
-      }
-    } catch (error) {
-      console.error('Failed to delete contact:', error)
-      alert('Network error. Failed to delete contact.')
-    } finally {
-      setDeleting(null)
-    }
-  }
-
-  const bulkDeleteContacts = async () => {
-    if (selectedContacts.length === 0) return
+    if (!confirm('Are you sure you want to delete this contact?')) return
     
-    if (!confirm(`Are you sure you want to delete ${selectedContacts.length} contacts? This action cannot be undone.`)) {
-      return
-    }
-
     try {
-      setBulkDeleting(true)
-      
       const response = await fetch('/api/admin/contacts', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ids: selectedContacts })
+        body: JSON.stringify({ contactId: id })
       })
 
       if (response.ok) {
-        const data = await response.json()
-        setSelectedContacts([])
-        fetchContacts() // Refresh the list
-        alert(`Successfully deleted ${data.deletedCount} contacts`)
-      } else {
-        const errorData = await response.json().catch(() => ({}))
-        if (response.status === 401) {
-          alert('Session expired. Please login again.')
-          window.location.href = '/admin/login'
-        } else {
-          alert(errorData.error || 'Failed to delete contacts')
-        }
+        await fetchContacts()
+        setSelectedContact(null)
       }
     } catch (error) {
-      console.error('Failed to bulk delete contacts:', error)
-      alert('Network error. Failed to delete contacts.')
-    } finally {
-      setBulkDeleting(false)
-    }
-  }
-
-  const toggleContactSelection = (id: string) => {
-    setSelectedContacts(prev => 
-      prev.includes(id) 
-        ? prev.filter(contactId => contactId !== id)
-        : [...prev, id]
-    )
-  }
-
-  const selectAllContacts = () => {
-    if (selectedContacts.length === contacts.length) {
-      setSelectedContacts([])
-    } else {
-      setSelectedContacts(contacts.map(c => c._id))
+      console.error('Error deleting contact:', error)
     }
   }
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'new': return 'bg-blue-100 text-blue-800'
-      case 'contacted': return 'bg-yellow-100 text-yellow-800'
-      case 'closed': return 'bg-green-100 text-green-800'
-      default: return 'bg-gray-100 text-gray-800'
+      case 'new': return 'bg-blue-100 text-blue-700'
+      case 'contacted': return 'bg-yellow-100 text-yellow-700'
+      case 'closed': return 'bg-green-100 text-green-700'
+      default: return 'bg-gray-100 text-gray-700'
     }
   }
 
-  const formatService = (service?: string) => {
-    if (!service) return 'Not specified'
-    return service.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'new': return <Clock className="w-4 h-4" />
+      case 'contacted': return <Mail className="w-4 h-4" />
+      case 'closed': return <CheckCircle className="w-4 h-4" />
+      default: return <XCircle className="w-4 h-4" />
+    }
   }
 
-  if (loading) {
-    return (
-      <div className="container mx-auto p-6">
-        <div className="text-center">Loading contacts...</div>
-      </div>
-    )
+  const stats = {
+    total: contacts.length,
+    new: contacts.filter(c => c.status === 'new').length,
+    contacted: contacts.filter(c => c.status === 'contacted').length,
+    closed: contacts.filter(c => c.status === 'closed').length
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div className="flex items-center gap-4">
-          <Button variant="outline" size="sm" asChild>
-            <a href="/admin" className="flex items-center gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Dashboard
-            </a>
-          </Button>
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Contact Management</h1>
-            <p className="text-gray-600 mt-1">Manage contact submissions and inquiries</p>
-          </div>
-        </div>
-        <div className="flex gap-2">
-          {selectedContacts.length > 0 && (
-            <Button 
-              variant="destructive" 
-              onClick={bulkDeleteContacts}
-              disabled={bulkDeleting}
-              className="flex items-center gap-2"
-            >
-              <Trash2 className="w-4 h-4" />
-              {bulkDeleting ? 'Deleting...' : `Delete ${selectedContacts.length}`}
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/admin" className="flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Dashboard
+              </Link>
             </Button>
-          )}
-          <Button onClick={fetchContacts} variant="outline" className="flex items-center gap-2">
-            <TrendingUp className="w-4 h-4" />
-            Refresh Data
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
+                <Users className="w-8 h-8 text-blue-600" />
+                Contact Management
+              </h1>
+              <p className="text-gray-600">Manage contact form submissions and inquiries</p>
+            </div>
+          </div>
+          <Button onClick={fetchContacts} disabled={loading} variant="outline">
+            <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+            Refresh
           </Button>
         </div>
-      </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-blue-100 text-sm font-medium">Total Contacts</p>
-                <p className="text-3xl font-bold">{stats.total}</p>
-              </div>
-              <Users className="w-8 h-8 text-blue-200" />
-            </div>
-          </CardContent>
-        </Card>
+        {/* Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          {[
+            { label: 'Total', value: stats.total, color: 'blue', icon: Users },
+            { label: 'New', value: stats.new, color: 'orange', icon: Clock },
+            { label: 'Contacted', value: stats.contacted, color: 'yellow', icon: Mail },
+            { label: 'Closed', value: stats.closed, color: 'green', icon: CheckCircle }
+          ].map((stat) => (
+            <Card key={stat.label}>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-gray-600">{stat.label}</p>
+                    <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                  </div>
+                  <stat.icon className={`w-6 h-6 text-${stat.color}-600`} />
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
 
-        <Card className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-yellow-100 text-sm font-medium">New Inquiries</p>
-                <p className="text-3xl font-bold">{stats.new}</p>
-              </div>
-              <Clock className="w-8 h-8 text-yellow-200" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-to-r from-purple-500 to-purple-600 text-white">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-purple-100 text-sm font-medium">Contacted</p>
-                <p className="text-3xl font-bold">{stats.contacted}</p>
-              </div>
-              <MessageCircle className="w-8 h-8 text-purple-200" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-to-r from-green-500 to-green-600 text-white">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-green-100 text-sm font-medium">Closed</p>
-                <p className="text-3xl font-bold">{stats.closed}</p>
-              </div>
-              <CheckCircle2 className="w-8 h-8 text-green-200" />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Filters and Bulk Actions */}
-      <Card>
-        <CardContent className="p-6">
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-gray-700">Filter by status:</label>
-                <Select value={filter} onValueChange={setFilter}>
-                  <SelectTrigger className="w-48">
-                    <SelectValue placeholder="Filter by status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Contacts ({stats.total})</SelectItem>
-                    <SelectItem value="new">New ({stats.new})</SelectItem>
-                    <SelectItem value="contacted">Contacted ({stats.contacted})</SelectItem>
-                    <SelectItem value="closed">Closed ({stats.closed})</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            
-            {contacts.length > 0 && (
-              <div className="flex items-center gap-2">
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={selectAllContacts}
-                  className="text-xs"
-                >
-                  {selectedContacts.length === contacts.length ? 'Deselect All' : 'Select All'}
-                </Button>
-                {selectedContacts.length > 0 && (
-                  <span className="text-sm text-muted-foreground">
-                    {selectedContacts.length} selected
-                  </span>
-                )}
-              </div>
-            )}
+        {/* Filters */}
+        <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-2">
+            <Filter className="w-4 h-4 text-gray-500" />
+            <span className="text-sm font-medium text-gray-700">Filter:</span>
           </div>
-        </CardContent>
-      </Card>
+          {['all', 'new', 'contacted', 'closed'].map((status) => (
+            <Button
+              key={status}
+              variant={filter === status ? "default" : "outline"}
+              size="sm"
+              onClick={() => setFilter(status)}
+              className="capitalize"
+            >
+              {status}
+            </Button>
+          ))}
+        </div>
 
-      <div className="grid gap-6">
-        {contacts.length === 0 ? (
-          <Card>
-            <CardContent className="p-6 text-center text-muted-foreground">
-              No contacts found.
-            </CardContent>
-          </Card>
-        ) : (
-          contacts.map((contact) => (
-            <Card key={contact._id} className={`w-full ${selectedContacts.includes(contact._id) ? 'ring-2 ring-blue-500' : ''}`}>
-              <CardHeader>
-                <div className="flex justify-between items-start">
-                  <div className="flex items-start gap-3">
-                    <input
-                      type="checkbox"
-                      checked={selectedContacts.includes(contact._id)}
-                      onChange={() => toggleContactSelection(contact._id)}
-                      className="mt-1 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                    />
-                    <div>
-                      <CardTitle className="text-xl">{contact.name}</CardTitle>
-                      <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
+        {/* Contacts List */}
+        <div className="grid gap-6">
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading contacts...</p>
+            </div>
+          ) : contacts.length === 0 ? (
+            <Card>
+              <CardContent className="p-12 text-center">
+                <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">No Contacts Found</h3>
+                <p className="text-gray-600">No contacts match your current filter.</p>
+              </CardContent>
+            </Card>
+          ) : (
+            contacts.map((contact) => (
+              <Card key={contact._id} className="hover:shadow-lg transition-shadow duration-300">
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <CardTitle className="text-xl text-gray-900">{contact.name}</CardTitle>
+                        <Badge className={`${getStatusColor(contact.status)} flex items-center gap-1`}>
+                          {getStatusIcon(contact.status)}
+                          {contact.status}
+                        </Badge>
+                      </div>
+                      <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-600">
+                        <div className="flex items-center gap-2">
                           <Mail className="w-4 h-4" />
                           {contact.email}
                         </div>
                         {contact.company && (
-                          <div className="flex items-center gap-1">
+                          <div className="flex items-center gap-2">
                             <Building className="w-4 h-4" />
                             {contact.company}
                           </div>
                         )}
-                        <div className="flex items-center gap-1">
+                        {contact.service && (
+                          <div className="flex items-center gap-2">
+                            <Users className="w-4 h-4" />
+                            {contact.service}
+                          </div>
+                        )}
+                        {contact.budget && (
+                          <div className="flex items-center gap-2">
+                            <DollarSign className="w-4 h-4" />
+                            {contact.budget}
+                          </div>
+                        )}
+                        <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
                           {new Date(contact.createdAt).toLocaleDateString()}
                         </div>
+                        <div className="flex items-center gap-2">
+                          <Phone className="w-4 h-4" />
+                          {contact.preferred} {contact.whatsapp && `(${contact.whatsapp})`}
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <Badge className={getStatusColor(contact.status)}>
-                    {contact.status}
-                  </Badge>
-                </div>
-              </CardHeader>
-              
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <h4 className="font-semibold mb-2">Contact Details</h4>
-                    <div className="space-y-1 text-sm">
-                      <div className="flex items-center gap-2">
-                        {contact.preferred === 'email' ? (
-                          <Mail className="w-4 h-4" />
-                        ) : (
-                          <MessageCircle className="w-4 h-4" />
-                        )}
-                        Prefers: {contact.preferred}
-                        {contact.whatsapp && ` (${contact.whatsapp})`}
-                      </div>
-                      {contact.service && (
-                        <div>Service: {formatService(contact.service)}</div>
-                      )}
-                      {contact.budget && (
-                        <div className="flex items-center gap-1">
-                          <DollarSign className="w-4 h-4" />
-                          Budget: {contact.budget}
-                        </div>
-                      )}
+                </CardHeader>
+                <CardContent>
+                  <div className="mb-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <MessageSquare className="w-4 h-4 text-gray-500" />
+                      <span className="font-medium text-gray-700">Message:</span>
                     </div>
+                    <p className="text-gray-600 bg-gray-50 p-3 rounded-lg">{contact.message}</p>
                   </div>
                   
-                  <div>
-                    <h4 className="font-semibold mb-2">Actions</h4>
-                    <div className="flex flex-wrap gap-2">
-                      <Select
-                        value={contact.status}
-                        onValueChange={(status) => updateStatus(contact._id, status)}
-                      >
-                        <SelectTrigger className="w-32">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="new">New</SelectItem>
-                          <SelectItem value="contacted">Contacted</SelectItem>
-                          <SelectItem value="closed">Closed</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
                       <Button
-                        variant="outline"
                         size="sm"
-                        onClick={() => window.open(`mailto:${contact.email}`)}
-                        className="flex items-center gap-1"
+                        onClick={() => setSelectedContact(contact)}
+                        variant="outline"
                       >
-                        <Mail className="w-4 h-4" />
-                        Email
+                        <Eye className="w-4 h-4 mr-2" />
+                        View Details
                       </Button>
-                      
-                      {contact.whatsapp && (
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {contact.status === 'new' && (
                         <Button
-                          variant="outline"
                           size="sm"
-                          onClick={() => window.open(`https://wa.me/${contact.whatsapp}`)}
-                          className="flex items-center gap-1"
+                          onClick={() => updateStatus(contact._id, 'contacted')}
+                          disabled={updating === contact._id}
+                          className="bg-yellow-600 hover:bg-yellow-700"
                         >
-                          <MessageCircle className="w-4 h-4" />
-                          WhatsApp
+                          Mark Contacted
                         </Button>
                       )}
-
+                      {contact.status === 'contacted' && (
+                        <Button
+                          size="sm"
+                          onClick={() => updateStatus(contact._id, 'closed')}
+                          disabled={updating === contact._id}
+                          className="bg-green-600 hover:bg-green-700"
+                        >
+                          Mark Closed
+                        </Button>
+                      )}
                       <Button
-                        variant="destructive"
                         size="sm"
+                        variant="destructive"
                         onClick={() => deleteContact(contact._id)}
-                        disabled={deleting === contact._id}
-                        className="flex items-center gap-1"
                       >
                         <Trash2 className="w-4 h-4" />
-                        {deleting === contact._id ? 'Deleting...' : 'Delete'}
                       </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))
+          )}
+        </div>
+
+        {/* Contact Details Modal */}
+        {selectedContact && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-2xl">{selectedContact.name}</CardTitle>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setSelectedContact(null)}
+                  >
+                    Close
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Contact Information</h3>
+                    <div className="space-y-2 text-sm">
+                      <p><span className="font-medium">Email:</span> {selectedContact.email}</p>
+                      <p><span className="font-medium">Company:</span> {selectedContact.company || 'Not provided'}</p>
+                      <p><span className="font-medium">Preferred Contact:</span> {selectedContact.preferred}</p>
+                      {selectedContact.whatsapp && (
+                        <p><span className="font-medium">WhatsApp:</span> {selectedContact.whatsapp}</p>
+                      )}
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Project Details</h3>
+                    <div className="space-y-2 text-sm">
+                      <p><span className="font-medium">Service:</span> {selectedContact.service || 'Not specified'}</p>
+                      <p><span className="font-medium">Budget:</span> {selectedContact.budget || 'Not specified'}</p>
+                      <p><span className="font-medium">Status:</span> 
+                        <Badge className={`ml-2 ${getStatusColor(selectedContact.status)}`}>
+                          {selectedContact.status}
+                        </Badge>
+                      </p>
+                      <p><span className="font-medium">Submitted:</span> {new Date(selectedContact.createdAt).toLocaleString()}</p>
                     </div>
                   </div>
                 </div>
                 
                 <div>
-                  <h4 className="font-semibold mb-2">Message</h4>
-                  <p className="text-sm text-muted-foreground bg-muted p-3 rounded-md">
-                    {contact.message}
-                  </p>
+                  <h3 className="font-semibold text-gray-900 mb-2">Message</h3>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <p className="text-gray-700 whitespace-pre-wrap">{selectedContact.message}</p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
-          ))
+          </div>
         )}
       </div>
     </div>

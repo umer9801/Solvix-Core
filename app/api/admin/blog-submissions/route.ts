@@ -13,7 +13,6 @@ async function checkAuth() {
 
 export async function GET(request: NextRequest) {
   try {
-    // Check authentication
     if (!await checkAuth()) {
       return NextResponse.json(
         { error: 'Unauthorized' },
@@ -22,36 +21,34 @@ export async function GET(request: NextRequest) {
     }
 
     const { searchParams } = new URL(request.url)
-    const status = searchParams.get('status')
-    const limit = parseInt(searchParams.get('limit') || '100')
+    const status = searchParams.get('status') || 'all'
 
     await client.connect()
     const db = client.db('solvixcore')
-    const collection = db.collection('contacts')
+    const collection = db.collection('blog-submissions')
 
     let filter = {}
-    if (status && status !== 'all') {
+    if (status !== 'all') {
       filter = { status }
     }
 
-    const contacts = await collection
+    const submissions = await collection
       .find(filter)
-      .sort({ createdAt: -1 })
-      .limit(limit)
+      .sort({ submittedAt: -1 })
       .toArray()
 
     return NextResponse.json({
       success: true,
-      contacts: contacts.map(contact => ({
-        ...contact,
-        _id: contact._id.toString()
+      submissions: submissions.map(submission => ({
+        ...submission,
+        _id: submission._id.toString()
       }))
     })
 
   } catch (error) {
-    console.error('Error fetching contacts:', error)
+    console.error('Error fetching blog submissions:', error)
     return NextResponse.json(
-      { error: 'Failed to fetch contacts' },
+      { error: 'Failed to fetch blog submissions' },
       { status: 500 }
     )
   } finally {
@@ -69,9 +66,9 @@ export async function PATCH(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { contactId, status } = body
+    const { submissionId, action, adminNotes } = body
 
-    if (!contactId || !status) {
+    if (!submissionId || !action) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -80,34 +77,40 @@ export async function PATCH(request: NextRequest) {
 
     await client.connect()
     const db = client.db('solvixcore')
-    const collection = db.collection('contacts')
+    const collection = db.collection('blog-submissions')
+
+    const updateData: any = {
+      status: action,
+      reviewedAt: new Date(),
+      reviewedBy: 'admin',
+      adminNotes: adminNotes || null
+    }
+
+    if (action === 'approved') {
+      updateData.approvedAt = new Date()
+    }
 
     const result = await collection.updateOne(
-      { _id: new ObjectId(contactId) },
-      { 
-        $set: { 
-          status,
-          updatedAt: new Date()
-        }
-      }
+      { _id: new ObjectId(submissionId) },
+      { $set: updateData }
     )
 
     if (result.matchedCount === 0) {
       return NextResponse.json(
-        { error: 'Contact not found' },
+        { error: 'Blog submission not found' },
         { status: 404 }
       )
     }
 
     return NextResponse.json({
       success: true,
-      message: 'Contact status updated successfully'
+      message: `Blog submission ${action} successfully`
     })
 
   } catch (error) {
-    console.error('Error updating contact:', error)
+    console.error('Error updating blog submission:', error)
     return NextResponse.json(
-      { error: 'Failed to update contact' },
+      { error: 'Failed to update blog submission' },
       { status: 500 }
     )
   } finally {
@@ -125,37 +128,37 @@ export async function DELETE(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { contactId, contactIds } = body
+    const { submissionId } = body
+
+    if (!submissionId) {
+      return NextResponse.json(
+        { error: 'Missing submissionId' },
+        { status: 400 }
+      )
+    }
 
     await client.connect()
     const db = client.db('solvixcore')
-    const collection = db.collection('contacts')
+    const collection = db.collection('blog-submissions')
 
-    let result
-    if (contactIds && Array.isArray(contactIds)) {
-      // Bulk delete
-      const objectIds = contactIds.map(id => new ObjectId(id))
-      result = await collection.deleteMany({ _id: { $in: objectIds } })
-    } else if (contactId) {
-      // Single delete
-      result = await collection.deleteOne({ _id: new ObjectId(contactId) })
-    } else {
+    const result = await collection.deleteOne({ _id: new ObjectId(submissionId) })
+
+    if (result.deletedCount === 0) {
       return NextResponse.json(
-        { error: 'Missing contactId or contactIds' },
-        { status: 400 }
+        { error: 'Blog submission not found' },
+        { status: 404 }
       )
     }
 
     return NextResponse.json({
       success: true,
-      message: `${result.deletedCount} contact(s) deleted successfully`,
-      deletedCount: result.deletedCount
+      message: 'Blog submission deleted successfully'
     })
 
   } catch (error) {
-    console.error('Error deleting contact(s):', error)
+    console.error('Error deleting blog submission:', error)
     return NextResponse.json(
-      { error: 'Failed to delete contact(s)' },
+      { error: 'Failed to delete blog submission' },
       { status: 500 }
     )
   } finally {
