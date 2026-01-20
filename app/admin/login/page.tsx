@@ -46,19 +46,26 @@ export default function AdminLoginPage() {
           console.log("Response headers:", res.headers)
           
           // Show success message
-          setError("Login successful! Redirecting...")
+          setError("✅ Login successful! Redirecting to dashboard...")
           
           // Check if cookie was set
           console.log("Current cookies:", document.cookie)
           
-          // Wait a moment for cookie to be set, then redirect
+          // Force redirect after a short delay
           setTimeout(() => {
             console.log("Checking cookies before redirect:", document.cookie)
-            console.log("Redirecting to admin dashboard...")
+            console.log("Forcing redirect to admin dashboard...")
             
-            // Force a hard redirect to ensure cookies are sent
-            window.location.replace("/admin")
-          }, 1000)
+            // Try multiple redirect methods
+            try {
+              // Method 1: Replace current page
+              window.location.replace("/admin")
+            } catch (e) {
+              console.log("Replace failed, trying href...")
+              // Method 2: Navigate to new page
+              window.location.href = "/admin"
+            }
+          }, 1500)
         } else {
           setError("Login failed. Please try again.")
         }
@@ -143,7 +150,11 @@ export default function AdminLoginPage() {
             </div>
 
             {error && (
-              <div className="flex items-center gap-2 p-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-300">
+              <div className={`flex items-center gap-2 p-3 border rounded-lg ${
+                error.includes('✅') 
+                  ? 'bg-green-500/20 border-green-500/30 text-green-300' 
+                  : 'bg-red-500/20 border-red-500/30 text-red-300'
+              }`}>
                 <AlertTriangle className="w-4 h-4 flex-shrink-0" />
                 <p className="text-sm">{error}</p>
               </div>
