@@ -233,19 +233,17 @@ export default function ServicePage({
         className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10"
       >
         <Button
-          asChild
+          onClick={() => window.location.href = '/contact'}
           className={`bg-gradient-to-r ${colors.gradient} text-white hover:opacity-90 shadow-lg hover:shadow-xl transition-all px-8 py-3 text-lg font-semibold`}
         >
-          <Link href="/contact" aria-label="Go to contact form">
-            Get Started Today
-          </Link>
+          Get Started Today
         </Button>
         <Button
-          asChild
+          onClick={() => window.location.href = '/services'}
           variant="secondary"
           className="bg-white/80 backdrop-blur-sm border-2 border-gray-200 text-gray-800 hover:bg-white shadow-lg hover:shadow-xl transition-all px-8 py-3 text-lg font-semibold"
         >
-          <Link href="/services">View All Services</Link>
+          View All Services
         </Button>
       </motion.div>
     </section>

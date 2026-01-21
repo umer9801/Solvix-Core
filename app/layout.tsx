@@ -13,25 +13,35 @@ import MobileOptimizations from "@/components/mobile-optimizations"
 // public/logo.png
 
 export const metadata: Metadata = {
-  title: "Solvix Core — AI-Powered Digital Solutions | Canada & Pakistan",
+  title: "Solvix Core — AI-Powered Digital Solutions | Canada, Pakistan, USA, UAE, Saudi Arabia & Europe",
   description:
-    "Leading AI automation and digital transformation company serving Canada and Pakistan. Expert web development, AI consulting, and business automation solutions. Transform your business with cutting-edge technology and drive growth in competitive markets.",
+    "Leading AI automation and digital transformation company serving Canada, Pakistan, USA, UAE, Saudi Arabia & Europe. Expert web development, AI consulting, ChatGPT integration, LangChain development, and business automation solutions. Transform your business with cutting-edge technology.",
   generator: "Next.js",
   metadataBase: new URL('https://solvixcore.com'),
   alternates: {
     canonical: '/',
+    languages: {
+      'en-US': '/usa',
+      'en-CA': '/canada', 
+      'en-PK': '/pakistan',
+      'ar-SA': '/saudi-arabia',
+      'ar-AE': '/uae',
+      'en-GB': '/uk',
+      'de-DE': '/germany',
+      'fr-FR': '/france',
+    }
   },
   openGraph: {
-    title: "Solvix Core — AI-Powered Digital Solutions | Canada & Pakistan",
-    description: "Leading AI automation and digital transformation company serving Canada and Pakistan. Expert web development, AI consulting, and business automation solutions.",
+    title: "Solvix Core — AI-Powered Digital Solutions | Global Technology Partner",
+    description: "Leading AI automation and digital transformation company serving Canada, Pakistan, USA, UAE, Saudi Arabia & Europe. Expert web development, AI consulting, and business automation solutions.",
     url: 'https://solvixcore.com',
     siteName: 'Solvix Core',
     images: [
       {
         url: '/logo.png',
-        width: 512,
-        height: 512,
-        alt: 'Solvix Core Logo',
+        width: 1200,
+        height: 630,
+        alt: 'Solvix Core - AI-Powered Digital Solutions',
       },
     ],
     locale: 'en_US',
@@ -39,9 +49,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Solvix Core — AI-Powered Digital Solutions | Canada & Pakistan",
-    description: "Leading AI automation and digital transformation company serving Canada and Pakistan. Expert web development, AI consulting, and business automation solutions.",
+    title: "Solvix Core — AI-Powered Digital Solutions | Global Technology Partner",
+    description: "Leading AI automation and digital transformation company serving Canada, Pakistan, USA, UAE, Saudi Arabia & Europe. Expert web development, AI consulting, and business automation solutions.",
     images: ['/logo.png'],
+    creator: '@solvixcore',
+    site: '@solvixcore',
   },
   robots: {
     index: true,
@@ -60,73 +72,136 @@ export const metadata: Metadata = {
     "AI automation company",
     "digital transformation services",
     "business automation solutions",
+    "global technology partner",
     
     // CANADA - High-Volume Keywords
     "AI business solutions Canada",
     "digital transformation Canada",
     "web development services Canada",
     "AI automation services Canada",
-    "business process automation Canada",
+    "ChatGPT integration Canada",
+    "LangChain development Canada",
+    "OpenAI consulting Canada",
     "custom software development Canada",
-    "AI consulting services Canada",
-    "machine learning consulting Canada",
-    "cloud solutions Canada",
-    "ecommerce development Canada",
     "Shopify development Canada",
     "mobile app development Canada",
     "SEO services Canada",
     "digital marketing Canada",
     "IT consulting Canada",
     "cybersecurity services Canada",
-    "data analytics Canada",
-    "CRM development Canada",
-    "API integration Canada",
-    "cloud migration Canada",
+    "cloud solutions Canada",
+    "Toronto AI services",
+    "Vancouver web development",
+    "Montreal digital transformation",
+    "Calgary AI consulting",
     
-    // CANADA - City-Specific (High Search Volume)
-    "AI services Toronto",
-    "web development Vancouver",
-    "digital transformation Montreal",
-    "AI consulting Calgary",
-    "software development Ottawa",
-    "IT services Edmonton",
-    "tech solutions Winnipeg",
-    "AI automation Halifax",
+    // USA - High-Volume Keywords
+    "AI business solutions USA",
+    "digital transformation United States",
+    "web development services USA",
+    "AI automation services America",
+    "ChatGPT integration USA",
+    "LangChain development America",
+    "OpenAI consulting USA",
+    "custom software development USA",
+    "Shopify development USA",
+    "mobile app development USA",
+    "SEO services USA",
+    "digital marketing USA",
+    "IT consulting USA",
+    "cybersecurity services USA",
+    "cloud solutions USA",
+    "New York AI services",
+    "California web development",
+    "Texas digital transformation",
+    "Florida AI consulting",
     
     // PAKISTAN - High-Volume Keywords
     "AI business solutions Pakistan",
     "digital transformation Pakistan",
     "web development services Pakistan",
     "AI automation services Pakistan",
+    "ChatGPT integration Pakistan",
+    "LangChain development Pakistan",
+    "OpenAI consulting Pakistan",
     "software development Pakistan",
     "IT services Pakistan",
     "ecommerce development Pakistan",
     "mobile app development Pakistan",
     "digital marketing Pakistan",
     "SEO services Pakistan",
-    "business automation Pakistan",
-    "cloud solutions Pakistan",
-    "AI consulting Pakistan",
-    "machine learning Pakistan",
-    "data science Pakistan",
-    "cybersecurity Pakistan",
     "fintech solutions Pakistan",
     "edtech development Pakistan",
-    "startup solutions Pakistan",
-    "SME digitization Pakistan",
+    "Karachi AI services",
+    "Lahore web development",
+    "Islamabad software development",
+    "Rawalpindi IT services",
     
-    // PAKISTAN - City-Specific (High Search Volume)
-    "AI services Karachi",
-    "web development Lahore",
-    "software development Islamabad",
-    "IT services Rawalpindi",
-    "digital marketing Faisalabad",
-    "AI consulting Multan",
-    "tech solutions Peshawar",
-    "app development Quetta",
+    // UAE - High-Volume Keywords
+    "AI business solutions UAE",
+    "digital transformation UAE",
+    "web development services UAE",
+    "AI automation services UAE",
+    "ChatGPT integration UAE",
+    "LangChain development UAE",
+    "OpenAI consulting UAE",
+    "custom software development UAE",
+    "Shopify development UAE",
+    "mobile app development UAE",
+    "SEO services UAE",
+    "digital marketing UAE",
+    "IT consulting UAE",
+    "cybersecurity services UAE",
+    "cloud solutions UAE",
+    "Dubai AI services",
+    "Abu Dhabi web development",
+    "Sharjah digital transformation",
+    "Ajman AI consulting",
     
-    // Trending Technologies (Both Markets)
-    "ChatGPT integration",
+    // SAUDI ARABIA - High-Volume Keywords
+    "AI business solutions Saudi Arabia",
+    "digital transformation Saudi Arabia",
+    "web development services Saudi Arabia",
+    "AI automation services Saudi Arabia",
+    "ChatGPT integration Saudi Arabia",
+    "LangChain development Saudi Arabia",
+    "OpenAI consulting Saudi Arabia",
+    "custom software development Saudi Arabia",
+    "Shopify development Saudi Arabia",
+    "mobile app development Saudi Arabia",
+    "SEO services Saudi Arabia",
+    "digital marketing Saudi Arabia",
+    "IT consulting Saudi Arabia",
+    "cybersecurity services Saudi Arabia",
+    "cloud solutions Saudi Arabia",
+    "Riyadh AI services",
+    "Jeddah web development",
+    "Dammam digital transformation",
+    "Mecca AI consulting",
+    
+    // EUROPE - High-Volume Keywords
+    "AI business solutions Europe",
+    "digital transformation Europe",
+    "web development services Europe",
+    "AI automation services Europe",
+    "ChatGPT integration Europe",
+    "LangChain development Europe",
+    "OpenAI consulting Europe",
+    "custom software development Europe",
+    "Shopify development Europe",
+    "mobile app development Europe",
+    "SEO services Europe",
+    "digital marketing Europe",
+    "IT consulting Europe",
+    "cybersecurity services Europe",
+    "cloud solutions Europe",
+    "London AI services",
+    "Berlin web development",
+    "Paris digital transformation",
+    "Amsterdam AI consulting",
+    
+    // Trending Technologies (Global)
+    "ChatGPT integration services",
     "OpenAI development",
     "LangChain development",
     "AI chatbot development",
@@ -155,7 +230,7 @@ export const metadata: Metadata = {
     "government digitization",
     "nonprofit tech solutions",
     
-    // Business Types (Both Markets)
+    // Business Types (Global)
     "startup development services",
     "SME digital transformation",
     "enterprise AI solutions",
@@ -180,9 +255,9 @@ export const metadata: Metadata = {
     "lead generation systems",
     
     // Competitive Keywords
-    "best AI company Canada",
-    "top web development Pakistan",
-    "leading digital agency",
+    "best AI company global",
+    "top web development international",
+    "leading digital agency worldwide",
     "affordable AI solutions",
     "enterprise software development",
     "custom business applications",
@@ -192,14 +267,14 @@ export const metadata: Metadata = {
     "responsive web design",
     
     // Local Business Keywords
-    "Canadian AI startup",
-    "Pakistan tech company",
-    "North American AI services",
-    "South Asian digital solutions",
+    "international AI services",
+    "global tech company",
     "cross-border technology services",
     "international software development",
     "remote AI consulting",
     "global digital transformation",
+    "worldwide technology partner",
+    "international business automation",
     
     // Emerging Trends (2024-2025)
     "generative AI solutions",
@@ -287,16 +362,19 @@ export default function RootLayout({
               "name": "Solvix Core",
               "url": "https://solvixcore.com",
               "logo": "https://solvixcore.com/logo.png",
-              "description": "Leading AI automation and digital transformation company serving Canada and Pakistan. Expert web development, AI consulting, and business automation solutions.",
+              "description": "Leading AI automation and digital transformation company serving Canada, Pakistan, USA, UAE, Saudi Arabia & Europe. Expert web development, AI consulting, ChatGPT integration, LangChain development, and business automation solutions.",
               "address": [
                 {
                   "@type": "PostalAddress",
                   "addressCountry": "CA",
-                  "addressRegion": "Manitoba"
+                  "addressRegion": "Manitoba",
+                  "addressLocality": "Winnipeg"
                 },
                 {
                   "@type": "PostalAddress", 
-                  "addressCountry": "PK"
+                  "addressCountry": "PK",
+                  "addressRegion": "Punjab",
+                  "addressLocality": "Lahore"
                 }
               ],
               "areaServed": [
@@ -307,30 +385,175 @@ export default function RootLayout({
                 {
                   "@type": "Country", 
                   "name": "Pakistan"
+                },
+                {
+                  "@type": "Country",
+                  "name": "United States"
+                },
+                {
+                  "@type": "Country",
+                  "name": "United Arab Emirates"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Saudi Arabia"
+                },
+                {
+                  "@type": "Country",
+                  "name": "United Kingdom"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Germany"
+                },
+                {
+                  "@type": "Country",
+                  "name": "France"
                 }
               ],
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "+1-431-533-5035",
-                "contactType": "customer service",
-                "email": "info@solvixcore.com"
-              },
+              "contactPoint": [
+                {
+                  "@type": "ContactPoint",
+                  "telephone": "+1-431-533-5035",
+                  "contactType": "customer service",
+                  "email": "info@solvixcore.com",
+                  "areaServed": ["CA", "US"],
+                  "availableLanguage": ["English"]
+                },
+                {
+                  "@type": "ContactPoint",
+                  "telephone": "+92-320-580-7054",
+                  "contactType": "customer service", 
+                  "email": "info@solvixcore.com",
+                  "areaServed": ["PK", "SA", "AE"],
+                  "availableLanguage": ["English", "Urdu", "Arabic"]
+                }
+              ],
               "sameAs": [
                 "https://www.linkedin.com/company/solvixcore",
                 "https://twitter.com/solvixcore"
               ],
               "services": [
                 "AI Automation",
-                "Web Development", 
-                "LangChain Development",
+                "ChatGPT Integration",
+                "LangChain Development", 
                 "OpenAI Agent SDK",
+                "Web Development",
                 "Custom Websites",
                 "Application Development",
-                "Video Editing",
-                "Graphic Design",
-                "Content Creation",
-                "Shopify Store Design"
-              ]
+                "Digital Transformation",
+                "Business Automation",
+                "Shopify Development",
+                "Mobile App Development",
+                "SEO Services",
+                "Digital Marketing",
+                "IT Consulting",
+                "Cloud Solutions",
+                "Cybersecurity Services"
+              ],
+              "priceRange": "$$",
+              "foundingDate": "2023",
+              "numberOfEmployees": "10-50",
+              "slogan": "AI-Powered Digital Solutions for Global Success"
+            })
+          }}
+        />
+        
+        {/* Local Business Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Solvix Core",
+              "image": "https://solvixcore.com/logo.png",
+              "url": "https://solvixcore.com",
+              "telephone": "+1-431-533-5035",
+              "email": "info@solvixcore.com",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "CA",
+                "addressRegion": "Manitoba"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": "49.8951",
+                "longitude": "-97.1384"
+              },
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday", 
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ],
+                "opens": "09:00",
+                "closes": "17:00"
+              },
+              "priceRange": "$$",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "127"
+              }
+            })
+          }}
+        />
+        
+        {/* Service Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Service",
+              "name": "AI Automation & Digital Transformation Services",
+              "description": "Comprehensive AI automation and digital transformation services including ChatGPT integration, LangChain development, web development, and business automation solutions.",
+              "provider": {
+                "@type": "Organization",
+                "name": "Solvix Core"
+              },
+              "areaServed": [
+                "Canada", "Pakistan", "United States", "United Arab Emirates", 
+                "Saudi Arabia", "United Kingdom", "Germany", "France"
+              ],
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "AI & Digital Services",
+                "itemListElement": [
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "ChatGPT Integration Services"
+                    }
+                  },
+                  {
+                    "@type": "Offer", 
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "LangChain Development"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service", 
+                      "name": "Custom Web Development"
+                    }
+                  },
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "Business Automation Solutions"
+                    }
+                  }
+                ]
+              }
             })
           }}
         />

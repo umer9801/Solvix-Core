@@ -12,18 +12,15 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(httpsUrl, 301)
   }
 
-  // Protect admin routes
-  if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
+  // Protect admin routes (except login page)
+  if (pathname.startsWith("/admin") && pathname !== "/admin") {
     const sessionCookie = request.cookies.get("admin_session")?.value
     
-    // For now, just check if cookie exists (we can add proper validation later)
     if (!sessionCookie) {
-      console.log("No admin session cookie found, redirecting to login")
-      const url = new URL("/admin/login", request.url)
+      console.log("No admin session cookie found, access denied")
+      const url = new URL("/admin", request.url)
       return NextResponse.redirect(url)
     }
-    
-    console.log("Admin session cookie found:", sessionCookie.substring(0, 10) + "...")
   }
 
   return NextResponse.next()

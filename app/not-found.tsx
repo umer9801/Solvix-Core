@@ -10,9 +10,9 @@ export default function NotFound() {
         <p className="text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
-        <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
-          <Link href="/">Go Home</Link>
-        </Button>
+        <Link href="/" className="inline-flex items-center justify-center px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md transition-colors">
+          Go Home
+        </Link>
       </div>
     </div>
   )

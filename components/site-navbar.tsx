@@ -119,10 +119,6 @@ export default function SiteNavbar() {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              <Link href="/blog" className={linkClass("/blog")}>
-                Blog
-              </Link>
-
               <Link href="/contact" className={linkClass("/contact")}>
                 Contact
               </Link>
@@ -247,19 +243,6 @@ export default function SiteNavbar() {
                       </div>
                     )}
                 </div>
-
-                <Link
-                  href="/blog"
-                  className={cn(
-                    "block px-4 py-3 text-sm font-medium rounded-lg",
-                    pathname === "/blog" || pathname.startsWith("/blog/")
-                      ? "bg-blue-600 text-white"
-                      : "text-gray-700 hover:bg-gray-100"
-                  )}
-                  onClick={() => setIsOpen(false)}
-                >
-                  Blog
-                </Link>
 
                 <Link
                   href="/contact"

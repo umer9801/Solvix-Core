@@ -1,47 +1,27 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { MongoClient, ObjectId } from 'mongodb'
-import { cookies } from 'next/headers'
+import { NextResponse } from "next/server"
+import dbConnect from "@/lib/dbConnect"
+import Contact from "@/lib/models/Contact"
 
-const uri = process.env.MONGODB_URI
-const client = new MongoClient(uri!)
-
-async function checkAuth() {
-  const cookieStore = await cookies()
-  const sessionToken = cookieStore.get("admin_session")?.value
-  return !!sessionToken
+// Check if user is authenticated
+function checkAuth(request: Request) {
+  const cookies = request.headers.get('cookie')
+  return cookies?.includes('admin_session=')
 }
 
-export async function GET(request: NextRequest) {
+export async function GET(request: Request) {
   try {
-    // Check authentication
-    if (!await checkAuth()) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      )
+    if (!checkAuth(request)) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
 
-    const { searchParams } = new URL(request.url)
-    const status = searchParams.get('status')
-    const limit = parseInt(searchParams.get('limit') || '100')
-
-    await client.connect()
-    const db = client.db('solvixcore')
-    const collection = db.collection('contacts')
-
-    let filter = {}
-    if (status && status !== 'all') {
-      filter = { status }
-    }
-
-    const contacts = await collection
-      .find(filter)
+    await dbConnect()
+    
+    const contacts = await Contact.find({})
       .sort({ createdAt: -1 })
-      .limit(limit)
-      .toArray()
+      .lean()
 
-    return NextResponse.json({
-      success: true,
+    return NextResponse.json({ 
+      success: true, 
       contacts: contacts.map(contact => ({
         ...contact,
         _id: contact._id.toString()
@@ -49,127 +29,77 @@ export async function GET(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('Error fetching contacts:', error)
-    return NextResponse.json(
-      { error: 'Failed to fetch contacts' },
-      { status: 500 }
-    )
-  } finally {
-    await client.close()
+    console.error("Error fetching contacts:", error)
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 })
   }
 }
 
-export async function PATCH(request: NextRequest) {
+export async function PATCH(request: Request) {
   try {
-    if (!await checkAuth()) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      )
+    if (!checkAuth(request)) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
     }
 
-    const body = await request.json()
-    const { contactId, status } = body
+    const { contactId, status } = await request.json()
 
     if (!contactId || !status) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      )
+      return NextResponse.json({ message: "Missing contactId or status" }, { status: 400 })
     }
 
-    await client.connect()
-    const db = client.db('solvixcore')
-    const collection = db.collection('contacts')
-
-    const result = await collection.updateOne(
-      { _id: new ObjectId(contactId) },
-      { 
-        $set: { 
-          status,
-          updatedAt: new Date()
-        }
-      }
+    await dbConnect()
+    
+    const contact = await Contact.findByIdAndUpdate(
+      contactId,
+      { status },
+      { new: true }
     )
 
-    if (result.matchedCount === 0) {
-      return NextResponse.json(
-        { error: 'Contact not found' },
-        { status: 404 }
-      )
+    if (!contact) {
+      return NextResponse.json({ message: "Contact not found" }, { status: 404 })
     }
 
-    return NextResponse.json({
-      success: true,
-      message: 'Contact status updated successfully'
+    return NextResponse.json({ 
+      success: true, 
+      contact: {
+        ...contact.toObject(),
+        _id: contact._id.toString()
+      }
     })
 
   } catch (error) {
-    console.error('Error updating contact:', error)
-    return NextResponse.json(
-      { error: 'Failed to update contact' },
-      { status: 500 }
-    )
-  } finally {
-    await client.close()
+    console.error("Error updating contact:", error)
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 })
   }
 }
 
-export async function DELETE(request: NextRequest) {
+export async function DELETE(request: Request) {
   try {
-    console.log('DELETE request received')
+    if (!checkAuth(request)) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+    }
+
+    const { searchParams } = new URL(request.url)
+    const contactId = searchParams.get('id')
+
+    if (!contactId) {
+      return NextResponse.json({ message: "Missing contact ID" }, { status: 400 })
+    }
+
+    await dbConnect()
     
-    if (!await checkAuth()) {
-      console.log('DELETE: Authentication failed')
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      )
+    const contact = await Contact.findByIdAndDelete(contactId)
+
+    if (!contact) {
+      return NextResponse.json({ message: "Contact not found" }, { status: 404 })
     }
 
-    const body = await request.json()
-    console.log('DELETE request body:', body)
-    const { contactId, contactIds } = body
-
-    if (!contactId && !contactIds) {
-      console.log('DELETE: Missing contactId or contactIds')
-      return NextResponse.json(
-        { error: 'Missing contactId or contactIds' },
-        { status: 400 }
-      )
-    }
-
-    await client.connect()
-    const db = client.db('solvixcore')
-    const collection = db.collection('contacts')
-
-    let result
-    if (contactIds && Array.isArray(contactIds)) {
-      // Bulk delete
-      console.log('DELETE: Bulk delete for IDs:', contactIds)
-      const objectIds = contactIds.map(id => new ObjectId(id))
-      result = await collection.deleteMany({ _id: { $in: objectIds } })
-    } else if (contactId) {
-      // Single delete
-      console.log('DELETE: Single delete for ID:', contactId)
-      result = await collection.deleteOne({ _id: new ObjectId(contactId) })
-    }
-
-    console.log('DELETE result:', result)
-
-    return NextResponse.json({
-      success: true,
-      message: `${result.deletedCount} contact(s) deleted successfully`,
-      deletedCount: result.deletedCount
+    return NextResponse.json({ 
+      success: true, 
+      message: "Contact deleted successfully"
     })
 
   } catch (error) {
-    console.error('Error deleting contact(s):', error)
-    return NextResponse.json(
-      { error: 'Failed to delete contact(s)' },
-      { status: 500 }
-    )
-  } finally {
-    await client.close()
+    console.error("Error deleting contact:", error)
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 })
   }
 }

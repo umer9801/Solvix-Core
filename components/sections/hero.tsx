@@ -44,27 +44,25 @@ export default function Hero() {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="mt-8 flex items-center justify-center gap-4 flex-wrap"
         >
-          <button
+          <Link
+            href="/services"
             className="relative overflow-hidden rounded-lg px-7 py-2.5 text-sm font-semibold text-primary-foreground
                        bg-primary border border-primary/50 shadow-lg
                        hover:bg-primary/90 hover:shadow-xl
-                       transition-all duration-300"
+                       transition-all duration-300 inline-block"
           >
-            <Link href="/services" className="relative z-10">
-              Explore Services
-            </Link>
-          </button>
+            Explore Services
+          </Link>
 
-          <button
+          <Link
+            href="/contact"
             className="relative overflow-hidden rounded-lg px-7 py-2.5 text-sm font-semibold text-foreground
                        bg-secondary border-2 border-border shadow-lg
                        hover:bg-secondary/80 hover:shadow-xl
-                       transition-all duration-300"
+                       transition-all duration-300 inline-block"
           >
-            <Link href="/contact" className="relative z-10">
-              Contact Us
-            </Link>
-          </button>
+            Contact Us
+          </Link>
         </motion.div>
       </div>
     </section>

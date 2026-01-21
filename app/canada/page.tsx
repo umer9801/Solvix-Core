@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export const metadata: Metadata = {
@@ -49,12 +48,12 @@ export default function CanadaPage() {
           </p>
           
           <div className="flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg" className="bg-red-600 hover:bg-red-700">
-              <Link href="/contact">Get Free Consultation</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="#services">View Our Services</Link>
-            </Button>
+            <Link href="/contact" className="inline-flex items-center justify-center px-6 py-3 text-lg font-semibold bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors">
+              Get Free Consultation
+            </Link>
+            <Link href="#services" className="inline-flex items-center justify-center px-6 py-3 text-lg font-semibold border border-gray-300 hover:bg-gray-50 text-gray-700 rounded-lg transition-colors">
+              View Our Services
+            </Link>
           </div>
         </div>
       </section>
@@ -242,12 +241,12 @@ export default function CanadaPage() {
             Join hundreds of Canadian businesses already benefiting from our AI solutions
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg" variant="secondary">
-              <Link href="/contact">Start Your Free Consultation</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-blue-600">
-              <Link href="tel:+14315335035">Call +1 (431) 533-5035</Link>
-            </Button>
+            <Link href="/contact" className="inline-flex items-center justify-center px-6 py-3 text-lg font-semibold bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors">
+              Start Your Free Consultation
+            </Link>
+            <Link href="tel:+14315335035" className="inline-flex items-center justify-center px-6 py-3 text-lg font-semibold border border-white text-white hover:bg-white hover:text-blue-600 rounded-lg transition-colors">
+              Call +1 (431) 533-5035
+            </Link>
           </div>
         </div>
       </section>
