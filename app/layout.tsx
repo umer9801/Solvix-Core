@@ -13,27 +13,17 @@ import MobileOptimizations from "@/components/mobile-optimizations"
 // public/logo.png
 
 export const metadata: Metadata = {
-  title: "Solvix Core — AI-Powered Digital Solutions | Canada, Pakistan, USA, UAE, Saudi Arabia & Europe",
+  title: "Solvix Core — AI Automation & Digital Solutions | Global AI Company Serving Canada, Pakistan, USA, UAE, Saudi Arabia, UK, Germany & France",
   description:
-    "Leading AI automation and digital transformation company serving Canada, Pakistan, USA, UAE, Saudi Arabia & Europe. Expert web development, AI consulting, ChatGPT integration, LangChain development, and business automation solutions. Transform your business with cutting-edge technology.",
+    "Leading AI automation and digital transformation company serving 50+ countries worldwide. Expert ChatGPT integration, LangChain development, web development, and business automation solutions. Trusted by businesses in Canada, Pakistan, USA, UAE, Saudi Arabia, UK, Germany, France. Transform your business with cutting-edge AI technology. 24/7 support across all time zones.",
   generator: "Next.js",
   metadataBase: new URL('https://solvixcore.com'),
   alternates: {
     canonical: '/',
-    languages: {
-      'en-US': '/usa',
-      'en-CA': '/canada', 
-      'en-PK': '/pakistan',
-      'ar-SA': '/saudi-arabia',
-      'ar-AE': '/uae',
-      'en-GB': '/uk',
-      'de-DE': '/germany',
-      'fr-FR': '/france',
-    }
   },
   openGraph: {
-    title: "Solvix Core — AI-Powered Digital Solutions | Global Technology Partner",
-    description: "Leading AI automation and digital transformation company serving Canada, Pakistan, USA, UAE, Saudi Arabia & Europe. Expert web development, AI consulting, and business automation solutions.",
+    title: "Solvix Core — Global AI Automation & Digital Solutions | Serving 50+ Countries Worldwide",
+    description: "Leading AI automation and digital transformation company serving Canada, Pakistan, USA, UAE, Saudi Arabia, UK, Germany, France & 40+ more countries. Expert ChatGPT integration, LangChain development, web development, and business automation solutions.",
     url: 'https://solvixcore.com',
     siteName: 'Solvix Core',
     images: [
@@ -41,7 +31,7 @@ export const metadata: Metadata = {
         url: '/logo.png',
         width: 1200,
         height: 630,
-        alt: 'Solvix Core - AI-Powered Digital Solutions',
+        alt: 'Solvix Core - Global AI-Powered Digital Solutions Serving 50+ Countries',
       },
     ],
     locale: 'en_US',
@@ -49,8 +39,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Solvix Core — AI-Powered Digital Solutions | Global Technology Partner",
-    description: "Leading AI automation and digital transformation company serving Canada, Pakistan, USA, UAE, Saudi Arabia & Europe. Expert web development, AI consulting, and business automation solutions.",
+    title: "Solvix Core — Global AI Automation & Digital Solutions | 50+ Countries Worldwide",
+    description: "Leading AI automation and digital transformation company serving Canada, Pakistan, USA, UAE, Saudi Arabia, UK, Germany, France & 40+ more countries. Expert ChatGPT integration, LangChain development, and business automation solutions.",
     images: ['/logo.png'],
     creator: '@solvixcore',
     site: '@solvixcore',
@@ -200,6 +190,128 @@ export const metadata: Metadata = {
     "Paris digital transformation",
     "Amsterdam AI consulting",
     
+    // UNITED KINGDOM - Expanded Keywords
+    "AI business solutions UK",
+    "digital transformation United Kingdom",
+    "web development services UK",
+    "AI automation services UK",
+    "ChatGPT integration UK",
+    "LangChain development UK",
+    "OpenAI consulting UK",
+    "Manchester web development",
+    "Birmingham digital transformation",
+    "Edinburgh AI consulting",
+    "Glasgow software development",
+    "Liverpool tech solutions",
+    "Cardiff digital services",
+    "Belfast web development",
+    
+    // GERMANY - Expanded Keywords
+    "AI business solutions Germany",
+    "digital transformation Germany",
+    "web development services Germany",
+    "AI automation services Germany",
+    "ChatGPT integration Germany",
+    "LangChain development Germany",
+    "OpenAI consulting Germany",
+    "Munich web development",
+    "Hamburg digital transformation",
+    "Frankfurt AI consulting",
+    "Cologne software development",
+    "Stuttgart tech solutions",
+    "Düsseldorf digital services",
+    "Dresden web development",
+    
+    // FRANCE - Expanded Keywords
+    "AI business solutions France",
+    "digital transformation France",
+    "web development services France",
+    "AI automation services France",
+    "ChatGPT integration France",
+    "LangChain development France",
+    "OpenAI consulting France",
+    "Lyon web development",
+    "Marseille digital transformation",
+    "Toulouse AI consulting",
+    "Nice software development",
+    "Nantes tech solutions",
+    "Strasbourg digital services",
+    "Bordeaux web development",
+    
+    // ADDITIONAL MAJOR MARKETS
+    // Australia
+    "AI business solutions Australia",
+    "web development services Australia",
+    "digital transformation Australia",
+    "Sydney AI consulting",
+    "Melbourne tech solutions",
+    "Brisbane web development",
+    "Perth digital services",
+    
+    // Netherlands
+    "AI business solutions Netherlands",
+    "web development services Netherlands",
+    "digital transformation Netherlands",
+    "Amsterdam AI consulting",
+    "Rotterdam tech solutions",
+    "The Hague web development",
+    "Utrecht digital services",
+    
+    // Switzerland
+    "AI business solutions Switzerland",
+    "web development services Switzerland",
+    "digital transformation Switzerland",
+    "Zurich AI consulting",
+    "Geneva tech solutions",
+    "Basel web development",
+    "Bern digital services",
+    
+    // Singapore
+    "AI business solutions Singapore",
+    "web development services Singapore",
+    "digital transformation Singapore",
+    "Singapore AI consulting",
+    "Singapore tech solutions",
+    
+    // Japan
+    "AI business solutions Japan",
+    "web development services Japan",
+    "digital transformation Japan",
+    "Tokyo AI consulting",
+    "Osaka tech solutions",
+    "Kyoto web development",
+    "Yokohama digital services",
+    
+    // South Korea
+    "AI business solutions South Korea",
+    "web development services South Korea",
+    "digital transformation South Korea",
+    "Seoul AI consulting",
+    "Busan tech solutions",
+    
+    // India
+    "AI business solutions India",
+    "web development services India",
+    "digital transformation India",
+    "Mumbai AI consulting",
+    "Delhi tech solutions",
+    "Bangalore web development",
+    "Hyderabad digital services",
+    
+    // Brazil
+    "AI business solutions Brazil",
+    "web development services Brazil",
+    "digital transformation Brazil",
+    "São Paulo AI consulting",
+    "Rio de Janeiro tech solutions",
+    
+    // Mexico
+    "AI business solutions Mexico",
+    "web development services Mexico",
+    "digital transformation Mexico",
+    "Mexico City AI consulting",
+    "Guadalajara tech solutions",
+    
     // Trending Technologies (Global)
     "ChatGPT integration services",
     "OpenAI development",
@@ -287,6 +399,54 @@ export const metadata: Metadata = {
     "sustainable technology solutions",
     "green tech development",
     "carbon-neutral software",
+    
+    // GLOBAL EXPANSION KEYWORDS
+    "worldwide AI services",
+    "international digital transformation",
+    "global software development",
+    "cross-border technology solutions",
+    "multi-country AI consulting",
+    "international business automation",
+    "global web development services",
+    "worldwide ChatGPT integration",
+    "international LangChain development",
+    "global OpenAI consulting",
+    
+    // ADDITIONAL HIGH-VALUE KEYWORDS
+    "AI company serving 50+ countries",
+    "global technology partner",
+    "international AI automation",
+    "worldwide digital solutions",
+    "multi-national tech support",
+    "global project management",
+    "international software consulting",
+    "worldwide business transformation",
+    "global AI implementation",
+    "international tech innovation",
+    
+    // LONG-TAIL COMPETITIVE KEYWORDS
+    "best AI automation company worldwide",
+    "top international web development",
+    "leading global digital transformation",
+    "affordable AI solutions international",
+    "enterprise software development global",
+    "custom business applications worldwide",
+    "scalable cloud solutions international",
+    "secure web applications global",
+    "mobile-first development worldwide",
+    "responsive web design international",
+    
+    // INDUSTRY + LOCATION COMBINATIONS
+    "fintech development Canada Pakistan USA",
+    "healthcare AI solutions global",
+    "edtech platforms international",
+    "retail automation worldwide",
+    "manufacturing AI global",
+    "logistics optimization international",
+    "real estate tech worldwide",
+    "agriculture technology global",
+    "government digitization international",
+    "nonprofit tech solutions worldwide",
   ],
   icons: {
     icon: [
@@ -349,8 +509,44 @@ export default function RootLayout({
         <meta name="publisher" content="Solvix Core" />
         <link rel="canonical" href="https://solvixcore.com" />
         
+        {/* International SEO */}
+        <meta name="geo.region" content="CA-MB" />
+        <meta name="geo.placename" content="Winnipeg" />
+        <meta name="geo.position" content="49.8951;-97.1384" />
+        <meta name="ICBM" content="49.8951, -97.1384" />
+        
+        {/* Additional International Meta Tags */}
+        <meta name="coverage" content="Worldwide" />
+        <meta name="distribution" content="Global" />
+        <meta name="target" content="all" />
+        <meta name="audience" content="all" />
+        <meta name="rating" content="General" />
+        
+        {/* Business Information */}
+        <meta name="company" content="Solvix Core" />
+        <meta name="classification" content="AI Automation, Web Development, Digital Transformation" />
+        <meta name="category" content="Technology, Software Development, AI Services" />
+        
+        {/* Contact Information */}
+        <meta name="contact" content="info@solvixcore.com" />
+        <meta name="reply-to" content="info@solvixcore.com" />
+        
         {/* Google Search Console Verification */}
         <meta name="google-site-verification" content="your-verification-code" />
+        
+        {/* Bing Webmaster Tools */}
+        <meta name="msvalidate.01" content="your-bing-verification-code" />
+        
+        {/* Yandex Webmaster */}
+        <meta name="yandex-verification" content="your-yandex-verification-code" />
+        
+        {/* Additional Language Support */}
+        <meta name="language" content="English" />
+        <meta name="content-language" content="en" />
+        
+        {/* Mobile App Links */}
+        <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL" />
+        <meta name="google-play-app" content="app-id=com.solvixcore.app" />
         
         {/* Structured Data for Organization */}
         <script
@@ -409,6 +605,182 @@ export default function RootLayout({
                 {
                   "@type": "Country",
                   "name": "France"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Australia"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Netherlands"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Switzerland"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Singapore"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Japan"
+                },
+                {
+                  "@type": "Country",
+                  "name": "South Korea"
+                },
+                {
+                  "@type": "Country",
+                  "name": "India"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Brazil"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Mexico"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Italy"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Spain"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Norway"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Sweden"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Denmark"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Finland"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Belgium"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Austria"
+                },
+                {
+                  "@type": "Country",
+                  "name": "New Zealand"
+                },
+                {
+                  "@type": "Country",
+                  "name": "South Africa"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Israel"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Turkey"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Poland"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Czech Republic"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Hungary"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Romania"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Bulgaria"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Croatia"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Slovenia"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Slovakia"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Estonia"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Latvia"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Lithuania"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Cyprus"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Malta"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Luxembourg"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Iceland"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Ireland"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Portugal"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Greece"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Chile"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Argentina"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Colombia"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Peru"
+                },
+                {
+                  "@type": "Country",
+                  "name": "Uruguay"
                 }
               ],
               "contactPoint": [
@@ -438,18 +810,117 @@ export default function RootLayout({
                 "ChatGPT Integration",
                 "LangChain Development", 
                 "OpenAI Agent SDK",
+                "Generative AI Solutions",
+                "Machine Learning Development",
+                "Natural Language Processing",
+                "Computer Vision Solutions",
+                "Predictive Analytics",
+                "Intelligent Process Automation",
+                "Conversational AI Development",
+                "AI Chatbot Development",
                 "Web Development",
                 "Custom Websites",
+                "Progressive Web Apps",
+                "E-commerce Development",
                 "Application Development",
+                "Mobile App Development",
+                "Cross-Platform Development",
+                "React Development",
+                "Next.js Development",
+                "Node.js Development",
+                "Python Development",
+                "Full-Stack Development",
+                "API Development",
+                "Microservices Architecture",
                 "Digital Transformation",
                 "Business Automation",
+                "Workflow Automation",
+                "Process Optimization",
+                "Digital Strategy Consulting",
+                "Technology Consulting",
                 "Shopify Development",
-                "Mobile App Development",
+                "WooCommerce Development",
+                "Magento Development",
+                "Marketplace Development",
+                "SaaS Development",
+                "Platform Development",
                 "SEO Services",
                 "Digital Marketing",
+                "Content Marketing",
+                "Social Media Marketing",
+                "Email Marketing Automation",
+                "Lead Generation Systems",
+                "Marketing Automation",
                 "IT Consulting",
                 "Cloud Solutions",
-                "Cybersecurity Services"
+                "Cloud Migration",
+                "AWS Services",
+                "Azure Services",
+                "Google Cloud Services",
+                "DevOps Services",
+                "CI/CD Implementation",
+                "Infrastructure as Code",
+                "Cybersecurity Services",
+                "Security Auditing",
+                "Penetration Testing",
+                "Data Protection",
+                "GDPR Compliance",
+                "SOC 2 Compliance",
+                "Blockchain Development",
+                "Smart Contract Development",
+                "DeFi Development",
+                "NFT Development",
+                "Web3 Development",
+                "Cryptocurrency Solutions",
+                "IoT Solutions",
+                "Edge Computing",
+                "5G Applications",
+                "AR/VR Development",
+                "Metaverse Development",
+                "Quantum Computing Consulting",
+                "Data Analytics",
+                "Business Intelligence",
+                "Data Visualization",
+                "Big Data Solutions",
+                "Data Science Consulting",
+                "Database Design",
+                "Database Optimization",
+                "CRM Development",
+                "ERP Development",
+                "Supply Chain Management",
+                "Inventory Management Systems",
+                "Customer Support Automation",
+                "Healthcare Technology",
+                "Fintech Development",
+                "Edtech Development",
+                "Retail Technology",
+                "Manufacturing Automation",
+                "Logistics Optimization",
+                "Real Estate Technology",
+                "Agriculture Technology",
+                "Government Technology",
+                "Nonprofit Technology",
+                "Startup Development",
+                "Enterprise Solutions",
+                "SME Digital Solutions",
+                "International Project Management",
+                "Multi-Country Support",
+                "24/7 Technical Support",
+                "Remote Development Services",
+                "Offshore Development",
+                "Nearshore Development",
+                "Agile Development",
+                "Scrum Implementation",
+                "Quality Assurance",
+                "Software Testing",
+                "Performance Optimization",
+                "Code Review Services",
+                "Technical Documentation",
+                "Training and Workshops",
+                "Technology Transfer",
+                "Legacy System Modernization",
+                "System Integration",
+                "Third-Party Integrations"
               ],
               "priceRange": "$$",
               "foundingDate": "2023",

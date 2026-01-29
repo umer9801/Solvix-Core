@@ -36,7 +36,7 @@ export default function UnifiedPage() {
   return (
     <>
       {/* Hero Section with Video Background */}
-      <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-400 via-blue-500 to-purple-600">
+      <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-400 via-blue-500 to-purple-600" style={{ minHeight: '100vh', touchAction: 'pan-y' }}>
         {/* Video Background - Optimized loading */}
         {isMounted && (
           <div className="absolute inset-0 w-full h-full">
