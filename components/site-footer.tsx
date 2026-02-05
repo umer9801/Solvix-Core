@@ -100,9 +100,11 @@ export default function SiteFooter() {
                 </a>
               </li>
               <li className="flex items-start space-x-2">
-                <MapPin className="w-4 h-4 text-red-600 mt-0.5" />
+                <MapPin className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
                 <span className="text-gray-600">
-                  {config.name}
+                  Suite 104 - 2 Gurdwara Road<br />
+                  Ottawa, ON K2E 1A2<br />
+                  Canada
                 </span>
               </li>
             </ul>

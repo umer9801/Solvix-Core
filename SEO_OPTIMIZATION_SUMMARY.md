@@ -183,6 +183,7 @@
 - **Email**: info@solvixcore.com
 - **Canada**: +1 (431) 533-5035
 - **Pakistan**: +92 (320) 580-7054
+- **Address**: Suite 104 - 2 Gurdwara Road, Ottawa, ON K2E 1A2, Canada
 - **Website**: https://solvixcore.com
 
 **Last Updated**: January 2026

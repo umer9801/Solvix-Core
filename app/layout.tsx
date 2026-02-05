@@ -510,10 +510,10 @@ export default function RootLayout({
         <link rel="canonical" href="https://solvixcore.com" />
         
         {/* International SEO */}
-        <meta name="geo.region" content="CA-MB" />
-        <meta name="geo.placename" content="Winnipeg" />
-        <meta name="geo.position" content="49.8951;-97.1384" />
-        <meta name="ICBM" content="49.8951, -97.1384" />
+        <meta name="geo.region" content="CA-ON" />
+        <meta name="geo.placename" content="Ottawa" />
+        <meta name="geo.position" content="45.4215;-75.6972" />
+        <meta name="ICBM" content="45.4215, -75.6972" />
         
         {/* Additional International Meta Tags */}
         <meta name="coverage" content="Worldwide" />
@@ -562,9 +562,11 @@ export default function RootLayout({
               "address": [
                 {
                   "@type": "PostalAddress",
-                  "addressCountry": "CA",
-                  "addressRegion": "Manitoba",
-                  "addressLocality": "Winnipeg"
+                  "streetAddress": "Suite 104 - 2 Gurdwara Road",
+                  "addressLocality": "Ottawa",
+                  "addressRegion": "ON",
+                  "postalCode": "K2E 1A2",
+                  "addressCountry": "CA"
                 },
                 {
                   "@type": "PostalAddress", 
@@ -944,13 +946,16 @@ export default function RootLayout({
               "email": "info@solvixcore.com",
               "address": {
                 "@type": "PostalAddress",
-                "addressCountry": "CA",
-                "addressRegion": "Manitoba"
+                "streetAddress": "Suite 104 - 2 Gurdwara Road",
+                "addressLocality": "Ottawa",
+                "addressRegion": "ON",
+                "postalCode": "K2E 1A2",
+                "addressCountry": "CA"
               },
               "geo": {
                 "@type": "GeoCoordinates",
-                "latitude": "49.8951",
-                "longitude": "-97.1384"
+                "latitude": "45.4215",
+                "longitude": "-75.6972"
               },
               "openingHoursSpecification": {
                 "@type": "OpeningHoursSpecification",

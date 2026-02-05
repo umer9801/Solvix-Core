@@ -311,7 +311,7 @@ export default function ContactPage() {
 
       {/* Contact Methods */}
       <section className="mx-auto max-w-6xl px-4 py-8">
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <div className="grid md:grid-cols-4 gap-6 mb-12">
           {[
             {
               icon: Mail,
@@ -384,6 +384,43 @@ export default function ContactPage() {
               <div className={`absolute inset-0 rounded-xl bg-gradient-to-r ${method.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 -z-10`} />
             </motion.div>
           ))}
+          
+          {/* Office Address Card */}
+          <motion.div
+            className="group p-6 rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm shadow-xl hover:shadow-red-500/25 hover:border-red-400/40 transition-all duration-500 hover:scale-105 text-center relative overflow-hidden"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            whileHover={{ y: -5 }}
+          >
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-orange-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500" />
+            
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
+              className="relative z-10 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-red-500 to-orange-500 mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg"
+            >
+              <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </motion.div>
+            
+            <h3 className="relative z-10 font-bold text-gray-800 mb-1 text-lg group-hover:text-red-400 transition-colors duration-300">Office Address</h3>
+            
+            <p className="relative z-10 text-gray-600 group-hover:text-red-400 transition-colors duration-300 font-medium text-sm leading-relaxed">
+              Suite 104 - 2 Gurdwara Road<br />
+              Ottawa, ON K2E 1A2<br />
+              Canada
+            </p>
+            
+            {/* Animated border effect */}
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500 -z-10" />
+          </motion.div>
         </div>
       </section>
 

@@ -8,6 +8,8 @@ import { services } from "@/src/data/services"
 import ServiceCard from "@/components/sections/service-card"
 import WhySolvix from "@/components/sections/why"
 import Portfolio from "@/components/sections/portfolio"
+import PricingSection from "@/components/sections/pricing-section"
+import RefundPolicy from "@/components/sections/refund-policy"
 
 export default function UnifiedPage() {
   const router = useRouter()
@@ -197,6 +199,12 @@ export default function UnifiedPage() {
       <section className="relative mx-auto max-w-6xl px-4 pb-16 sm:pb-24">
         <Portfolio />
       </section>
+
+      {/* Pricing Section */}
+      <PricingSection />
+
+      {/* Refund Policy Section */}
+      <RefundPolicy />
 
       {/* CTA Section */}
       <section className="relative mx-auto max-w-4xl px-4 py-16">
