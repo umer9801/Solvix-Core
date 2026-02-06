@@ -1,13 +1,19 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
+import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import ClientLayout from "@/components/client-layout"
 import { SimpleCountryProvider } from "@/lib/simple-country-context"
 import FloatingButtons from "@/components/floating-buttons"
 import MobileOptimizations from "@/components/mobile-optimizations"
+
+// Inter font - Clean, modern, enterprise-safe
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+})
 
 // Make sure you have:
 // public/logo.png
@@ -1035,7 +1041,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased bg-background text-foreground`}
+        className={`${inter.variable} font-sans antialiased bg-background text-foreground`}
       >
         <SimpleCountryProvider>
           <ClientLayout>

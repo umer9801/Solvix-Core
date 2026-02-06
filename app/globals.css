@@ -99,89 +99,98 @@ html, body {
 }
 
 :root {
-  /* Modern Vibrant Theme - Eye-catching & Professional */
-  --background: oklch(0.97 0.01 270); /* Clean light background */
-  --foreground: oklch(0.15 0.02 270); /* Dark text */
-  --card: oklch(1 0 0); /* Pure white cards */
-  --card-foreground: oklch(0.15 0.02 270);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.02 270);
-  --brand-cyan: oklch(0.55 0.20 200); /* Vibrant cyan */
-  --brand-teal: oklch(0.50 0.18 180); /* Rich teal */
-  --brand-amber: oklch(0.70 0.18 75); /* Bright amber */
-  --primary: oklch(0.50 0.22 260); /* Rich purple-blue */
-  --primary-foreground: oklch(0.98 0.01 270); /* Light text on primary */
-  --secondary: oklch(0.95 0.01 270); /* Light secondary */
-  --secondary-foreground: oklch(0.25 0.02 270);
-  --muted: oklch(0.94 0.01 270);
-  --muted-foreground: oklch(0.50 0.02 270); /* Medium gray text */
-  --accent: oklch(0.55 0.20 200); /* Vibrant accent */
-  --accent-foreground: oklch(0.98 0.01 270);
-  --destructive: oklch(0.60 0.25 25);
-  --destructive-foreground: oklch(0.98 0.01 270);
-  --border: oklch(0.88 0.02 270); /* Subtle borders */
-  --input: oklch(0.88 0.02 270);
-  --ring: oklch(0.50 0.22 260);
-  --chart-1: oklch(0.55 0.20 200);
-  --chart-2: oklch(0.50 0.18 180);
-  --chart-3: oklch(0.50 0.22 260);
-  --chart-4: oklch(0.70 0.18 75);
-  --chart-5: oklch(0.60 0.16 320);
+  /* Clean Modern Theme - Professional & Elegant */
+  --background: #FFFFFF; /* Base Background */
+  --foreground: #0F172A; /* Primary Text */
+  --card: #FFFFFF; /* Pure white cards */
+  --card-foreground: #0F172A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
+  --section-soft: #F8FAFC; /* Section Soft */
+  --section-alternate: #F1F5F9; /* Alternate Section */
+  --primary: #4F46E5; /* Primary Indigo */
+  --primary-hover: #4338CA; /* Hover state */
+  --primary-active: #3730A3; /* Active state */
+  --primary-foreground: #FFFFFF;
+  --secondary: #F8FAFC; /* Light secondary */
+  --secondary-foreground: #334155; /* Secondary Text */
+  --muted: #F1F5F9;
+  --muted-foreground: #64748B; /* Muted Text */
+  --accent-purple: #9333EA; /* Accent Purple */
+  --accent-cyan: #22D3EE; /* Accent Cyan */
+  --accent: #4F46E5;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: #E5E7EB; /* Border */
+  --input: #E5E7EB;
+  --ring: #4F46E5;
+  --shadow: rgba(2, 6, 23, 0.06); /* Shadow */
+  --gradient-signature: linear-gradient(135deg, #4F46E5 0%, #9333EA 50%, #EC4899 100%); /* Signature Gradient */
+  --chart-1: #4F46E5;
+  --chart-2: #9333EA;
+  --chart-3: #22D3EE;
+  --chart-4: #EC4899;
+  --chart-5: #8B5CF6;
   --radius: 0.75rem;
-  --sidebar: oklch(0.97 0.01 270);
-  --sidebar-foreground: oklch(0.15 0.02 270);
-  --sidebar-primary: oklch(0.50 0.22 260);
-  --sidebar-primary-foreground: oklch(0.98 0.01 270);
-  --sidebar-accent: oklch(0.95 0.01 270);
-  --sidebar-accent-foreground: oklch(0.25 0.02 270);
-  --sidebar-border: oklch(0.88 0.02 270);
-  --sidebar-ring: oklch(0.50 0.22 260);
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #0F172A;
+  --sidebar-primary: #4F46E5;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F8FAFC;
+  --sidebar-accent-foreground: #334155;
+  --sidebar-border: #E5E7EB;
+  --sidebar-ring: #4F46E5;
 }
 
-/* Light theme (if user wants to switch) */
+/* Light theme (same as root for consistency) */
 .light {
-  --background: oklch(0.98 0.005 250);
-  --foreground: oklch(0.15 0.01 250);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.01 250);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.01 250);
-  --brand-cyan: oklch(0.55 0.12 240);
-  --brand-teal: oklch(0.50 0.10 220);
-  --brand-amber: oklch(0.65 0.12 70);
-  --primary: oklch(0.45 0.10 260);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.96 0.005 250);
-  --secondary-foreground: oklch(0.25 0.01 250);
-  --muted: oklch(0.96 0.005 250);
-  --muted-foreground: oklch(0.50 0.01 250);
-  --accent: oklch(0.45 0.10 260);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.90 0.01 250);
-  --input: oklch(0.90 0.01 250);
-  --ring: oklch(0.45 0.10 260);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.55 0.12 240);
-  --chart-3: oklch(0.50 0.10 220);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.98 0.005 250);
-  --sidebar-foreground: oklch(0.15 0.01 250);
-  --sidebar-primary: oklch(0.45 0.10 260);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.96 0.005 250);
-  --sidebar-accent-foreground: oklch(0.25 0.01 250);
-  --sidebar-border: oklch(0.90 0.01 250);
-  --sidebar-ring: oklch(0.45 0.10 260);
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
+  --section-soft: #F8FAFC;
+  --section-alternate: #F1F5F9;
+  --primary: #4F46E5;
+  --primary-hover: #4338CA;
+  --primary-active: #3730A3;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F8FAFC;
+  --secondary-foreground: #334155;
+  --muted: #F1F5F9;
+  --muted-foreground: #64748B;
+  --accent-purple: #9333EA;
+  --accent-cyan: #22D3EE;
+  --accent: #4F46E5;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: #E5E7EB;
+  --input: #E5E7EB;
+  --ring: #4F46E5;
+  --shadow: rgba(2, 6, 23, 0.06);
+  --gradient-signature: linear-gradient(135deg, #4F46E5 0%, #9333EA 50%, #EC4899 100%);
+  --chart-1: #4F46E5;
+  --chart-2: #9333EA;
+  --chart-3: #22D3EE;
+  --chart-4: #EC4899;
+  --chart-5: #8B5CF6;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #0F172A;
+  --sidebar-primary: #4F46E5;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F8FAFC;
+  --sidebar-accent-foreground: #334155;
+  --sidebar-border: #E5E7EB;
+  --sidebar-ring: #4F46E5;
 }
 
 
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -226,18 +235,18 @@ html, body {
   }
   body {
     @apply text-foreground;
-    background: linear-gradient(135deg, #f8faff 0%, #e0f2fe 25%, #f3e8ff 50%, #fef7cd 75%, #ffffff 100%);
+    background: #FFFFFF;
     min-height: 100vh;
   }
   
   html {
-    background: linear-gradient(135deg, #f8faff 0%, #e0f2fe 25%, #f3e8ff 50%, #fef7cd 75%, #ffffff 100%);
+    background: #FFFFFF;
   }
   
   /* Unified background for all devices */
   @media (max-width: 768px) {
     body, html {
-      background: linear-gradient(135deg, #f8faff 0%, #e0f2fe 25%, #f3e8ff 50%, #fef7cd 75%, #ffffff 100%);
+      background: #FFFFFF;
       background-attachment: scroll;
     }
   }
@@ -335,17 +344,17 @@ html, body {
 
 /* Light blue gradient background classes */
 .light-bg {
-  background: linear-gradient(135deg, #fbfcff 0%, #f6f9ff 50%, #ffffff 100%);
+  background: #F8FAFC;
 }
 
 .card-bg {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #E5E7EB;
   backdrop-filter: blur(10px);
 }
 
 .premium-bg {
-  background: linear-gradient(135deg, #f8faff 0%, #f0f7ff 25%, #e8f4ff 50%, #f5f9ff 75%, #ffffff 100%);
+  background: #F1F5F9;
 }
 
 /* Unified experience - same animations and effects on all devices */
@@ -451,19 +460,19 @@ video {
 }
 
 .contact-form-input:focus {
-  border-color: #3b82f6 !important;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  border-color: #4F46E5 !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1) !important;
   outline: none !important;
 }
 
 .contact-form-input.email-input:focus {
-  border-color: #3b82f6 !important;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  border-color: #4F46E5 !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1) !important;
 }
 
 .contact-form-input.company-input:focus {
-  border-color: #8b5cf6 !important;
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+  border-color: #9333EA !important;
+  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1) !important;
 }
 
 .contact-form-input.whatsapp-input:focus {
@@ -482,8 +491,8 @@ video {
 }
 
 .contact-form-textarea:focus {
-  border-color: #3b82f6 !important;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+  border-color: #4F46E5 !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1) !important;
   outline: none !important;
 }
 
@@ -496,8 +505,8 @@ video {
 }
 
 .contact-form-select:focus {
-  border-color: #8b5cf6 !important;
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+  border-color: #9333EA !important;
+  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1) !important;
 }
 
 .contact-form-select.budget-select:focus {
@@ -514,7 +523,7 @@ video {
 }
 
 .contact-form-radio:hover {
-  border-color: #3b82f6 !important;
+  border-color: #4F46E5 !important;
 }
 
 .contact-form-radio.whatsapp-radio:hover {
@@ -532,12 +541,12 @@ video {
 .contact-send-button {
   height: 3.5rem !important;
   padding: 0 2rem !important;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899) !important;
+  background: linear-gradient(135deg, #4F46E5 0%, #9333EA 50%, #EC4899 100%) !important;
   color: white !important;
   font-weight: 600 !important;
   border-radius: 0.75rem !important;
   border: none !important;
-  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.3), 0 2px 8px 0 rgba(139, 92, 246, 0.2) !important;
+  box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.3), 0 2px 8px 0 rgba(147, 51, 234, 0.2) !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   min-width: 160px !important;
   position: relative !important;
@@ -545,14 +554,14 @@ video {
 }
 
 .contact-send-button:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed, #db2777) !important;
-  box-shadow: 0 8px 25px 0 rgba(59, 130, 246, 0.5), 0 4px 15px 0 rgba(139, 92, 246, 0.3), 0 0 0 1px rgba(236, 72, 153, 0.2) !important;
+  background: linear-gradient(135deg, #4338CA 0%, #7C3AED 50%, #DB2777 100%) !important;
+  box-shadow: 0 8px 25px 0 rgba(79, 70, 229, 0.5), 0 4px 15px 0 rgba(147, 51, 234, 0.3), 0 0 0 1px rgba(236, 72, 153, 0.2) !important;
   transform: translateY(-3px) scale(1.03) !important;
 }
 
 .contact-send-button:active {
   transform: translateY(-1px) scale(1.01) !important;
-  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.4) !important;
+  box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.4) !important;
 }
 
 .contact-whatsapp-button {
