@@ -1,0 +1,1 @@
+var e=`/assets/ai-graphic-v1h0xvAJ.jpg`;export{e as t};

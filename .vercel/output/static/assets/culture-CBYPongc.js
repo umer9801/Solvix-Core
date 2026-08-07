@@ -1,0 +1,1 @@
+var e=`/assets/culture-DYIpVAv9.jpg`;export{e as t};
