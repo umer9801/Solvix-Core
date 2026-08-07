@@ -5,7 +5,7 @@ import { ArrowUpRight, Menu, Search, X } from "lucide-react";
 import { COMPANY, NAV_LINKS, SERVICES } from "@/lib/site-data";
 import { Magnetic } from "./primitives";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/logo.jpeg";
+import logo from "@/assets/logo.PNG";
 
 const GROUPS = ["Build", "Design", "Intelligence", "Platforms", "Infrastructure", "Growth"];
 
@@ -64,8 +64,8 @@ export function Nav() {
             )}
           >
             <Link to="/" className="group flex items-center gap-2.5 pl-1">
-              <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl">
-                <img src={logo} alt="Solvix Core Logo" className="h-full w-full object-cover" />
+              <span className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-white p-1 shadow-sm">
+                <img src={logo} alt="Solvix Core Logo" className="h-full w-full object-contain" />
               </span>
               <span className="font-display text-xl tracking-tight">{COMPANY.name}</span>
             </Link>
@@ -204,8 +204,8 @@ export function Nav() {
             >
               <div className="flex items-center justify-between px-6 py-5 border-b border-border">
                 <div className="flex items-center gap-2.5">
-                  <span className="flex h-9 w-9 overflow-hidden rounded-xl">
-                    <img src={logo} alt="Solvix Core" className="h-full w-full object-cover" />
+                  <span className="flex h-11 w-11 overflow-hidden rounded-xl bg-white p-1 shadow-sm">
+                    <img src={logo} alt="Solvix Core" className="h-full w-full object-contain" />
                   </span>
                   <span className="font-display text-lg">{COMPANY.name}</span>
                 </div>

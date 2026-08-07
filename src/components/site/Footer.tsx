@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Github, Linkedin, Twitter, Instagram } from "lucide-react";
 import { COMPANY, NAV_LINKS, OFFICES, SERVICES } from "@/lib/site-data";
 import { Magnetic, Reveal, TextReveal } from "./primitives";
-import logo from "@/assets/logo.jpeg";
+import logo from "@/assets/logo.PNG";
 
 export function CtaBand({
   eyebrow = "Ready to start?",
@@ -62,8 +62,8 @@ export function Footer() {
         <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <div className="flex items-center gap-2.5">
-              <span className="flex h-9 w-9 overflow-hidden rounded-xl">
-                <img src={logo} alt="Solvix Core Logo" className="h-full w-full object-cover" />
+              <span className="flex h-11 w-11 overflow-hidden rounded-xl bg-white p-1 shadow-sm">
+                <img src={logo} alt="Solvix Core Logo" className="h-full w-full object-contain" />
               </span>
               <span className="font-display text-xl">{COMPANY.name}</span>
             </div>

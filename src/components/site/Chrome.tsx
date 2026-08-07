@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
 import { ArrowUp, CalendarDays } from "lucide-react";
+import logo from "@/assets/logo.PNG";
 
 export function ReadingProgress() {
   const { scrollYProgress } = useScroll();
@@ -31,14 +32,19 @@ export function Loader() {
           className="fixed inset-0 z-[100] flex items-center justify-center bg-surface"
         >
           <div className="text-center">
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 14, filter: "blur(8px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display text-5xl tracking-tight md:text-7xl"
+              className="flex flex-col items-center gap-4"
             >
-              Solvix Core
-            </motion.p>
+              <div className="h-20 w-20 overflow-hidden rounded-2xl bg-white p-2 shadow-soft">
+                <img src={logo} alt="Solvix Core" className="h-full w-full object-contain" />
+              </div>
+              <p className="font-display text-4xl tracking-tight md:text-5xl">
+                Solvix Core
+              </p>
+            </motion.div>
             <div className="mx-auto mt-6 h-px w-40 overflow-hidden bg-border">
               <motion.div
                 initial={{ x: "-100%" }}
@@ -47,7 +53,7 @@ export function Loader() {
                 className="h-full w-full bg-primary"
               />
             </div>
-            <p className="eyebrow mt-5">Engineering studio</p>
+            <p className="eyebrow mt-5">Premium Tech Solutions — CA · UK · PK</p>
           </div>
         </motion.div>
       ) : null}
