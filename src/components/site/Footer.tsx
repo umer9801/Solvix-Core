@@ -15,10 +15,10 @@ export function CtaBand({
 }) {
   return (
     <section className="container-lux py-24 md:py-32">
-      <div className="grain relative overflow-hidden rounded-[2.5rem] px-8 py-20 text-background md:px-16 md:py-28" style={{background: "linear-gradient(135deg, oklch(0.32 0.22 262) 0%, oklch(0.24 0.24 275) 45%, oklch(0.28 0.20 250) 100%)"}}>
-        <div className="animate-hue-drift pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-violet/40 blur-3xl" />
+      <div className="grain relative overflow-hidden rounded-[2.5rem] border border-border bg-ink px-8 py-20 text-background md:px-16 md:py-28">
+        <div className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-white/5 blur-3xl" />
         <div
-          className="animate-hue-drift pointer-events-none absolute -bottom-32 -left-16 h-80 w-80 rounded-full bg-coral/30 blur-3xl"
+          className="pointer-events-none absolute -bottom-32 -left-16 h-80 w-80 rounded-full bg-white/5 blur-3xl"
           style={{ animationDelay: "-6s" }}
         />
         <div className="relative max-w-3xl">

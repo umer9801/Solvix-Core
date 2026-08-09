@@ -5,8 +5,6 @@ import { CtaBand } from "@/components/site/Footer";
 import { Counter, ParallaxImage, Reveal, SectionHead } from "@/components/site/primitives";
 import { AWARDS, STATS, TEAM, TIMELINE, VALUES } from "@/lib/site-data";
 import officeTeam from "@/assets/office-team.jpg";
-import culture from "@/assets/culture.jpg";
-import heroAbstract from "@/assets/hero-abstract.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -163,22 +161,6 @@ function About() {
       </section>
 
       <section className="container-lux pb-24">
-        <div className="grid gap-4 md:grid-cols-3">
-          <Reveal className="md:col-span-2">
-            <ParallaxImage
-              src={culture}
-              alt="A quiet corner of the Lisbon studio"
-              className="aspect-[16/9] rounded-[2rem]"
-            />
-          </Reveal>
-          <Reveal delay={0.1}>
-            <ParallaxImage
-              src={heroAbstract}
-              alt="Solvix Core brand system"
-              className="h-full min-h-64 rounded-[2rem]"
-            />
-          </Reveal>
-        </div>
         <div className="mt-16 grid gap-14 lg:grid-cols-2">
           <div>
             <SectionHead

@@ -23,11 +23,10 @@ export function PageHero({
 }) {
   return (
     <section className="relative overflow-hidden pb-16 pt-10 md:pb-20 md:pt-14">
-      {/* Colorful gradient blobs */}
+      {/* Subtle gradient */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-16 -left-16 h-80 w-80 rounded-full bg-primary/18 blur-[70px]" />
-        <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-violet/12 blur-[60px]" />
-        <div className="absolute bottom-0 left-1/2 h-48 w-48 rounded-full bg-coral/10 blur-[50px]" />
+        <div className="absolute -top-16 -left-16 h-72 w-72 rounded-full bg-primary/10 blur-[70px]" />
+        <div className="absolute top-0 right-0 h-56 w-56 rounded-full bg-primary/6 blur-[60px]" />
       </div>
       <Blobs />
       <div className="container-lux">
