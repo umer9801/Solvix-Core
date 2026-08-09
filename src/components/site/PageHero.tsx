@@ -36,7 +36,7 @@ export function PageHero({
         </Reveal>
 
         {/* Main grid */}
-        <div className="mt-8 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-start">
 
           {/* Left — content */}
           <div>
@@ -88,8 +88,8 @@ export function PageHero({
                   src={image}
                   alt={imageAlt ?? eyebrow}
                   width={700}
-                  height={560}
-                  className="aspect-[5/4] w-full object-cover"
+                  height={900}
+                  className="aspect-[3/4] w-full object-cover object-center"
                 />
               </div>
               <div className="rule-dots absolute -right-4 -bottom-4 -z-10 h-32 w-32 rounded-2xl" />
