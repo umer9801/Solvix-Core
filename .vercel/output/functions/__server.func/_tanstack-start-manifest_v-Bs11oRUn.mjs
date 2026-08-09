@@ -1,4 +1,4 @@
-//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-CXcgj9eP.js
+//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-Bs11oRUn.js
 var tsrStartManifest = () => ({ routes: {
 	__root__: {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/__root.tsx",
@@ -17,23 +17,23 @@ var tsrStartManifest = () => ({ routes: {
 			"/case-studies/",
 			"/services/"
 		],
-		preloads: ["/assets/index-DMTuw7Pb.js", "/assets/primitives-BVklnNhd.js"],
+		preloads: ["/assets/index-DmqGLAJ3.js", "/assets/primitives-BVklnNhd.js"],
 		scripts: [{ attrs: {
 			type: "module",
 			async: !0,
-			src: "/assets/index-DMTuw7Pb.js"
+			src: "/assets/index-DmqGLAJ3.js"
 		} }]
 	},
 	"/": {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/index.tsx",
 		children: void 0,
-		preloads: ["/assets/routes-X5blXR-b.js"]
+		preloads: ["/assets/routes-CfCzL_zr.js", "/assets/circle-check-big-Crbd7Hjj.js"]
 	},
 	"/about": {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/about.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/about-D0sNbVLL.js",
+			"/assets/about-uLAIJtLz.js",
 			"/assets/PageHero-CBztW5tE.js",
 			"/assets/office-team-kvpx1Vn0.js"
 		]
@@ -41,18 +41,19 @@ var tsrStartManifest = () => ({ routes: {
 	"/blog": {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/blog.tsx",
 		children: void 0,
-		preloads: ["/assets/blog-CZQvmhe5.js", "/assets/PageHero-CBztW5tE.js"]
+		preloads: ["/assets/blog-C-1BTgD2.js", "/assets/PageHero-CBztW5tE.js"]
 	},
 	"/careers": {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/careers.tsx",
 		children: void 0,
-		preloads: ["/assets/careers-20ybGgOC.js", "/assets/PageHero-CBztW5tE.js"]
+		preloads: ["/assets/careers-BpoTv0gt.js", "/assets/PageHero-CBztW5tE.js"]
 	},
 	"/contact": {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/contact.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/contact-rXEKoFVH.js",
+			"/assets/contact-CHV1-18T.js",
+			"/assets/circle-check-big-Crbd7Hjj.js",
 			"/assets/PageHero-CBztW5tE.js",
 			"/assets/dashboard-CiXA9-3b.js"
 		]
@@ -60,18 +61,18 @@ var tsrStartManifest = () => ({ routes: {
 	"/faqs": {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/faqs.tsx",
 		children: void 0,
-		preloads: ["/assets/faqs-DU5ldSSW.js", "/assets/PageHero-CBztW5tE.js"]
+		preloads: ["/assets/faqs-Btd5I_yO.js", "/assets/PageHero-CBztW5tE.js"]
 	},
 	"/industries": {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/industries.tsx",
 		children: void 0,
-		preloads: ["/assets/industries-DgQqbYph.js"]
+		preloads: ["/assets/industries-D6PVg9um.js"]
 	},
 	"/projects": {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/projects.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/projects-afuv0qDr.js",
+			"/assets/projects-bXNxK3ZO.js",
 			"/assets/project-3-CTD_rKJO.js",
 			"/assets/PageHero-CBztW5tE.js",
 			"/assets/office-team-kvpx1Vn0.js",
@@ -83,7 +84,7 @@ var tsrStartManifest = () => ({ routes: {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/technologies.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/technologies-Dl4vKBwV.js",
+			"/assets/technologies-DshT85TL.js",
 			"/assets/project-3-CTD_rKJO.js",
 			"/assets/PageHero-CBztW5tE.js"
 		]
@@ -92,7 +93,7 @@ var tsrStartManifest = () => ({ routes: {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/case-studies/$slug.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/_slug-CWovFQco.js",
+			"/assets/_slug-B4jy_fQJ.js",
 			"/assets/project-3-CTD_rKJO.js",
 			"/assets/PageHero-CBztW5tE.js",
 			"/assets/web-portfolio-BX0GZbxA.js",
@@ -103,7 +104,7 @@ var tsrStartManifest = () => ({ routes: {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/services/$slug.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/_slug-CmjWTY9F.js",
+			"/assets/_slug-j6YM3V7s.js",
 			"/assets/PageHero-CBztW5tE.js",
 			"/assets/office-team-kvpx1Vn0.js",
 			"/assets/pos-portfolio-C_U-4S2G.js"
@@ -113,7 +114,7 @@ var tsrStartManifest = () => ({ routes: {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/case-studies/index.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/case-studies-Bs1vq4GO.js",
+			"/assets/case-studies-CQWVTbaV.js",
 			"/assets/PageHero-CBztW5tE.js",
 			"/assets/dashboard-CiXA9-3b.js"
 		]
@@ -121,7 +122,7 @@ var tsrStartManifest = () => ({ routes: {
 	"/services/": {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/services/index.tsx",
 		children: void 0,
-		preloads: ["/assets/services-C7FYorEG.js", "/assets/PageHero-CBztW5tE.js"]
+		preloads: ["/assets/services-QGkispSb.js", "/assets/PageHero-CBztW5tE.js"]
 	}
 } });
 //#endregion
