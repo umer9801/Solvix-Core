@@ -11,6 +11,7 @@ export function PageHero({
   meta,
   image,
   imageAlt,
+  landscape = false,
 }: {
   eyebrow: string;
   title: string;
@@ -19,6 +20,7 @@ export function PageHero({
   meta?: { k: string; v: string }[];
   image?: string;
   imageAlt?: string;
+  landscape?: boolean;
   heroNote?: string;
 }) {
   return (
@@ -93,8 +95,8 @@ export function PageHero({
                   src={image}
                   alt={imageAlt ?? eyebrow}
                   width={700}
-                  height={900}
-                  className="aspect-[3/4] w-full object-cover object-center"
+                  height={landscape ? 450 : 900}
+                  className={`w-full object-cover object-center ${landscape ? "aspect-[16/10]" : "aspect-[3/4]"}`}
                 />
               </div>
               <div className="rule-dots absolute -right-4 -bottom-4 -z-10 h-32 w-32 rounded-2xl" />

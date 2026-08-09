@@ -5,6 +5,7 @@ import { CtaBand } from "@/components/site/Footer";
 import { Counter, ParallaxImage, Reveal, SectionHead } from "@/components/site/primitives";
 import { AWARDS, STATS, TEAM, TIMELINE, VALUES } from "@/lib/site-data";
 import officeTeam from "@/assets/office-team.jpg";
+import aboutHero from "@/assets/about-hero.jpeg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -30,7 +31,8 @@ function About() {
         eyebrow="About Solvix Core"
         title="Premium tech solutions built for your success."
         body="We help teams in Canada, the UK and Pakistan deliver complex digital products faster, with better outcomes and clearer risk control."
-        heroNote="From discovery to launch, we partner with your business to turn technology investment into measurable results."
+        image={aboutHero}
+        imageAlt="About Solvix Core"
         meta={STATS.map((s) => ({
           k: `${s.value}${s.suffix}`,
           v: s.label,
