@@ -245,61 +245,19 @@ var Brain = createLucideIcon("brain", [
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var CalendarDays = createLucideIcon("calendar-days", [
-	["path", {
-		d: "M8 2v4",
-		key: "1cmpym"
-	}],
-	["path", {
-		d: "M16 2v4",
-		key: "4m81vk"
-	}],
-	["rect", {
-		width: "18",
-		height: "18",
-		x: "3",
-		y: "4",
-		rx: "2",
-		key: "1hopcy"
-	}],
-	["path", {
-		d: "M3 10h18",
-		key: "8toen8"
-	}],
-	["path", {
-		d: "M8 14h.01",
-		key: "6423bh"
-	}],
-	["path", {
-		d: "M12 14h.01",
-		key: "1etili"
-	}],
-	["path", {
-		d: "M16 14h.01",
-		key: "1gbofw"
-	}],
-	["path", {
-		d: "M8 18h.01",
-		key: "lrp35t"
-	}],
-	["path", {
-		d: "M12 18h.01",
-		key: "mhygvu"
-	}],
-	["path", {
-		d: "M16 18h.01",
-		key: "kzsmim"
-	}]
-]);
+var Check = createLucideIcon("check", [["path", {
+	d: "M20 6 9 17l-5-5",
+	key: "1gmf2c"
+}]]);
 /**
 * @license lucide-react v0.575.0 - ISC
 *
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Check = createLucideIcon("check", [["path", {
-	d: "M20 6 9 17l-5-5",
-	key: "1gmf2c"
+var ChevronRight = createLucideIcon("chevron-right", [["path", {
+	d: "m9 18 6-6-6-6",
+	key: "mthhwq"
 }]]);
 /**
 * @license lucide-react v0.575.0 - ISC
@@ -710,4 +668,4 @@ var Zap = createLucideIcon("zap", [["path", {
 	key: "1xq2db"
 }]]);
 //#endregion
-export { ArrowUp as A, Gauge as C, Brain as D, CalendarDays as E, ArrowRight as M, Bot as O, Github as S, Check as T, MapPin as _, Twitter as a, Instagram as b, Smartphone as c, Search as d, Quote as f, Menu as g, MessageCircle as h, Video as i, ArrowUpRight as j, Award as k, ShoppingBag as l, Phone as m, X as n, Telescope as o, Plus as p, Workflow as r, Target as s, Zap as t, Send as u, Mail as v, CircleCheckBig as w, Heart as x, Linkedin as y };
+export { ArrowUp as A, Gauge as C, Brain as D, Check as E, ArrowRight as M, Bot as O, Github as S, ChevronRight as T, MapPin as _, Twitter as a, Instagram as b, Smartphone as c, Search as d, Quote as f, Menu as g, MessageCircle as h, Video as i, ArrowUpRight as j, Award as k, ShoppingBag as l, Phone as m, X as n, Telescope as o, Plus as p, Workflow as r, Target as s, Zap as t, Send as u, Mail as v, CircleCheckBig as w, Heart as x, Linkedin as y };

@@ -12,8 +12,7 @@ export const Route = createFileRoute("/contact")({
       { title: "Contact Solvix Core — Get a Free Quote" },
       {
         name: "description",
-        content:
-          "Contact Solvix Core for AI solutions, web development, automation and Shopify services. Serving globally. Fast response within 24 hours.",
+        content: "Contact Solvix Core for AI solutions, web development, automation and Shopify services. Serving globally. Fast response within 24 hours.",
       },
       { property: "og:title", content: "Contact Solvix Core — Get a Free Quote" },
       { property: "og:description", content: "Tell us about your project — we respond within 24 hours." },
@@ -22,8 +21,34 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
+const CURRENCIES = [
+  { code: "USD", symbol: "$", label: "US Dollar (USD)" },
+  { code: "CAD", symbol: "CA$", label: "Canadian Dollar (CAD)" },
+  { code: "GBP", symbol: "£", label: "British Pound (GBP)" },
+  { code: "PKR", symbol: "₨", label: "Pakistani Rupee (PKR)" },
+  { code: "EUR", symbol: "€", label: "Euro (EUR)" },
+  { code: "AUD", symbol: "A$", label: "Australian Dollar (AUD)" },
+  { code: "AED", symbol: "د.إ", label: "UAE Dirham (AED)" },
+  { code: "INR", symbol: "₹", label: "Indian Rupee (INR)" },
+  { code: "SAR", symbol: "﷼", label: "Saudi Riyal (SAR)" },
+  { code: "SGD", symbol: "S$", label: "Singapore Dollar (SGD)" },
+  { code: "MYR", symbol: "RM", label: "Malaysian Ringgit (MYR)" },
+  { code: "BDT", symbol: "৳", label: "Bangladeshi Taka (BDT)" },
+  { code: "NGN", symbol: "₦", label: "Nigerian Naira (NGN)" },
+  { code: "KES", symbol: "KSh", label: "Kenyan Shilling (KES)" },
+  { code: "ZAR", symbol: "R", label: "South African Rand (ZAR)" },
+];
+
+const COUNTRIES = [
+  "Canada", "United Kingdom", "Pakistan", "United States", "Australia",
+  "UAE", "India", "Saudi Arabia", "Singapore", "Malaysia", "Bangladesh",
+  "Nigeria", "Kenya", "South Africa", "Germany", "France", "Netherlands",
+  "New Zealand", "Ireland", "Other",
+];
+
 function Contact() {
   const [sent, setSent] = useState(false);
+  const [currency, setCurrency] = useState("USD");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -31,11 +56,13 @@ function Contact() {
     company: "",
     country: "",
     service: "",
-    budget: "",
+    budgetAmount: "",
     timeline: "",
     description: "",
     howDidYouHear: "",
   });
+
+  const selectedCurrency = CURRENCIES.find((c) => c.code === currency) ?? CURRENCIES[0];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -47,7 +74,7 @@ function Contact() {
   };
 
   const inputClass = "mt-2 w-full rounded-2xl border border-border bg-surface-2 px-4 py-3.5 text-sm outline-none transition-colors focus:border-primary";
-  const selectClass = "mt-2 w-full rounded-2xl border border-border bg-surface-2 px-4 py-3.5 text-sm outline-none transition-colors focus:border-primary appearance-none cursor-pointer";
+  const selectClass = "mt-2 w-full rounded-2xl border border-border bg-surface-2 px-4 py-3.5 text-sm outline-none transition-colors focus:border-primary cursor-pointer";
   const labelClass = "block text-[11px] font-semibold uppercase tracking-widest text-muted-foreground";
 
   return (
@@ -63,7 +90,7 @@ function Contact() {
       <section className="container-lux pb-24">
         <div className="grid gap-8 lg:grid-cols-[1.4fr_0.6fr]">
 
-          {/* ── Main Form ───────────────────────────────────── */}
+          {/* ── Main Form ─────────────────────────────────── */}
           <Reveal>
             {sent ? (
               <div className="flex flex-col items-center justify-center gap-6 rounded-[2rem] border border-primary/20 bg-primary/5 p-16 text-center">
@@ -82,10 +109,14 @@ function Contact() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="card-lux rounded-[2rem] p-8 md:p-10 space-y-6">
+              <form onSubmit={handleSubmit} className="card-lux rounded-[2rem] p-8 md:p-10 space-y-8">
 
+                {/* Section 1 — Your Details */}
                 <div>
-                  <h3 className="font-display text-xl mb-4">Your Details</h3>
+                  <h3 className="font-display text-xl mb-5 flex items-center gap-2">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">1</span>
+                    Your Details
+                  </h3>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="block">
                       <span className={labelClass}>Full Name *</span>
@@ -104,23 +135,36 @@ function Contact() {
                       <input name="company" type="text" value={form.company} onChange={handleChange} placeholder="Your company (optional)" className={inputClass} />
                     </label>
                     <label className="block">
-                      <span className={labelClass}>Country *</span>
+                      <span className={labelClass}>Your Country *</span>
                       <select required name="country" value={form.country} onChange={handleChange} className={selectClass}>
                         <option value="">Select your country</option>
-                        <option value="Canada">Canada</option>
-                        <option value="UK">United Kingdom</option>
-                        <option value="Pakistan">Pakistan</option>
-                        <option value="USA">United States</option>
-                        <option value="Australia">Australia</option>
-                        <option value="UAE">UAE</option>
-                        <option value="Other">Other</option>
+                        {COUNTRIES.map((c) => (
+                          <option key={c} value={c}>{c}</option>
+                        ))}
+                      </select>
+                    </label>
+                    <label className="block">
+                      <span className={labelClass}>Your Currency *</span>
+                      <select
+                        required
+                        value={currency}
+                        onChange={(e) => setCurrency(e.target.value)}
+                        className={selectClass}
+                      >
+                        {CURRENCIES.map((c) => (
+                          <option key={c.code} value={c.code}>{c.label}</option>
+                        ))}
                       </select>
                     </label>
                   </div>
                 </div>
 
+                {/* Section 2 — Project Details */}
                 <div className="border-t border-border pt-6">
-                  <h3 className="font-display text-xl mb-4">Project Details</h3>
+                  <h3 className="font-display text-xl mb-5 flex items-center gap-2">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">2</span>
+                    Project Details
+                  </h3>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <label className="block">
                       <span className={labelClass}>Service Required *</span>
@@ -142,20 +186,6 @@ function Contact() {
                       </select>
                     </label>
                     <label className="block">
-                      <span className={labelClass}>Budget Range (USD) *</span>
-                      <select required name="budget" value={form.budget} onChange={handleChange} className={selectClass}>
-                        <option value="">Select your budget</option>
-                        <option value="Under $500">Under $500</option>
-                        <option value="$500 - $1,000">$500 – $1,000</option>
-                        <option value="$1,000 - $2,500">$1,000 – $2,500</option>
-                        <option value="$2,500 - $5,000">$2,500 – $5,000</option>
-                        <option value="$5,000 - $10,000">$5,000 – $10,000</option>
-                        <option value="$10,000 - $25,000">$10,000 – $25,000</option>
-                        <option value="$25,000+">$25,000+</option>
-                        <option value="Not Sure">Not Sure</option>
-                      </select>
-                    </label>
-                    <label className="block">
                       <span className={labelClass}>Timeline *</span>
                       <select required name="timeline" value={form.timeline} onChange={handleChange} className={selectClass}>
                         <option value="">When do you need it?</option>
@@ -167,7 +197,28 @@ function Contact() {
                         <option value="No rush">No Rush — Just Exploring</option>
                       </select>
                     </label>
-                    <label className="block">
+
+                    {/* Budget — free input with currency prefix */}
+                    <label className="block sm:col-span-2">
+                      <span className={labelClass}>Your Budget ({selectedCurrency.code}) *</span>
+                      <div className="mt-2 flex overflow-hidden rounded-2xl border border-border focus-within:border-primary transition-colors">
+                        <span className="flex items-center bg-surface-2 px-4 text-sm font-semibold text-muted-foreground border-r border-border shrink-0">
+                          {selectedCurrency.symbol} {selectedCurrency.code}
+                        </span>
+                        <input
+                          required
+                          name="budgetAmount"
+                          type="text"
+                          value={form.budgetAmount}
+                          onChange={handleChange}
+                          placeholder="e.g. 2,000 or 500 - 1,000"
+                          className="w-full bg-surface-2 px-4 py-3.5 text-sm outline-none"
+                        />
+                      </div>
+                      <p className="mt-1.5 text-xs text-muted-foreground">Enter your budget in {selectedCurrency.label}. You can write a range like "500 - 1000".</p>
+                    </label>
+
+                    <label className="block sm:col-span-2">
                       <span className={labelClass}>How Did You Find Us?</span>
                       <select name="howDidYouHear" value={form.howDidYouHear} onChange={handleChange} className={selectClass}>
                         <option value="">Select one</option>
@@ -182,17 +233,22 @@ function Contact() {
                   </div>
                 </div>
 
+                {/* Section 3 — Project Description */}
                 <div className="border-t border-border pt-6">
+                  <h3 className="font-display text-xl mb-5 flex items-center gap-2">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">3</span>
+                    Describe Your Project
+                  </h3>
                   <label className="block">
-                    <span className={labelClass}>Describe Your Project *</span>
+                    <span className={labelClass}>Project Description *</span>
                     <textarea
                       required
                       name="description"
                       value={form.description}
                       onChange={handleChange}
-                      rows={6}
-                      placeholder="Tell us exactly what you need — what problem are you solving? What features do you want? Do you have any designs or references? The more detail the better."
-                      className={`${inputClass} resize-none`}
+                      rows={7}
+                      placeholder={`Tell us everything about your project:\n\n• What problem are you trying to solve?\n• What features or pages do you need?\n• Do you have any designs or references?\n• Do you have an existing website or system?\n• Any specific technology you prefer?\n\nThe more detail you give, the better we can help.`}
+                      className={`${inputClass} resize-none leading-relaxed`}
                     />
                   </label>
                 </div>
@@ -249,25 +305,18 @@ function Contact() {
             <Reveal delay={0.16}>
               <div className="grain relative overflow-hidden rounded-[2rem] bg-ink p-7 text-background">
                 <Phone className="h-5 w-5 text-primary" />
-                <p className="font-display mt-4 text-xl leading-tight">
-                  Prefer to talk directly?
-                </p>
+                <p className="font-display mt-4 text-xl leading-tight">Prefer to talk directly?</p>
                 <p className="mt-2 text-sm text-background/65">
-                  Send us a WhatsApp message and we will reply immediately during business hours.
+                  Send us a WhatsApp message and we will reply immediately.
                 </p>
-                <a
-                  href={COMPANY.whatsapp.canada}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-2 rounded-full bg-background px-5 py-2.5 text-sm font-semibold text-foreground"
-                >
+                <a href={COMPANY.whatsapp.canada} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 rounded-full bg-background px-5 py-2.5 text-sm font-semibold text-foreground">
                   <MessageCircle className="h-4 w-4" /> Open WhatsApp
                 </a>
               </div>
             </Reveal>
 
             <Reveal delay={0.2}>
-              <div className="card-lux rounded-[2rem] p-7 space-y-3">
+              <div className="card-lux rounded-[2rem] p-7 space-y-4">
                 <p className="eyebrow mb-2">What Happens Next?</p>
                 {[
                   "We review your brief within 24 hours",
@@ -276,7 +325,7 @@ function Contact() {
                 ].map((step, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">{i + 1}</span>
-                    <p className="text-sm text-muted-foreground">{step}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{step}</p>
                   </div>
                 ))}
               </div>
@@ -295,12 +344,7 @@ function Contact() {
                 <p className="font-display mt-4 text-2xl">{o.city}</p>
                 <p className="mt-2 text-sm text-muted-foreground">{o.line}</p>
                 <p className="mt-1 font-mono text-xs text-muted-foreground">{o.tz}</p>
-                <a
-                  href={`https://wa.me/${o.phone.replace(/[^0-9]/g, "")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
-                >
+                <a href={`https://wa.me/${o.phone.replace(/[^0-9]/g, "")}`} target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline">
                   <MessageCircle className="h-3.5 w-3.5" /> {o.phone}
                 </a>
               </div>

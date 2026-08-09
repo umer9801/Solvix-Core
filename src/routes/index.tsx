@@ -78,24 +78,31 @@ const accentStyles: Record<string, { bg: string; icon: string; border: string; g
 };
 
 // ─── Cycling word animation ──────────────────────────────────────────────────
-const cyclingWords = ["AI Solutions", "Automation", "Web Apps", "Shopify Stores", "Mobile Apps", "CRM Systems"];
+const cyclingWords = [
+  "AI That Works",
+  "Automation Systems",
+  "Web Platforms",
+  "Shopify Stores",
+  "Mobile Apps",
+  "CRM Systems",
+];
 
 function CyclingWord() {
   const [index, setIndex] = useState(0);
   useEffect(() => {
-    const t = setInterval(() => setIndex((i) => (i + 1) % cyclingWords.length), 2200);
+    const t = setInterval(() => setIndex((i) => (i + 1) % cyclingWords.length), 2500);
     return () => clearInterval(t);
   }, []);
   return (
-    <span className="relative inline-block overflow-hidden align-bottom" style={{ minWidth: "18rem" }}>
+    <span className="relative block overflow-hidden h-[1.15em]">
       <AnimatePresence mode="wait">
         <motion.span
           key={cyclingWords[index]}
-          initial={{ y: "100%", opacity: 0 }}
-          animate={{ y: "0%", opacity: 1 }}
-          exit={{ y: "-100%", opacity: 0 }}
-          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          className="block text-primary italic"
+          initial={{ y: "100%", opacity: 0, filter: "blur(8px)" }}
+          animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
+          exit={{ y: "-100%", opacity: 0, filter: "blur(8px)" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="block text-primary"
         >
           {cyclingWords[index]}
         </motion.span>
@@ -123,36 +130,56 @@ function Hero() {
         <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
             <Reveal>
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-border bg-card px-4 py-2 text-xs">
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-medium">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
                 </span>
-                Now serving globally — Canada · UK · Pakistan
+                Taking on new projects — Canada · UK · Pakistan · Globally
               </div>
             </Reveal>
 
-            <h1 className="display-xl mt-8">
-              <span className="block">We Build</span>
+            <h1 className="display-xl mt-7">
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="block text-foreground/50 text-[0.65em] font-normal tracking-tight mb-1"
+              >
+                We Build
+              </motion.span>
               <CyclingWord />
-              <span className="block text-foreground/70" style={{fontSize: "0.55em", letterSpacing: "-0.01em", marginTop: "0.2em", fontStyle: "normal"}}>
-                That Drive Real Results
-              </span>
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="block text-foreground text-[0.62em] font-normal tracking-tight mt-1"
+              >
+                For Ambitious Businesses
+              </motion.span>
             </h1>
 
             <Reveal delay={0.5}>
               <p className="mt-8 max-w-lg text-lg leading-relaxed text-muted-foreground">
-                Solvix Core builds AI, automation, web and Shopify systems that cut
-                launch time, reduce operating cost and keep work aligned to the value
-                your team needs.
+                Most agencies take 3 months and charge double. We deliver production-ready technology in weeks — at prices that actually make sense. AI, automation, web apps, Shopify, mobile and CRM — all under one roof.
               </p>
             </Reveal>
 
-            <Reveal delay={0.62}>
-              <p className="mt-8 max-w-lg text-sm leading-relaxed text-muted-foreground">
-                We design, deliver and support production-ready systems with the
-                discipline of a consultancy and the speed of a product team.
-              </p>
+            <Reveal delay={0.6}>
+              <div className="mt-5 flex flex-wrap gap-3">
+                {["35% below market rates", "Delivered in weeks", "You own the code 100%"].map((tag, i) => (
+                  <motion.span
+                    key={tag}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.7 + i * 0.1 }}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-semibold text-primary"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                    {tag}
+                  </motion.span>
+                ))}
+              </div>
             </Reveal>
 
             <Reveal delay={0.76}>

@@ -122,22 +122,27 @@ export function LuxButton({
 
 export function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "0px" });
   const [n, setN] = useState(0);
   const decimals = value % 1 !== 0 ? 2 : 0;
 
   useEffect(() => {
     if (!inView) return;
-    const start = performance.now();
-    const dur = 1800;
-    let raf = 0;
-    const tick = (t: number) => {
-      const p = Math.min((t - start) / dur, 1);
-      setN(value * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    // Small delay so reveal animation completes first
+    const delay = setTimeout(() => {
+      const start = performance.now();
+      const dur = 1600;
+      let raf = 0;
+      const tick = (t: number) => {
+        const p = Math.min((t - start) / dur, 1);
+        setN(value * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) raf = requestAnimationFrame(tick);
+        else setN(value);
+      };
+      raf = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(raf);
+    }, 200);
+    return () => clearTimeout(delay);
   }, [inView, value]);
 
   return (

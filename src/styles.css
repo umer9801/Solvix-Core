@@ -210,6 +210,10 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  &:hover {
+    box-shadow: var(--shadow-lift);
+  }
 }
 
 @utility shadow-lift {

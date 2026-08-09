@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
-import { ArrowUp, CalendarDays } from "lucide-react";
+import { ArrowUp, MessageCircle } from "lucide-react";
 import logo from "@/assets/logo.PNG";
 
 export function ReadingProgress() {
@@ -10,16 +10,25 @@ export function ReadingProgress() {
   return (
     <motion.div
       style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-[80] h-[3px] origin-left bg-primary"
+      className="fixed inset-x-0 top-0 z-[80] h-[2px] origin-left bg-primary"
     />
   );
 }
 
 export function Loader() {
   const [done, setDone] = useState(false);
+  const [progress, setProgress] = useState(0);
+
   useEffect(() => {
-    const t = setTimeout(() => setDone(true), 1500);
-    return () => clearTimeout(t);
+    // Animate progress bar
+    const interval = setInterval(() => {
+      setProgress((p) => {
+        if (p >= 100) { clearInterval(interval); return 100; }
+        return p + (100 - p) * 0.08 + 0.5;
+      });
+    }, 30);
+    const t = setTimeout(() => setDone(true), 2000);
+    return () => { clearTimeout(t); clearInterval(interval); };
   }, []);
 
   return (
@@ -27,33 +36,55 @@ export function Loader() {
       {!done ? (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ y: "-100%" }}
-          transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-surface"
+          exit={{ opacity: 0, scale: 1.03, filter: "blur(8px)" }}
+          transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background"
         >
-          <div className="text-center">
+          {/* Subtle bg glow */}
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-primary/8 blur-[120px]" />
+          </div>
+
+          <div className="relative flex flex-col items-center">
+            {/* Logo */}
             <motion.div
-              initial={{ opacity: 0, y: 14, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col items-center gap-4"
+              initial={{ opacity: 0, scale: 0.8, filter: "blur(12px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="mb-8 h-20 w-20 overflow-hidden rounded-2xl bg-white p-2.5 shadow-lift ring-1 ring-border"
             >
-              <div className="h-20 w-20 overflow-hidden rounded-2xl bg-white p-2 shadow-soft">
-                <img src={logo} alt="Solvix Core" className="h-full w-full object-contain" />
-              </div>
-              <p className="font-display text-4xl tracking-tight md:text-5xl">
-                Solvix Core
-              </p>
+              <img src={logo} alt="Solvix Core" className="h-full w-full object-contain" />
             </motion.div>
-            <div className="mx-auto mt-6 h-px w-40 overflow-hidden bg-border">
+
+            {/* Name */}
+            <motion.h1
+              initial={{ opacity: 0, y: 12, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="font-display text-4xl tracking-tight"
+            >
+              Solvix Core
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="eyebrow mt-2 text-muted-foreground"
+            >
+              Premium Tech Solutions
+            </motion.p>
+
+            {/* Progress bar */}
+            <div className="mt-10 h-px w-48 overflow-hidden rounded-full bg-border">
               <motion.div
-                initial={{ x: "-100%" }}
-                animate={{ x: "0%" }}
-                transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
-                className="h-full w-full bg-primary"
+                className="h-full rounded-full bg-primary origin-left"
+                style={{ scaleX: progress / 100 }}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: progress / 100 }}
+                transition={{ duration: 0.1, ease: "linear" }}
               />
             </div>
-            <p className="eyebrow mt-5">Premium Tech Solutions — CA · UK · PK</p>
           </div>
         </motion.div>
       ) : null}
@@ -64,7 +95,7 @@ export function Loader() {
 export function FloatingActions() {
   const [show, setShow] = useState(false);
   useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 700);
+    const onScroll = () => setShow(window.scrollY > 600);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -73,26 +104,30 @@ export function FloatingActions() {
     <AnimatePresence>
       {show ? (
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 24 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 16, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 16, scale: 0.95 }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="fixed bottom-6 right-5 z-40 flex items-center gap-2"
         >
-          <Link
-            to="/contact"
-            className="group flex items-center gap-2 rounded-full border border-border bg-card/90 px-5 py-3 text-sm font-semibold shadow-lift backdrop-blur-xl"
-          >
-            <CalendarDays className="h-4 w-4 text-primary" />
-            Book a call
-          </Link>
-          <button
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
+            <Link
+              to="/contact"
+              className="group flex items-center gap-2 rounded-full border border-primary/20 bg-primary text-primary-foreground px-5 py-3 text-sm font-semibold shadow-lift"
+            >
+              <MessageCircle className="h-4 w-4" />
+              Get a Quote
+            </Link>
+          </motion.div>
+          <motion.button
+            whileHover={{ scale: 1.1, y: -2 }}
+            whileTap={{ scale: 0.95 }}
             aria-label="Back to top"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-background shadow-lift transition-transform hover:-translate-y-0.5"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-background shadow-lift"
           >
             <ArrowUp className="h-4 w-4" />
-          </button>
+          </motion.button>
         </motion.div>
       ) : null}
     </AnimatePresence>
