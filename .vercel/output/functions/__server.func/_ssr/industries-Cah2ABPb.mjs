@@ -1,6 +1,6 @@
 import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.mjs";
 import { C as SectionHead, b as Reveal, c as INDUSTRIES, n as Blobs } from "./primitives-DL1IYeHP.mjs";
-import { r as CtaBand } from "./router-Bb5BvK0D.mjs";
+import { r as CtaBand } from "./router-CUTUSDtf.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/industries-Cah2ABPb.js
 var import_jsx_runtime = require_jsx_runtime();
 function Industries() {

@@ -1,4 +1,4 @@
-//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-B2RSp34y.js
+//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-DF3xM7xC.js
 var tsrStartManifest = () => ({ routes: {
 	__root__: {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/__root.tsx",
@@ -18,7 +18,7 @@ var tsrStartManifest = () => ({ routes: {
 			"/services/"
 		],
 		preloads: [
-			"/assets/index-D3mEjixy.js",
+			"/assets/index-BC-JKa9d.js",
 			"/assets/primitives-24Ce2qUq.js",
 			"/assets/preload-helper-C_GBtsKl.js",
 			"/assets/Footer-BLAINJ7W.js",
@@ -27,7 +27,7 @@ var tsrStartManifest = () => ({ routes: {
 		scripts: [{ attrs: {
 			type: "module",
 			async: !0,
-			src: "/assets/index-D3mEjixy.js"
+			src: "/assets/index-BC-JKa9d.js"
 		} }]
 	},
 	"/": {
@@ -116,7 +116,7 @@ var tsrStartManifest = () => ({ routes: {
 		filePath: "C:/Users/DELL/Desktop/solvix-core/src/routes/services/$slug.tsx",
 		children: void 0,
 		preloads: [
-			"/assets/_slug-C9mrrZL6.js",
+			"/assets/_slug-BKlktJNT.js",
 			"/assets/PageHero-0Q_HjG8D.js",
 			"/assets/pos-portfolio-C_U-4S2G.js"
 		]

@@ -2,17 +2,17 @@ import { n as require_jsx_runtime } from "./_libs/react+tanstack__react-query.mj
 import { C as SectionHead, b as Reveal, g as PROCESS, h as PRICING, s as FAQS } from "./_ssr/primitives-DL1IYeHP.mjs";
 import { v as Link } from "./_libs/@tanstack/react-router+[...].mjs";
 import { T as Check, j as ArrowUpRight } from "./_libs/lucide-react.mjs";
-import { r as CtaBand } from "./_ssr/router-Bb5BvK0D.mjs";
-import { t as Route } from "./_ssr/router-Bb5BvK0D2.mjs";
 import { t as PageHero } from "./_ssr/PageHero-CDJ9mRNv.mjs";
+import { r as CtaBand } from "./_ssr/router-CUTUSDtf.mjs";
+import { t as Route } from "./_ssr/router-CUTUSDtf2.mjs";
 import { t as pos_portfolio_default } from "./_ssr/pos-portfolio-BywQPkOO.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/_slug-4JGBRGOu.js
+//#region node_modules/.nitro/vite/services/ssr/assets/_slug-jT3_z95k.js
 var import_jsx_runtime = require_jsx_runtime();
 var ai_integration_default = "/assets/ai-integration-CQXvHYw2.PNG";
 var heroImages = {
 	"ai-solutions": ai_integration_default,
 	"web-development": "/assets/web-development-CaXD7QWC.PNG",
-	"content-creation": "/assets/content%20creation-D7uzFij8.PNG",
+	"content-creation": "/assets/content-creation-D7uzFij8.PNG",
 	"marketing-seo": "/assets/marketing-IJzl7Cqs.PNG",
 	"langchain-integration": "/assets/langchain-C1oJI0mV.PNG",
 	"openai-integration": ai_integration_default,

@@ -2,7 +2,7 @@ import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.m
 import { O as TextReveal, _ as PROJECTS, a as COMPANY, b as Reveal, f as NAV_LINKS, p as OFFICES, r as CASE_STUDIES, u as Magnetic, x as SERVICES } from "./primitives-DL1IYeHP.mjs";
 import { R as notFound, g as createFileRoute, h as lazyRouteComponent, v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { S as Github, a as Twitter, b as Instagram, j as ArrowUpRight, y as Linkedin } from "../_libs/lucide-react.mjs";
-import { r as router_exports } from "./router-Bb5BvK0D2.mjs";
+import { r as router_exports } from "./router-CUTUSDtf2.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/Footer-Cb4VOc7t.js
 var import_jsx_runtime = require_jsx_runtime();
 var logo_default = "/assets/logo-DixoYNo1.PNG";

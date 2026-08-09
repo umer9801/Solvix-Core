@@ -1,8 +1,8 @@
 import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.mjs";
 import { b as Reveal, s as FAQS } from "./primitives-DL1IYeHP.mjs";
 import { p as Plus } from "../_libs/lucide-react.mjs";
-import { r as CtaBand } from "./router-Bb5BvK0D.mjs";
 import { t as PageHero } from "./PageHero-CDJ9mRNv.mjs";
+import { r as CtaBand } from "./router-CUTUSDtf.mjs";
 import { t as hero_abstract_default } from "./hero-abstract-DQf8B25I.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/faqs-CckKaeLC.js
 var import_jsx_runtime = require_jsx_runtime();

@@ -9,7 +9,7 @@ import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import aiIntegration from "@/assets/ai-integration.PNG";
 import webDevelopment from "@/assets/web-development.PNG";
-import contentCreation from "@/assets/content creation.PNG";
+import contentCreation from "@/assets/content-creation.PNG";
 import marketingImage from "@/assets/marketing.PNG";
 import langchainImage from "@/assets/langchain.PNG";
 import posPortfolio from "@/assets/pos-portfolio.jpeg";
