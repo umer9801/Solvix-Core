@@ -1,11 +1,11 @@
 import { n as require_jsx_runtime } from "./_libs/react+tanstack__react-query.mjs";
 import { C as SectionHead, b as Reveal, v as ParallaxImage } from "./_ssr/primitives-CLSdz6WR.mjs";
-import { i as CtaBand, r as Route$2 } from "./_ssr/router-DonJhFq0.mjs";
+import { i as CtaBand, r as Route$2 } from "./_ssr/router-rm7hCNnZ.mjs";
 import { t as PageHero } from "./_ssr/PageHero-DE44CvKF.mjs";
 import { t as pos_portfolio_default } from "./_ssr/pos-portfolio-BywQPkOO.mjs";
 import { t as project_3_default } from "./_ssr/project-3-ESm6Vkz6.mjs";
 import { t as web_portfolio_default } from "./_ssr/web-portfolio-ItcxmmE-.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/_slug-B6HH88tc.js
+//#region node_modules/.nitro/vite/services/ssr/assets/_slug-me8mkCkB.js
 var import_jsx_runtime = require_jsx_runtime();
 var images = {
 	"project-1": web_portfolio_default,

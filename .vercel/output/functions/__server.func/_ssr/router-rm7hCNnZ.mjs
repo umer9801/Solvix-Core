@@ -6,7 +6,7 @@ import { O as TextReveal, _ as PROJECTS, a as COMPANY, b as Reveal, f as NAV_LIN
 import { R as notFound, _ as createRootRouteWithContext, d as useRouterState, g as createFileRoute, h as lazyRouteComponent, l as Scripts, m as Outlet, p as createRouter, u as HeadContent, v as Link, y as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { A as ArrowUp, E as CalendarDays, S as Github, a as Twitter, b as Instagram, d as Search, g as Menu, j as ArrowUpRight, n as X, y as Linkedin } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-DonJhFq0.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-rm7hCNnZ.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var __defProp = Object.defineProperty;
@@ -1023,7 +1023,7 @@ function RootComponent() {
 		]
 	});
 }
-var $$splitComponentImporter$12 = () => import("./routes-D2K4NKBD.mjs");
+var $$splitComponentImporter$12 = () => import("./routes-DdQ9XUj9.mjs");
 var Route$12 = createFileRoute("/")({
 	head: () => ({ meta: [
 		{ title: "Solvix Core — AI Solutions, Web Development & Automation | Serving Globally" },
@@ -1046,7 +1046,7 @@ var Route$12 = createFileRoute("/")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$12, "component")
 });
-var $$splitComponentImporter$11 = () => import("./about-CxLLAQkj.mjs");
+var $$splitComponentImporter$11 = () => import("./about-YE_FDLwn.mjs");
 var Route$11 = createFileRoute("/about")({
 	head: () => ({ meta: [
 		{ title: "About Solvix Core — AI & Web Development Agency Serving Globally" },
@@ -1069,7 +1069,7 @@ var Route$11 = createFileRoute("/about")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$11, "component")
 });
-var $$splitComponentImporter$10 = () => import("./blog-C0oJCPGT.mjs");
+var $$splitComponentImporter$10 = () => import("./blog-D6Dcvb3W.mjs");
 var Route$10 = createFileRoute("/blog")({
 	head: () => ({ meta: [
 		{ title: "Blog — Tech Insights | Solvix Core" },
@@ -1088,7 +1088,7 @@ var Route$10 = createFileRoute("/blog")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$10, "component")
 });
-var $$splitComponentImporter$9 = () => import("./careers-jEmCI5LE.mjs");
+var $$splitComponentImporter$9 = () => import("./careers-dUUXqGUX.mjs");
 var Route$9 = createFileRoute("/careers")({
 	head: () => ({ meta: [
 		{ title: "Careers — Join Solvix Core" },
@@ -1130,7 +1130,7 @@ var Route$8 = createFileRoute("/contact")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$8, "component")
 });
-var $$splitComponentImporter$7 = () => import("./faqs-DqEht8ag.mjs");
+var $$splitComponentImporter$7 = () => import("./faqs-CM_bLmoO.mjs");
 var Route$7 = createFileRoute("/faqs")({
 	head: () => ({ meta: [
 		{ title: "FAQs — Web Development & AI Services Questions | Solvix Core" },
@@ -1153,7 +1153,7 @@ var Route$7 = createFileRoute("/faqs")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$7, "component")
 });
-var $$splitComponentImporter$6 = () => import("./industries-kMbSrtC2.mjs");
+var $$splitComponentImporter$6 = () => import("./industries-B17Gej_W.mjs");
 var Route$6 = createFileRoute("/industries")({
 	head: () => ({ meta: [
 		{ title: "Industries We Serve Globally | Solvix Core" },
@@ -1176,7 +1176,7 @@ var Route$6 = createFileRoute("/industries")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$6, "component")
 });
-var $$splitComponentImporter$5 = () => import("./projects-DmcXYT1J.mjs");
+var $$splitComponentImporter$5 = () => import("./projects-C6XlcF-H.mjs");
 var Route$5 = createFileRoute("/projects")({
 	head: () => ({ meta: [
 		{ title: "Our Work — Web, AI & POS Projects | Solvix Core" },
@@ -1199,7 +1199,7 @@ var Route$5 = createFileRoute("/projects")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$5, "component")
 });
-var $$splitComponentImporter$4 = () => import("./technologies-nJhcaqP-.mjs");
+var $$splitComponentImporter$4 = () => import("./technologies-ygH6fGA3.mjs");
 var Route$4 = createFileRoute("/technologies")({
 	head: () => ({ meta: [
 		{ title: "Tech Stack — React, Next.js, AI, Shopify & More | Solvix Core" },
@@ -1222,7 +1222,7 @@ var Route$4 = createFileRoute("/technologies")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-var $$splitComponentImporter$3 = () => import("./case-studies-zlnRmDiS.mjs");
+var $$splitComponentImporter$3 = () => import("./case-studies-C1ahrGB_.mjs");
 var Route$3 = createFileRoute("/case-studies/")({
 	head: () => ({ meta: [
 		{ title: "Case Studies — Real Client Results | Solvix Core" },
@@ -1245,7 +1245,7 @@ var Route$3 = createFileRoute("/case-studies/")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
-var $$splitComponentImporter$2 = () => import("../_slug-B6HH88tc.mjs");
+var $$splitComponentImporter$2 = () => import("../_slug-me8mkCkB.mjs");
 var Route$2 = createFileRoute("/case-studies/$slug")({
 	loader: ({ params }) => {
 		const study = CASE_STUDIES.find((c) => c.slug === params.slug);
@@ -1272,7 +1272,7 @@ var Route$2 = createFileRoute("/case-studies/$slug")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
-var $$splitComponentImporter$1 = () => import("./services-Cwkw5MWy.mjs");
+var $$splitComponentImporter$1 = () => import("./services-BuOXW4R3.mjs");
 var Route$1 = createFileRoute("/services/")({
 	head: () => ({ meta: [
 		{ title: "Services — AI Solutions, Web Dev, Shopify & Automation | Solvix Core" },
@@ -1295,7 +1295,7 @@ var Route$1 = createFileRoute("/services/")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-var $$splitComponentImporter = () => import("../_slug-76Wpg0R9.mjs");
+var $$splitComponentImporter = () => import("../_slug-DXRoH9n9.mjs");
 var Route = createFileRoute("/services/$slug")({
 	loader: ({ params }) => {
 		const service = SERVICES.find((s) => s.slug === params.slug);

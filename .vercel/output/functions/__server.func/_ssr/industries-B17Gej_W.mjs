@@ -1,7 +1,7 @@
 import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.mjs";
 import { C as SectionHead, b as Reveal, c as INDUSTRIES, n as Blobs } from "./primitives-CLSdz6WR.mjs";
-import { i as CtaBand } from "./router-DonJhFq0.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/industries-kMbSrtC2.js
+import { i as CtaBand } from "./router-rm7hCNnZ.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/industries-B17Gej_W.js
 var import_jsx_runtime = require_jsx_runtime();
 function Industries() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [

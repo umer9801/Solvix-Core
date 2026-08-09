@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -77,6 +77,33 @@ const accentStyles: Record<string, { bg: string; icon: string; border: string; g
   coral:    { bg: "bg-red-50",     icon: "text-red-600",     border: "group-hover:border-red-300",    grad: "from-red-50/50 to-white" },
 };
 
+// ─── Cycling word animation ──────────────────────────────────────────────────
+const cyclingWords = ["AI Solutions", "Automation", "Web Apps", "Shopify Stores", "Mobile Apps", "CRM Systems"];
+
+function CyclingWord() {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setIndex((i) => (i + 1) % cyclingWords.length), 2200);
+    return () => clearInterval(t);
+  }, []);
+  return (
+    <span className="relative inline-block overflow-hidden align-bottom" style={{ minWidth: "18rem" }}>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={cyclingWords[index]}
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: "-100%", opacity: 0 }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="block text-primary italic"
+        >
+          {cyclingWords[index]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  );
+}
+
 // ─── Hero ────────────────────────────────────────────────────────────────────
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -106,17 +133,10 @@ function Hero() {
             </Reveal>
 
             <h1 className="display-xl mt-8">
-              <TextReveal as="p" text="Technology that" className="block" />
-              <span className="block">
-                <TextReveal as="p" text="drives" className="inline-block" delay={0.18} />{" "}
-                <motion.span
-                  initial={{ opacity: 0, filter: "blur(14px)" }}
-                  animate={{ opacity: 1, filter: "blur(0px)" }}
-                  transition={{ duration: 1.1, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className="italic text-primary"
-                >
-                  real results
-                </motion.span>
+              <span className="block">We Build</span>
+              <CyclingWord />
+              <span className="block text-foreground/70" style={{fontSize: "0.55em", letterSpacing: "-0.01em", marginTop: "0.2em", fontStyle: "normal"}}>
+                That Drive Real Results
               </span>
             </h1>
 

@@ -1,12 +1,12 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
-import { a as useScroll, r as useTransform } from "../_libs/framer-motion+[...].mjs";
+import { a as useScroll, r as useTransform, s as AnimatePresence } from "../_libs/framer-motion+[...].mjs";
 import { t as motion } from "../_libs/motion.mjs";
-import { C as SectionHead, E as TESTIMONIALS, O as TextReveal, S as STATS, b as Reveal, d as Marquee, g as PROCESS, i as CLIENTS, l as LuxButton, n as Blobs, o as Counter, w as SpotlightCard, x as SERVICES } from "./primitives-CLSdz6WR.mjs";
+import { C as SectionHead, E as TESTIMONIALS, S as STATS, b as Reveal, d as Marquee, g as PROCESS, i as CLIENTS, l as LuxButton, n as Blobs, o as Counter, w as SpotlightCard, x as SERVICES } from "./primitives-CLSdz6WR.mjs";
 import { v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { C as Gauge, D as Brain, M as ArrowRight, O as Bot, c as Smartphone, f as Quote, i as Video, j as ArrowUpRight, l as ShoppingBag, r as Workflow, t as Zap, w as CircleCheckBig } from "../_libs/lucide-react.mjs";
-import { i as CtaBand } from "./router-DonJhFq0.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-D2K4NKBD.js
+import { i as CtaBand } from "./router-rm7hCNnZ.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DdQ9XUj9.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var home_hero_default = "/assets/home-hero-C7z52xSX.PNG";
@@ -54,6 +54,53 @@ var accentStyles = {
 		grad: "from-red-50/50 to-white"
 	}
 };
+var cyclingWords = [
+	"AI Solutions",
+	"Automation",
+	"Web Apps",
+	"Shopify Stores",
+	"Mobile Apps",
+	"CRM Systems"
+];
+function CyclingWord() {
+	const [index, setIndex] = (0, import_react.useState)(0);
+	(0, import_react.useEffect)(() => {
+		const t = setInterval(() => setIndex((i) => (i + 1) % cyclingWords.length), 2200);
+		return () => clearInterval(t);
+	}, []);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+		className: "relative inline-block overflow-hidden align-bottom",
+		style: { minWidth: "18rem" },
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, {
+			mode: "wait",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
+				initial: {
+					y: "100%",
+					opacity: 0
+				},
+				animate: {
+					y: "0%",
+					opacity: 1
+				},
+				exit: {
+					y: "-100%",
+					opacity: 0
+				},
+				transition: {
+					duration: .45,
+					ease: [
+						.16,
+						1,
+						.3,
+						1
+					]
+				},
+				className: "block text-primary italic",
+				children: cyclingWords[index]
+			}, cyclingWords[index])
+		})
+	});
+}
 function Hero() {
 	const ref = (0, import_react.useRef)(null);
 	const { scrollYProgress } = useScroll({
@@ -85,44 +132,23 @@ function Hero() {
 						}) }),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
 							className: "display-xl mt-8",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TextReveal, {
-								as: "p",
-								text: "Technology that",
-								className: "block"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: "block",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TextReveal, {
-										as: "p",
-										text: "drives",
-										className: "inline-block",
-										delay: .18
-									}),
-									" ",
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-										initial: {
-											opacity: 0,
-											filter: "blur(14px)"
-										},
-										animate: {
-											opacity: 1,
-											filter: "blur(0px)"
-										},
-										transition: {
-											duration: 1.1,
-											delay: .7,
-											ease: [
-												.16,
-												1,
-												.3,
-												1
-											]
-										},
-										className: "italic text-primary",
-										children: "real results"
-									})
-								]
-							})]
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "block",
+									children: "We Build"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CyclingWord, {}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "block text-foreground/70",
+									style: {
+										fontSize: "0.55em",
+										letterSpacing: "-0.01em",
+										marginTop: "0.2em",
+										fontStyle: "normal"
+									},
+									children: "That Drive Real Results"
+								})
+							]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
 							delay: .5,
