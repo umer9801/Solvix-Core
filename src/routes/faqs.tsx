@@ -4,6 +4,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/primitives";
 import { FAQS } from "@/lib/site-data";
+import heroAbstract from "@/assets/hero-abstract.jpg";
 
 export const Route = createFileRoute("/faqs")({
   head: () => ({
@@ -27,30 +28,10 @@ function Faqs() {
       <PageHero
         eyebrow="FAQs"
         title="Straight answers, before you ask."
-        body="If something isn't covered here, ask us directly — we'd rather answer than posture."
-        heroNote="Clear, direct responses to the questions we hear most from decision-makers and project leaders."
-      >
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          <div className="rounded-[2rem] border border-border bg-card p-8">
-            <p className="eyebrow">Fast clarity</p>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              These answers are written for teams deciding whether to start a real project.
-            </p>
-          </div>
-          <div className="rounded-[2rem] border border-border bg-card p-8">
-            <p className="eyebrow">No fluff</p>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              We avoid jargon and explain what you need to know about process, pricing and ownership.
-            </p>
-          </div>
-          <div className="rounded-[2rem] border border-border bg-card p-8">
-            <p className="eyebrow">Decision-ready</p>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              If you still have a question, it means you’re close to making a good choice.
-            </p>
-          </div>
-        </div>
-      </PageHero>
+        body="Everything you want to know before starting a project — from pricing to ownership to timelines."
+        image={heroAbstract}
+        imageAlt="Frequently asked questions"
+      />
       <section className="container-lux pb-24">
         <div className="mx-auto max-w-3xl divide-y divide-border border-y border-border">
           {FAQS.map((f, i) => (

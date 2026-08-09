@@ -18,6 +18,7 @@ export const COMPANY = {
 export const NAV_LINKS = [
   { label: "About", to: "/about" },
   { label: "Services", to: "/services" },
+  { label: "Work", to: "/projects" },
   { label: "Industries", to: "/industries" },
   { label: "Technologies", to: "/technologies" },
   { label: "FAQs", to: "/faqs" },

@@ -4,6 +4,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/primitives";
 import { CASE_STUDIES } from "@/lib/site-data";
+import dashboard from "@/assets/dashboard.jpg";
 
 export const Route = createFileRoute("/case-studies/")({
   head: () => ({
@@ -12,7 +13,7 @@ export const Route = createFileRoute("/case-studies/")({
       {
         name: "description",
         content:
-          "Detailed accounts of how Solvix Core delivered measurable results for clients in Canada, UK and Pakistan — challenge, approach and outcomes.",
+          "Detailed accounts of how Solvix Core delivered measurable results for clients in Canada, UK and Pakistan.",
       },
       { property: "og:title", content: "Case Studies | Solvix Core" },
       { property: "og:description", content: "Challenge, approach and measured results." },
@@ -26,31 +27,11 @@ function CaseStudies() {
     <>
       <PageHero
         eyebrow="Case Studies"
-        title="What changed, and by how much."
-        body="Each engagement is measured against numbers agreed before a line of code is written."
-        heroNote="Read the work that proves our process — challenge, approach and outcome for real clients in regulated businesses."
-      >
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          <div className="rounded-[2rem] border border-border bg-card p-8">
-            <p className="eyebrow">Measured outcomes</p>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Every case study is built around the numbers that mattered most to the client.
-            </p>
-          </div>
-          <div className="rounded-[2rem] border border-border bg-card p-8">
-            <p className="eyebrow">Industry focus</p>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Many of the stories involve regulated, operationally complex businesses with real stakes.
-            </p>
-          </div>
-          <div className="rounded-[2rem] border border-border bg-card p-8">
-            <p className="eyebrow">Transparent process</p>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              We show what changed, how we delivered it, and why it worked for the client.
-            </p>
-          </div>
-        </div>
-      </PageHero>
+        title="Real results, stated plainly."
+        body="Each engagement is measured against numbers agreed before a line of code is written. Here is what actually changed."
+        image={dashboard}
+        imageAlt="Case studies and results"
+      />
       <section className="container-lux pb-24">
         {CASE_STUDIES.map((c, i) => (
           <Reveal key={c.slug} delay={i * 0.06}>
@@ -81,7 +62,7 @@ function CaseStudies() {
           </Reveal>
         ))}
       </section>
-      <CtaBand eyebrow="Diligence" title="Want references you can actually call?" />
+      <CtaBand eyebrow="Your outcome" title="Want results like these?" />
     </>
   );
 }

@@ -27,24 +27,13 @@ function Careers() {
     <>
       <PageHero
         eyebrow="Careers"
-        title="A small studio with an unreasonable standard."
-        body="We hire slowly, pay openly, and give people the time it takes to do work they'd sign."
-        heroNote="Remote-first, senior roles only — a team built around craft, ownership and real client outcomes."
+        title="Join a team that ships things that matter."
+        body="Remote-first, senior roles only — we hire slowly, pay fairly and give people the time it takes to do their best work."
+        image={culture}
+        imageAlt="Solvix Core team culture"
       />
       <section className="container-lux pb-24">
-        <Reveal>
-          <img
-            src={culture}
-            alt="A quiet corner of the studio"
-            loading="lazy"
-            width={1200}
-            height={912}
-            className="aspect-[21/9] w-full rounded-[2.5rem] object-cover"
-          />
-        </Reveal>
-      </section>
-      <section className="container-lux pb-24">
-        <SectionHead eyebrow="Open roles" title="Six seats, all senior." />
+        <SectionHead eyebrow="Open roles" title="Current openings." />
         <div className="mt-12 border-t border-border">
           {ROLES.map((r, i) => (
             <Reveal key={r.title} delay={i * 0.05}>
@@ -70,7 +59,7 @@ function Careers() {
       </section>
       <section className="border-y border-border bg-surface py-24">
         <div className="container-lux">
-          <SectionHead eyebrow="How we operate" title="What you'd be signing up to." />
+          <SectionHead eyebrow="How we operate" title="What you would be signing up to." />
           <div className="mt-12 grid gap-6 md:grid-cols-4">
             {VALUES.map((v, i) => (
               <Reveal key={v.title} delay={i * 0.06}>
