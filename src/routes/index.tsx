@@ -69,12 +69,12 @@ const serviceIcons: Record<string, React.ElementType> = {
   "pos-systems": ShoppingBag,
 };
 
-const accentStyles: Record<string, { bg: string; icon: string; border: string }> = {
-  primary:  { bg: "bg-blue-50",    icon: "text-blue-600",    border: "group-hover:border-blue-300" },
-  violet:   { bg: "bg-violet-50",  icon: "text-violet-600",  border: "group-hover:border-violet-300" },
-  sage:     { bg: "bg-emerald-50", icon: "text-emerald-600", border: "group-hover:border-emerald-300" },
-  peach:    { bg: "bg-orange-50",  icon: "text-orange-600",  border: "group-hover:border-orange-300" },
-  coral:    { bg: "bg-red-50",     icon: "text-red-600",     border: "group-hover:border-red-300" },
+const accentStyles: Record<string, { bg: string; icon: string; border: string; grad: string }> = {
+  primary:  { bg: "bg-blue-100",    icon: "text-blue-700",    border: "group-hover:border-blue-400",   grad: "from-blue-50 to-white" },
+  violet:   { bg: "bg-violet-100",  icon: "text-violet-700",  border: "group-hover:border-violet-400", grad: "from-violet-50 to-white" },
+  sage:     { bg: "bg-emerald-100", icon: "text-emerald-700", border: "group-hover:border-emerald-400",grad: "from-emerald-50 to-white" },
+  peach:    { bg: "bg-orange-100",  icon: "text-orange-700",  border: "group-hover:border-orange-400", grad: "from-orange-50 to-white" },
+  coral:    { bg: "bg-red-100",     icon: "text-red-700",     border: "group-hover:border-red-400",    grad: "from-red-50 to-white" },
 };
 
 // ─── Hero ────────────────────────────────────────────────────────────────────
@@ -86,6 +86,12 @@ function Hero() {
 
   return (
     <section ref={ref} className="relative overflow-hidden pb-20 pt-10 md:pb-28">
+      {/* Colorful gradient background */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-20 -left-20 h-96 w-96 rounded-full bg-primary/20 blur-[80px]" />
+        <div className="absolute top-10 right-0 h-80 w-80 rounded-full bg-violet/15 blur-[70px]" />
+        <div className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-coral/12 blur-[60px]" />
+      </div>
       <Blobs />
       <div className="container-lux">
         <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -229,7 +235,7 @@ function FeaturedServices() {
           return (
             <Reveal key={s.slug} delay={i * 0.05}>
               <SpotlightCard
-                className={`group relative h-full overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift ${style.border}`}
+                className={`group relative h-full overflow-hidden rounded-2xl border border-border bg-gradient-to-br ${style.grad} p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift ${style.border}`}
               >
                 <Link to={`/services/${s.slug}`} className="flex h-full flex-col">
                   {/* Accent blob in top-right */}
@@ -261,8 +267,9 @@ function FeaturedServices() {
 // ─── Stats ────────────────────────────────────────────────────────────────────
 function StatsBand() {
   return (
-    <section className="relative overflow-hidden bg-ink py-20 text-background">
-      <div className="animate-hue-drift pointer-events-none absolute -left-20 top-0 h-96 w-96 rounded-full bg-primary/25 blur-3xl" />
+    <section className="relative overflow-hidden py-20 text-background" style={{background: "linear-gradient(135deg, oklch(0.28 0.18 258) 0%, oklch(0.22 0.20 270) 40%, oklch(0.30 0.15 250) 100%)"}}>
+      <div className="pointer-events-none absolute -left-20 top-0 h-96 w-96 rounded-full bg-violet/30 blur-3xl" />
+      <div className="pointer-events-none absolute right-0 bottom-0 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
       <div className="container-lux relative">
         <div className="grid gap-10 md:grid-cols-4">
           {STATS.map((s, i) => (
@@ -298,7 +305,7 @@ function ProcessSection() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {PROCESS.map((p, i) => (
           <Reveal key={p.step} delay={i * 0.07}>
-            <div className="group rounded-2xl border border-border bg-white p-6 transition-all duration-300 hover:border-primary/40 hover:shadow-lift">
+            <div className="group rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-background p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-lift hover:from-primary/10">
               <span className="font-mono text-xs font-bold text-primary">{p.step}</span>
               <h3 className="font-display mt-3 text-lg leading-tight">{p.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
@@ -321,7 +328,7 @@ function WhyUs() {
     "98% client satisfaction rate",
   ];
   return (
-    <section className="border-y border-border bg-surface py-16">
+    <section className="border-y border-primary/20 py-16" style={{background: "linear-gradient(160deg, oklch(0.945 0.028 248) 0%, oklch(0.938 0.032 268) 100%)"}}>
       <div className="container-lux">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center">
           <SectionHead
@@ -357,7 +364,7 @@ function Testimonials() {
       <div className="grid gap-6 md:grid-cols-3">
         {TESTIMONIALS.map((t, i) => (
           <Reveal key={t.name} delay={i * 0.09}>
-            <figure className="flex h-full flex-col rounded-2xl border border-border bg-white p-7 shadow-sm">
+            <figure className="flex h-full flex-col rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 via-background to-violet/5 p-7 shadow-sm">
               <Quote className="h-6 w-6 text-primary/40" />
               <blockquote className="font-display mt-5 flex-1 text-lg leading-snug">
                 "{t.quote}"
@@ -384,9 +391,9 @@ function LeproPartnership() {
   return (
     <section className="container-lux py-10">
       <Reveal>
-        <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-r from-primary/5 via-blue-50 to-primary/5 px-8 py-10 md:px-14 md:py-12">
-          <div className="pointer-events-none absolute -right-12 -top-12 h-48 w-48 rounded-full bg-primary/10 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-blue-300/20 blur-2xl" />
+        <div className="relative overflow-hidden rounded-3xl border border-primary/30 px-8 py-10 md:px-14 md:py-12" style={{background: "linear-gradient(135deg, oklch(0.88 0.09 252) 0%, oklch(0.92 0.06 270) 50%, oklch(0.90 0.07 248) 100%)"}}>
+          <div className="pointer-events-none absolute -right-12 -top-12 h-48 w-48 rounded-full bg-primary/25 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-violet/20 blur-2xl" />
 
           <div className="relative flex flex-col items-center gap-6 text-center md:flex-row md:text-left">
             {/* Icon badge */}

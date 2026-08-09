@@ -110,7 +110,7 @@ export const STATS = [
   { value: 15, suffix: "+", label: "Projects delivered" },
   { value: 3, suffix: "", label: "Countries served" },
   { value: 98, suffix: "%", label: "Client satisfaction" },
-  { value: 50, suffix: "+", label: "Expert team members" },
+  { value: 10, suffix: "+", label: "Team members" },
 ];
 
 export const PROCESS = [
@@ -422,12 +422,12 @@ export const VALUES = [
 ];
 
 export const TIMELINE = [
-  { year: "2019", title: "Solvix Core founded", body: "Started as a web development studio serving clients in Canada with a focus on quality and delivery." },
-  { year: "2020", title: "Expanded to UK market", body: "Opened operations serving United Kingdom businesses, growing our team and service offering." },
-  { year: "2021", title: "Pakistan operations launched", body: "Established our Pakistan presence, building a world-class development team." },
-  { year: "2022", title: "AI & Automation practice", body: "Launched our intelligence practice, delivering LangChain, OpenAI and n8n solutions." },
-  { year: "2023", title: "500+ projects milestone", body: "Delivered over 500 projects across Canada, UK and Pakistan — 98% client satisfaction." },
-  { year: "2025", title: "Partnered with Lepro Trading Inc", body: "Strategic partnership to expand reach and deliver even greater value to clients globally." },
+  { year: "2024", title: "Solvix Core founded", body: "Started as a web development and AI agency serving clients in Canada, UK and Pakistan." },
+  { year: "2024", title: "First projects delivered", body: "Delivered our first 5 projects including a business website for a UK firm and a POS system for a grocery store." },
+  { year: "2025", title: "Team grows to 10+", body: "Expanded our team of developers, designers and AI specialists to serve more clients globally." },
+  { year: "2025", title: "15+ projects milestone", body: "Reached 15+ successful project deliveries across web development, AI, automation and POS systems." },
+  { year: "2025", title: "Partnered with Lepro Trading Inc", body: "Strategic partnership to expand our reach and deliver even greater value to clients worldwide." },
+  { year: "2025", title: "Serving globally", body: "Now serving clients in Canada, UK, Pakistan and beyond — 98% client satisfaction rate." },
 ];
 
 export const TEAM = [
