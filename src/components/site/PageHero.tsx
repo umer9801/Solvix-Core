@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { Blobs, Reveal, TextReveal } from "./primitives";
+import { Blobs, Reveal } from "./primitives";
 
 export function PageHero({
   eyebrow,
@@ -19,7 +19,7 @@ export function PageHero({
   meta?: { k: string; v: string }[];
   image?: string;
   imageAlt?: string;
-  heroNote?: string; // accepted but ignored — kept for back-compat
+  heroNote?: string;
 }) {
   return (
     <section className="relative overflow-hidden pb-16 pt-10 md:pb-20 md:pt-14">
@@ -47,14 +47,22 @@ export function PageHero({
               </div>
             </Reveal>
 
-            <TextReveal text={title} as="h1" className="display-xl mt-6 max-w-2xl" />
+            {/* Title — plain h1, no word-by-word animation */}
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="display-xl mt-6 max-w-2xl"
+            >
+              {title}
+            </motion.h1>
 
-            <Reveal delay={0.2}>
+            <Reveal delay={0.25}>
               <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">{body}</p>
             </Reveal>
 
             {meta && (
-              <Reveal delay={0.3}>
+              <Reveal delay={0.35}>
                 <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-border pt-8 sm:grid-cols-4">
                   {meta.map((m) => (
                     <div key={m.k}>
@@ -67,7 +75,7 @@ export function PageHero({
             )}
           </div>
 
-          {/* Right — image only if provided */}
+          {/* Right — image */}
           {image && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}

@@ -164,20 +164,20 @@ export const INDUSTRIES = [
 export const PROJECTS = [
   {
     slug: "ai-ecommerce-canada",
-    title: "AI-Powered E-Commerce Platform",
-    sector: "E-Commerce",
+    title: "Business Information Website",
+    sector: "Professional Services",
     year: "2025",
-    summary: "A full Shopify + AI recommendation engine for a Canadian retail brand, boosting conversions by 42%.",
-    metric: "+42% conversion rate",
+    summary: "A fully custom business information and accounting website for a UK-based firm — clean UI, service listings, client portal and integrated contact system.",
+    metric: "Delivered in 3 weeks",
     image: "project-1",
   },
   {
     slug: "automation-uk",
-    title: "Business Automation Suite",
-    sector: "Professional Services",
+    title: "Point of Sale System",
+    sector: "Retail — Grocery",
     year: "2025",
-    summary: "n8n-powered automation connecting CRM, invoicing and email — saving 120 hours per month for a UK firm.",
-    metric: "120 hrs/mo saved",
+    summary: "A full Point of Sale system built for a grocery store — product management, barcode scanning, sales tracking, daily reports and inventory alerts.",
+    metric: "500+ daily transactions",
     image: "project-2",
   },
   {
@@ -194,30 +194,30 @@ export const PROJECTS = [
 export const CASE_STUDIES = [
   {
     slug: "ai-ecommerce-canada",
-    client: "Canadian Retail Brand",
-    title: "AI recommendation engine that tripled average order value",
+    client: "UK Accounting & Business Services Firm",
+    title: "Professional business website that became the firm's primary lead source",
     challenge:
-      "A Canadian e-commerce store was struggling with low repeat purchases and poor product discovery on their Shopify store.",
+      "A UK-based accounting and business services firm had no online presence. Potential clients could not find them, verify their credentials or contact them easily — they were losing business to competitors with better websites.",
     approach:
-      "We integrated a custom OpenAI-powered recommendation engine with personalised email automation via n8n, all connected to their Shopify backend.",
+      "We built a clean, professional multi-page website with service listings, team profiles, a client enquiry system and Google Business integration. The site was optimised for local SEO and mobile from day one.",
     results: [
-      { k: "42%", v: "conversion rate uplift" },
-      { k: "3x", v: "average order value" },
-      { k: "6 wks", v: "from brief to launch" },
+      { k: "3 wks", v: "from brief to live" },
+      { k: "Top 3", v: "Google local search ranking" },
+      { k: "60%", v: "enquiries now via website" },
     ],
   },
   {
     slug: "automation-uk",
-    client: "UK Professional Services Firm",
-    title: "120 hours a month reclaimed through smart automation",
+    client: "Grocery Store — UK",
+    title: "Point of Sale system that replaced manual paper-based checkout",
     challenge:
-      "Manual data entry between CRM, invoicing software and email was consuming two full-time staff.",
+      "A UK grocery store was running checkout on pen and paper — no inventory tracking, no daily sales reports and constant stock discrepancies that were costing the owner money every week.",
     approach:
-      "We built a suite of n8n workflows connecting HubSpot, Xero and Gmail, with AI-assisted document parsing and exception handling.",
+      "We built a custom POS system with barcode scanning, product management, real-time inventory tracking, daily sales reports and low-stock alerts. The system runs on a tablet at the counter and syncs data to a web dashboard.",
     results: [
-      { k: "120 hrs", v: "saved every month" },
-      { k: "38k GBP", v: "annual cost saving" },
-      { k: "2 wks", v: "implementation time" },
+      { k: "500+", v: "daily transactions processed" },
+      { k: "Zero", v: "manual stock errors since launch" },
+      { k: "2 hrs", v: "saved daily on reconciliation" },
     ],
   },
   {
@@ -239,21 +239,21 @@ export const CASE_STUDIES = [
 export const TESTIMONIALS = [
   {
     quote:
-      "Solvix Core transformed our business with their AI automation. The n8n workflows they built have saved us hundreds of hours every month.",
+      "Solvix Core built us a website we are genuinely proud of. It looks professional, loads fast and has already brought in new clients we would never have reached before.",
     name: "James Mitchell",
-    role: "CEO, TechVentures Canada",
+    role: "Director, UK Business Services Firm",
   },
   {
     quote:
-      "Outstanding web development work. The team delivered beyond our expectations — fast, modern, and exactly what our brand needed.",
-    name: "Sarah Thornton",
-    role: "Founder, Digital Hub London",
+      "The POS system they built for us changed everything. No more pen and paper, no more stock confusion. I can see everything on my phone now — sales, stock, reports.",
+    name: "Ahmed Khalil",
+    role: "Owner, Grocery Store UK",
   },
   {
     quote:
-      "Solvix Core's AI solutions took our e-commerce store to the next level. The Shopify customisation and marketing automation is world-class.",
-    name: "Ahmed Raza",
-    role: "Director, Commerce Pakistan",
+      "Solvix Core rebuilt our platform from scratch in record time. The AI chatbot alone has reduced our support load significantly. Exceptional quality of work.",
+    name: "Bilal Rana",
+    role: "CTO, Tech Company Pakistan",
   },
 ];
 
