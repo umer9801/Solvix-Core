@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
+import { motion } from "motion/react";
 import { Blobs, Reveal, TextReveal } from "./primitives";
 
 export function PageHero({
@@ -8,44 +9,86 @@ export function PageHero({
   body,
   children,
   meta,
+  image,
+  imageAlt,
 }: {
   eyebrow: string;
   title: string;
   body: string;
   children?: ReactNode;
   meta?: { k: string; v: string }[];
+  image?: string;
+  imageAlt?: string;
+  heroNote?: string; // accepted but ignored — kept for back-compat
 }) {
   return (
-    <section className="relative overflow-hidden pb-16 pt-16 md:pb-24 md:pt-24">
+    <section className="relative overflow-hidden pb-16 pt-10 md:pb-20 md:pt-14">
       <Blobs />
       <div className="container-lux">
+
+        {/* Breadcrumb */}
         <Reveal>
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <Link to="/" className="transition-colors hover:text-foreground">
-              Home
-            </Link>
+            <Link to="/" className="transition-colors hover:text-foreground">Home</Link>
             <span>/</span>
-            <span className="text-foreground">{eyebrow}</span>
+            <span className="font-medium text-foreground">{eyebrow}</span>
           </div>
         </Reveal>
-        <div className="mt-10 grid gap-10 lg:grid-cols-[1.35fr_1fr] lg:items-end">
-          <TextReveal text={title} as="h1" className="display-xl max-w-4xl" />
-          <Reveal delay={0.2}>
-            <p className="max-w-md text-lg leading-relaxed text-muted-foreground lg:pb-3">{body}</p>
-          </Reveal>
+
+        {/* Main grid */}
+        <div className="mt-8 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+
+          {/* Left — content */}
+          <div>
+            <Reveal>
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/8 px-4 py-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                <span className="text-xs font-semibold uppercase tracking-wide text-primary">{eyebrow}</span>
+              </div>
+            </Reveal>
+
+            <TextReveal text={title} as="h1" className="display-xl mt-6 max-w-2xl" />
+
+            <Reveal delay={0.2}>
+              <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground">{body}</p>
+            </Reveal>
+
+            {meta && (
+              <Reveal delay={0.3}>
+                <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-border pt-8 sm:grid-cols-4">
+                  {meta.map((m) => (
+                    <div key={m.k}>
+                      <dt className="font-display text-3xl">{m.k}</dt>
+                      <dd className="mt-1 text-xs text-muted-foreground">{m.v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </Reveal>
+            )}
+          </div>
+
+          {/* Right — image only if provided */}
+          {image && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="relative hidden lg:block"
+            >
+              <div className="overflow-hidden rounded-[2rem] border border-border shadow-lift">
+                <img
+                  src={image}
+                  alt={imageAlt ?? eyebrow}
+                  width={700}
+                  height={560}
+                  className="aspect-[5/4] w-full object-cover"
+                />
+              </div>
+              <div className="rule-dots absolute -right-4 -bottom-4 -z-10 h-32 w-32 rounded-2xl" />
+            </motion.div>
+          )}
         </div>
-        {meta ? (
-          <Reveal delay={0.3}>
-            <div className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-border bg-border md:grid-cols-4">
-              {meta.map((m) => (
-                <div key={m.k} className="bg-card px-6 py-7">
-                  <p className="font-display text-3xl">{m.k}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">{m.v}</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        ) : null}
+
         {children}
       </div>
     </section>

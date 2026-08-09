@@ -4,6 +4,7 @@ import { Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal, SectionHead } from "@/components/site/primitives";
 import { COMPANY, FAQS, OFFICES } from "@/lib/site-data";
+import dashboard from "@/assets/dashboard.jpg";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -30,7 +31,30 @@ function Contact() {
         eyebrow="Contact"
         title="Let's build something great together."
         body="We serve clients in Canada, UK and Pakistan. Reach out via WhatsApp or email — we respond within 24 hours."
-      />
+        image={dashboard}
+        imageAlt="Contact Solvix Core"
+      >
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          <div className="rounded-[2rem] border border-border bg-card p-8">
+            <p className="eyebrow">Fast reply</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              We answer every inquiry within 24 hours with clear next steps.
+            </p>
+          </div>
+          <div className="rounded-[2rem] border border-border bg-card p-8">
+            <p className="eyebrow">Multiple channels</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              WhatsApp, email and direct contact — choose the one that fits your workflow.
+            </p>
+          </div>
+          <div className="rounded-[2rem] border border-border bg-card p-8">
+            <p className="eyebrow">Project clarity</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Tell us the problem first, not the solution, and we’ll help you land on what matters.
+            </p>
+          </div>
+        </div>
+      </PageHero>
 
       <section className="container-lux pb-24">
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
@@ -106,7 +130,7 @@ function Contact() {
                     className="flex items-center gap-3 text-sm hover:text-primary"
                   >
                     <MessageCircle className="h-4 w-4 text-primary" />
-                    <span>🇨🇦 Canada — {COMPANY.phone.canada}</span>
+                    <span>Canada — {COMPANY.phone.canada}</span>
                   </a>
                   <a
                     href={COMPANY.whatsapp.uk}
@@ -115,7 +139,7 @@ function Contact() {
                     className="flex items-center gap-3 text-sm hover:text-primary"
                   >
                     <MessageCircle className="h-4 w-4 text-primary" />
-                    <span>🇬🇧 UK — {COMPANY.phone.uk}</span>
+                    <span>UK — {COMPANY.phone.uk}</span>
                   </a>
                   <a
                     href={COMPANY.whatsapp.pakistan}
@@ -124,7 +148,7 @@ function Contact() {
                     className="flex items-center gap-3 text-sm hover:text-primary"
                   >
                     <MessageCircle className="h-4 w-4 text-primary" />
-                    <span>🇵🇰 Pakistan — {COMPANY.phone.pakistan}</span>
+                    <span>Pakistan — {COMPANY.phone.pakistan}</span>
                   </a>
                 </div>
               </div>

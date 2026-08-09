@@ -31,14 +31,30 @@ function About() {
   return (
     <>
       <PageHero
-        eyebrow="About"
-        title="Built to deliver premium tech solutions across three continents."
-        body="Solvix Core was founded with one mission — make cutting-edge technology accessible and affordable for businesses in Canada, the UK and Pakistan."
+        eyebrow="About Solvix Core"
+        title="Premium tech solutions built for your success."
+        body="We help teams in Canada, the UK and Pakistan deliver complex digital products faster, with better outcomes and clearer risk control."
+        heroNote="From discovery to launch, we partner with your business to turn technology investment into measurable results."
         meta={STATS.map((s) => ({
           k: `${s.value}${s.suffix}`,
           v: s.label,
         }))}
-      />
+      >
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          <div className="rounded-[2rem] border border-border bg-card p-8">
+            <p className="eyebrow">Our promise</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              We only take work where we can deliver a clear outcome, affordable quality, and a path to the next phase.
+            </p>
+          </div>
+          <div className="rounded-[2rem] border border-border bg-card p-8">
+            <p className="eyebrow">What we value</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Intelligent design, practical engineering and honesty about scope, timeline and cost are baked into every engagement.
+            </p>
+          </div>
+        </div>
+      </PageHero>
 
       <section className="container-lux py-24">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
@@ -55,7 +71,7 @@ function About() {
             />
             <Reveal delay={0.2}>
               <p className="mt-6 leading-relaxed text-muted-foreground">
-                Today Solvix Core is a team of 50+ designers, engineers and AI specialists operating across Canada, the UK and Pakistan. We work with startups, SMBs and enterprises — delivering AI solutions, automation, web development, Shopify stores and mobile apps that drive real results.
+                Today Solvix Core is a team of 10+ designers, engineers and AI specialists operating across Canada, the UK and Pakistan. We work with startups, SMBs and enterprises — delivering AI solutions, automation, web development, Shopify stores and mobile apps that drive real results.
               </p>
             </Reveal>
           </div>
@@ -113,7 +129,7 @@ function About() {
             <span className="h-px w-8 bg-primary" />
             <span className="eyebrow text-background/60">Timeline</span>
           </div>
-          <h2 className="display-lg mt-6 max-w-2xl">Six years, six turning points.</h2>
+          <h2 className="display-lg mt-6 max-w-2xl">Two years, two turning points.</h2>
           <ol className="mt-16 grid gap-10 md:grid-cols-3">
             {TIMELINE.map((t, i) => (
               <Reveal key={t.year} delay={i * 0.07}>
@@ -129,21 +145,22 @@ function About() {
       </section>
 
       <section className="container-lux py-24">
-        <SectionHead eyebrow="Team" title="The people who will actually be in the room." />
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {TEAM.map((m, i) => (
-            <Reveal key={m.name} delay={i * 0.06}>
-              <div className="group card-lux flex items-center gap-5 rounded-[1.5rem] p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
-                <span className="font-display flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-surface text-xl transition-colors group-hover:bg-primary-soft">
-                  {m.initials}
-                </span>
-                <div>
-                  <p className="font-semibold">{m.name}</p>
-                  <p className="text-sm text-muted-foreground">{m.role}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
+        <SectionHead eyebrow="Company" title="The people behind what we ship." />
+        <div className="grid gap-8 lg:grid-cols-2">
+          <div className="rounded-[2rem] border border-border bg-card p-10">
+            <p className="eyebrow">Founded</p>
+            <h3 className="display-md mt-3">2024</h3>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Solvix Core launched in 2024 and has grown into a tight, expert team that moves fast and stays focused on quality.
+            </p>
+          </div>
+          <div className="rounded-[2rem] border border-border bg-card p-10">
+            <p className="eyebrow">Size</p>
+            <h3 className="display-md mt-3">10+ team members</h3>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              A lean team of designers, engineers and AI specialists operating across Canada, the UK and Pakistan.
+            </p>
+          </div>
         </div>
       </section>
 

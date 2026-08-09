@@ -50,8 +50,8 @@ export function Nav() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-          scrolled ? "py-2" : "py-5",
+          "fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur-sm transition-all duration-500",
+          scrolled ? "py-2 shadow-sm" : "py-5",
         )}
       >
         <div className="container-lux">
@@ -59,8 +59,8 @@ export function Nav() {
             className={cn(
               "flex items-center justify-between rounded-full px-4 py-2.5 transition-all duration-500 md:px-5",
               scrolled
-                ? "border border-border bg-card/85 shadow-soft backdrop-blur-xl"
-                : "border border-transparent",
+                ? "border border-border bg-white shadow-soft backdrop-blur-xl"
+                : "border border-border bg-white shadow-sm",
             )}
           >
             <Link to="/" className="group flex items-center gap-2.5 pl-1">
@@ -166,8 +166,7 @@ export function Nav() {
                         {SERVICES.filter((s) => s.group === g).map((s) => (
                           <li key={s.slug}>
                             <Link
-                              to="/services/$slug"
-                              params={{ slug: s.slug }}
+                              to={`/services/${s.slug}`}
                               className="text-sm text-foreground/75 transition-colors hover:text-primary"
                             >
                               {s.title}
@@ -247,9 +246,9 @@ export function Nav() {
                   Start a project <ArrowUpRight className="h-4 w-4" />
                 </Link>
                 <div className="grid grid-cols-3 gap-2 text-center text-xs text-muted-foreground">
-                  <a href={COMPANY.whatsapp.canada} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-surface p-2 hover:text-primary">🇨🇦 CA</a>
-                  <a href={COMPANY.whatsapp.uk} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-surface p-2 hover:text-primary">🇬🇧 UK</a>
-                  <a href={COMPANY.whatsapp.pakistan} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-surface p-2 hover:text-primary">🇵🇰 PK</a>
+                  <a href={COMPANY.whatsapp.canada} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-surface p-2 hover:text-primary text-center">CA</a>
+                  <a href={COMPANY.whatsapp.uk} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-surface p-2 hover:text-primary text-center">UK</a>
+                  <a href={COMPANY.whatsapp.pakistan} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-surface p-2 hover:text-primary text-center">PK</a>
                 </div>
               </div>
             </motion.div>
@@ -292,8 +291,7 @@ export function Nav() {
                 {results.map((s) => (
                   <li key={s.slug}>
                     <Link
-                      to="/services/$slug"
-                      params={{ slug: s.slug }}
+                      to={`/services/${s.slug}`}
                       className="flex items-center justify-between rounded-xl px-3 py-3 text-sm transition-colors hover:bg-surface"
                     >
                       <span>{s.title}</span>

@@ -34,10 +34,32 @@ function Services() {
   return (
     <>
       <PageHero
-        eyebrow="Services"
-        title="Every capability a serious software programme needs."
-        body="Assembled into one squad, accountable end to end — from the first workshop to the fourth year of operation."
-      />
+        eyebrow="Our Services"
+        title="Everything you need to grow your business online."
+        body="Nine core services across AI, automation, web development, Shopify and marketing — all delivered at 35% below market rates."
+        heroNote="Choose the capability your business needs today, and we'll wrap it in the delivery, governance and quality controls that make it work."
+      >
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          <div className="rounded-[2rem] border border-border bg-card p-7">
+            <p className="eyebrow">Choose with confidence</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              We help you land on the right service by focusing on the outcome first, not the feature list.
+            </p>
+          </div>
+          <div className="rounded-[2rem] border border-border bg-card p-7">
+            <p className="eyebrow">Built for production</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Every service is scoped for a working launch, clear next steps, and a path to scale once it proves value.
+            </p>
+          </div>
+          <div className="rounded-[2rem] border border-border bg-card p-7">
+            <p className="eyebrow">Faster handover</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Documentation, training and support are included so your team can run the system confidently.
+            </p>
+          </div>
+        </div>
+      </PageHero>
 
       <section className="container-lux pb-24">
         <div className="sticky top-24 z-20 -mx-1 mb-12 flex gap-2 overflow-x-auto rounded-full border border-border bg-card/80 p-1.5 backdrop-blur-xl">
@@ -61,8 +83,7 @@ function Services() {
             <Reveal key={s.slug} delay={(i % 6) * 0.05}>
               <SpotlightCard className="card-lux group h-full rounded-[1.75rem] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift">
                 <Link
-                  to="/services/$slug"
-                  params={{ slug: s.slug }}
+                  to={`/services/${s.slug}`}
                   className="flex h-full flex-col p-8"
                 >
                   <div className="flex items-start justify-between">

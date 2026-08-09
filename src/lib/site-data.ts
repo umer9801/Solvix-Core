@@ -18,10 +18,8 @@ export const COMPANY = {
 export const NAV_LINKS = [
   { label: "About", to: "/about" },
   { label: "Services", to: "/services" },
-  { label: "Pricing", to: "/pricing" },
   { label: "Industries", to: "/industries" },
   { label: "Technologies", to: "/technologies" },
-  { label: "Blog", to: "/blog" },
   { label: "FAQs", to: "/faqs" },
   { label: "Contact", to: "/contact" },
 ] as const;
@@ -98,10 +96,17 @@ export const SERVICES: Service[] = [
     blurb: "Seamless OpenAI API integration — from GPT-powered features to DALL-E, Whisper and custom assistants.",
     accent: "primary",
   },
+  {
+    slug: "pos-systems",
+    title: "Retail POS Systems",
+    group: "Platforms",
+    blurb: "End-to-end retail and hospitality POS systems with payment workflows, inventory sync and customer insights.",
+    accent: "peach",
+  },
 ];
 
 export const STATS = [
-  { value: 500, suffix: "+", label: "Projects delivered" },
+  { value: 15, suffix: "+", label: "Projects delivered" },
   { value: 3, suffix: "", label: "Countries served" },
   { value: 98, suffix: "%", label: "Client satisfaction" },
   { value: 50, suffix: "+", label: "Expert team members" },

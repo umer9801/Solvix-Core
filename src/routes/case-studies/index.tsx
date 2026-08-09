@@ -28,7 +28,29 @@ function CaseStudies() {
         eyebrow="Case Studies"
         title="What changed, and by how much."
         body="Each engagement is measured against numbers agreed before a line of code is written."
-      />
+        heroNote="Read the work that proves our process — challenge, approach and outcome for real clients in regulated businesses."
+      >
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          <div className="rounded-[2rem] border border-border bg-card p-8">
+            <p className="eyebrow">Measured outcomes</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Every case study is built around the numbers that mattered most to the client.
+            </p>
+          </div>
+          <div className="rounded-[2rem] border border-border bg-card p-8">
+            <p className="eyebrow">Industry focus</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Many of the stories involve regulated, operationally complex businesses with real stakes.
+            </p>
+          </div>
+          <div className="rounded-[2rem] border border-border bg-card p-8">
+            <p className="eyebrow">Transparent process</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              We show what changed, how we delivered it, and why it worked for the client.
+            </p>
+          </div>
+        </div>
+      </PageHero>
       <section className="container-lux pb-24">
         {CASE_STUDIES.map((c, i) => (
           <Reveal key={c.slug} delay={i * 0.06}>

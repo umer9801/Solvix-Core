@@ -29,6 +29,7 @@ function Careers() {
         eyebrow="Careers"
         title="A small studio with an unreasonable standard."
         body="We hire slowly, pay openly, and give people the time it takes to do work they'd sign."
+        heroNote="Remote-first, senior roles only — a team built around craft, ownership and real client outcomes."
       />
       <section className="container-lux pb-24">
         <Reveal>

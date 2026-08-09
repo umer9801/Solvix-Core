@@ -43,8 +43,24 @@ function CaseStudy() {
         eyebrow={study.client}
         title={study.title}
         body={study.challenge}
+        heroNote="This engagement is described in full — the problem, our approach, and the measurable business result."
         meta={study.results.map((r) => ({ k: r.k, v: r.v }))}
-      />
+      >
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          <div className="rounded-[2rem] border border-border bg-card p-8">
+            <p className="eyebrow">The impact</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              These case studies show the business value we delivered, not just the technology we built.
+            </p>
+          </div>
+          <div className="rounded-[2rem] border border-border bg-card p-8">
+            <p className="eyebrow">Our role</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              We acted as the delivery partner, handling design, engineering, and risk while the client stayed aligned.
+            </p>
+          </div>
+        </div>
+      </PageHero>
 
       {project ? (
         <section className="container-lux pb-24">

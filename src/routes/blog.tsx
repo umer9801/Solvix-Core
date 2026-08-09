@@ -30,6 +30,7 @@ function Blog() {
         eyebrow="Journal"
         title="Long-form notes from inside the work."
         body="One essay a month. No listicles, no thought-leadership filler."
+        heroNote="Practical writing from practitioners, not agency copywriters — every post is grounded in the projects we do."
       />
       <section className="container-lux pb-24">
         <Reveal>

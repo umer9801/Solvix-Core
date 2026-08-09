@@ -5,24 +5,21 @@ import {
   ArrowRight,
   ArrowUpRight,
   Bot,
-  Boxes,
-  CloudCog,
-  Compass,
+  Brain,
   Gauge,
-  Layers,
   Quote,
-  ShieldCheck,
-  Sparkles,
+  ShoppingBag,
+  Smartphone,
+  Video,
   Workflow,
+  Zap,
+  CheckCircle,
 } from "lucide-react";
 import {
-  accentBg,
   Blobs,
   Counter,
   LuxButton,
-  Magnetic,
   Marquee,
-  ParallaxImage,
   Reveal,
   SectionHead,
   SpotlightCard,
@@ -30,29 +27,13 @@ import {
 } from "@/components/site/primitives";
 import { CtaBand } from "@/components/site/Footer";
 import {
-  CASE_STUDIES,
   CLIENTS,
-  INDUSTRIES,
-  PROCESS,
-  PROJECTS,
   SERVICES,
   STATS,
-  TECHNOLOGIES,
+  PROCESS,
   TESTIMONIALS,
 } from "@/lib/site-data";
-import heroAbstract from "@/assets/hero-abstract.jpg";
-import officeTeam from "@/assets/office-team.jpg";
-import dashboardImg from "@/assets/dashboard.jpg";
-import aiGraphic from "@/assets/ai-graphic.jpg";
-import project1 from "@/assets/project-1.jpg";
-import project2 from "@/assets/project-2.jpg";
-import project3 from "@/assets/project-3.jpg";
-
-const projectImages: Record<string, string> = {
-  "project-1": project1,
-  "project-2": project2,
-  "project-3": project3,
-};
+import homeHero from "@/assets/home-hero.PNG";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -74,6 +55,28 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+const serviceIcons: Record<string, React.ElementType> = {
+  "ai-solutions": Brain,
+  "n8n-automation": Workflow,
+  "web-development": Zap,
+  "shopify-store-design": ShoppingBag,
+  "mobile-app-development": Smartphone,
+  "content-creation": Video,
+  "marketing-seo": ArrowUpRight,
+  "langchain-integration": Bot,
+  "openai-integration": Brain,
+  "pos-systems": ShoppingBag,
+};
+
+const accentStyles: Record<string, { bg: string; icon: string; border: string }> = {
+  primary:  { bg: "bg-blue-50",    icon: "text-blue-600",    border: "group-hover:border-blue-300" },
+  violet:   { bg: "bg-violet-50",  icon: "text-violet-600",  border: "group-hover:border-violet-300" },
+  sage:     { bg: "bg-emerald-50", icon: "text-emerald-600", border: "group-hover:border-emerald-300" },
+  peach:    { bg: "bg-orange-50",  icon: "text-orange-600",  border: "group-hover:border-orange-300" },
+  coral:    { bg: "bg-red-50",     icon: "text-red-600",     border: "group-hover:border-red-300" },
+};
+
+// ─── Hero ────────────────────────────────────────────────────────────────────
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -81,7 +84,7 @@ function Hero() {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
   return (
-    <section ref={ref} className="relative overflow-hidden pb-24 pt-10 md:pb-32">
+    <section ref={ref} className="relative overflow-hidden pb-20 pt-10 md:pb-28">
       <Blobs />
       <div className="container-lux">
         <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -92,7 +95,7 @@ function Hero() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
                 </span>
-                Two delivery squads open for Q3 2026
+                Now serving Canada · UK · Pakistan
               </div>
             </Reveal>
 
@@ -113,21 +116,28 @@ function Hero() {
 
             <Reveal delay={0.5}>
               <p className="mt-8 max-w-lg text-lg leading-relaxed text-muted-foreground">
-                Solvix Core is a premium technology solutions provider serving businesses in
-                Canada, UK and Pakistan. We build AI systems, automation workflows, websites,
-                Shopify stores and mobile apps — at 35% below market rates.
+                Solvix Core builds AI, automation, web and Shopify systems that cut
+                launch time, reduce operating cost and keep work aligned to the value
+                your team needs.
               </p>
             </Reveal>
 
             <Reveal delay={0.62}>
+              <p className="mt-8 max-w-lg text-sm leading-relaxed text-muted-foreground">
+                We design, deliver and support production-ready systems with the
+                discipline of a consultancy and the speed of a product team.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.76}>
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <Link to="/contact">
                   <LuxButton>
                     Start a project <ArrowRight className="h-4 w-4" />
                   </LuxButton>
                 </Link>
-                <Link to="/projects">
-                  <LuxButton variant="ghost">See selected work</LuxButton>
+                <Link to="/services">
+                  <LuxButton variant="ghost">Explore services</LuxButton>
                 </Link>
               </div>
             </Reveal>
@@ -146,11 +156,11 @@ function Hero() {
             </Reveal>
           </div>
 
-          <motion.div style={{ y, scale }} className="relative">
+          <motion.div style={{ y, scale }} className="relative hidden lg:block">
             <div className="relative overflow-hidden rounded-[2.5rem] border border-border shadow-lift">
               <img
-                src={heroAbstract}
-                alt="Sculptural abstract forms in emerald, coral and violet"
+                src={homeHero}
+                alt="Solvix Core home hero"
                 width={1408}
                 height={1200}
                 className="h-full w-full object-cover"
@@ -164,12 +174,12 @@ function Hero() {
             >
               <div className="flex items-center gap-2">
                 <Gauge className="h-4 w-4 text-primary" />
-                <p className="text-xs font-semibold">Delivery health</p>
+                <p className="text-xs font-semibold">Client satisfaction</p>
               </div>
               <p className="font-display mt-3 text-4xl">
-                <Counter value={99.99} suffix="%" />
+                <Counter value={98} suffix="%" />
               </p>
-              <p className="mt-1 text-xs text-muted-foreground">Uptime across managed platforms</p>
+              <p className="mt-1 text-xs text-muted-foreground">Across all delivered projects</p>
             </motion.div>
           </motion.div>
         </div>
@@ -178,84 +188,79 @@ function Hero() {
   );
 }
 
+// ─── Trusted By ───────────────────────────────────────────────────────────────
 function TrustedBy() {
   return (
-    <section className="border-y border-border bg-surface-2 py-10">
+    <section className="border-y border-border bg-surface-2 py-8">
       <div className="container-lux flex flex-col gap-6 md:flex-row md:items-center">
-        <p className="eyebrow shrink-0 md:w-56">Trusted by teams at</p>
+        <p className="eyebrow shrink-0 md:w-44">Serving teams in</p>
         <Marquee
           items={CLIENTS}
           className="flex-1"
-          itemClassName="font-display text-2xl tracking-tight text-foreground/35"
+          itemClassName="font-display text-xl tracking-tight text-foreground/35"
         />
       </div>
     </section>
   );
 }
 
-function Intro() {
+// ─── Services (attractive cards) ─────────────────────────────────────────────
+function FeaturedServices() {
   return (
-    <section className="container-lux py-24 md:py-32">
-      <div className="grid gap-16 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-        <div className="relative">
-          <ParallaxImage
-            src={officeTeam}
-            alt="Solvix Core team collaborating"
-            className="aspect-[4/5] rounded-[2rem]"
-          />
-          <div className="rule-dots absolute -right-6 -top-6 -z-10 h-40 w-40 rounded-3xl" />
-        </div>
-        <div>
-          <SectionHead
-            eyebrow="The company"
-            title="We are the team businesses in Canada, UK and Pakistan call when results matter."
-            body="50+ designers, engineers and AI specialists working remotely across three countries. No account managers, no delays — the people who plan the work are the people who ship it."
-          />
-          <div className="mt-12 grid gap-8 sm:grid-cols-2">
-            {[
-              {
-                icon: Compass,
-                title: "Judgement first",
-                body: "We start with the operating model, not the tech stack.",
-              },
-              {
-                icon: ShieldCheck,
-                title: "Production from day one",
-                body: "Every increment is deployable, observable and tested.",
-              },
-              {
-                icon: Layers,
-                title: "Systems, not screens",
-                body: "Design systems and architecture your team can extend.",
-              },
-              {
-                icon: Sparkles,
-                title: "Craft that compounds",
-                body: "Lower running costs, faster change, fewer surprises.",
-              },
-            ].map((f, i) => (
-              <Reveal key={f.title} delay={i * 0.08}>
-                <div className="flex gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-accent">
-                    <f.icon className="h-5 w-5 text-primary" />
-                  </span>
-                  <div>
-                    <p className="font-semibold">{f.title}</p>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
+    <section className="container-lux py-20 md:py-24">
+      <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
+        <SectionHead
+          eyebrow="What we do"
+          title="Nine services. One team. Zero hand-offs."
+          className="max-w-xl"
+        />
+        <Link to="/services">
+          <LuxButton variant="ghost">
+            All services <ArrowUpRight className="h-4 w-4" />
+          </LuxButton>
+        </Link>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {SERVICES.map((s, i) => {
+          const Icon = serviceIcons[s.slug] ?? Zap;
+          const style = accentStyles[s.accent] ?? accentStyles.primary;
+          return (
+            <Reveal key={s.slug} delay={i * 0.05}>
+              <SpotlightCard
+                className={`group relative h-full overflow-hidden rounded-2xl border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift ${style.border}`}
+              >
+                <Link to={`/services/${s.slug}`} className="flex h-full flex-col">
+                  {/* Accent blob in top-right */}
+                  <div className={`absolute -right-6 -top-6 h-24 w-24 rounded-full ${style.bg} opacity-60 blur-2xl transition-all duration-500 group-hover:opacity-100`} />
+
+                  <div className="relative">
+                    <span className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${style.bg}`}>
+                      <Icon className={`h-5 w-5 ${style.icon}`} />
+                    </span>
+                    <p className={`eyebrow mt-5 ${style.icon}`}>{s.group}</p>
+                    <h3 className="font-display mt-1.5 text-xl leading-tight text-foreground">{s.title}</h3>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-3">{s.blurb}</p>
                   </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
+
+                  <span className={`mt-5 inline-flex items-center gap-1.5 text-xs font-semibold ${style.icon}`}>
+                    Learn more
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                </Link>
+              </SpotlightCard>
+            </Reveal>
+          );
+        })}
       </div>
     </section>
   );
 }
 
+// ─── Stats ────────────────────────────────────────────────────────────────────
 function StatsBand() {
   return (
-    <section className="relative overflow-hidden bg-ink py-24 text-background">
+    <section className="relative overflow-hidden bg-ink py-20 text-background">
       <div className="animate-hue-drift pointer-events-none absolute -left-20 top-0 h-96 w-96 rounded-full bg-primary/25 blur-3xl" />
       <div className="container-lux relative">
         <div className="grid gap-10 md:grid-cols-4">
@@ -275,285 +280,28 @@ function StatsBand() {
   );
 }
 
-function FeaturedServices() {
-  const featured = SERVICES.slice(0, 8);
-  return (
-    <section className="container-lux py-24 md:py-32">
-      <div className="flex flex-wrap items-end justify-between gap-8">
-        <SectionHead
-          eyebrow="Capabilities"
-          title="Twenty-two disciplines. One delivery standard."
-          className="max-w-2xl"
-        />
-        <Link to="/services">
-          <LuxButton variant="ghost">
-            All services <ArrowUpRight className="h-4 w-4" />
-          </LuxButton>
-        </Link>
-      </div>
-
-      <div className="mt-16 grid gap-5 md:grid-cols-6">
-        {featured.map((s, i) => {
-          const large = i === 0 || i === 5;
-          return (
-            <Reveal
-              key={s.slug}
-              delay={i * 0.05}
-              className={large ? "md:col-span-3" : "md:col-span-2"}
-            >
-              <SpotlightCard className="card-lux group h-full rounded-[1.75rem] p-8 transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
-                <Link
-                  to="/services/$slug"
-                  params={{ slug: s.slug }}
-                  className="flex h-full flex-col"
-                >
-                  <span
-                    className={`flex h-12 w-12 items-center justify-center rounded-2xl ${accentBg[s.accent]}`}
-                  >
-                    <Boxes className="h-5 w-5 text-ink/70" />
-                  </span>
-                  <p className="eyebrow mt-8">{s.group}</p>
-                  <h3
-                    className={`mt-2 ${large ? "display-md" : "font-display text-2xl leading-tight"}`}
-                  >
-                    {s.title}
-                  </h3>
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                    {s.blurb}
-                  </p>
-                  <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                    Explore
-                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-                  </span>
-                </Link>
-              </SpotlightCard>
-            </Reveal>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-function TechStack() {
-  return (
-    <section className="border-y border-border bg-surface py-24 md:py-32">
-      <div className="container-lux">
-        <SectionHead
-          eyebrow="Technology"
-          title="Boring where it should be. Sharp where it counts."
-          body="We choose tools for their operational cost over five years, not their popularity this quarter."
-          align="center"
-        />
-        <div className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-border bg-border md:grid-cols-3">
-          {TECHNOLOGIES.map((t, i) => (
-            <Reveal key={t.group} delay={i * 0.06}>
-              <div className="h-full bg-card p-8 transition-colors duration-500 hover:bg-surface-2">
-                <p className="font-display text-2xl">{t.group}</p>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {t.items.map((it) => (
-                    <li
-                      key={it}
-                      className="rounded-full border border-border px-3 py-1.5 font-mono text-[11px] text-muted-foreground"
-                    >
-                      {it}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
+// ─── Process (trimmed — just 3 steps + link) ──────────────────────────────────
 function ProcessSection() {
   return (
-    <section className="container-lux py-24 md:py-32">
-      <div className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="lg:sticky lg:top-32 lg:self-start">
-          <SectionHead
-            eyebrow="How we work"
-            title="A method built for consequence, not ceremony."
-            body="Five movements, repeated with discipline. Each one ends with something real: a decision, a design, a deployment."
-          />
-          <Reveal delay={0.2}>
-            <div className="mt-10">
-              <Link to="/about">
-                <LuxButton variant="ghost">Read our principles</LuxButton>
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-        <ol className="relative border-l border-border pl-8">
-          {PROCESS.map((p, i) => (
-            <Reveal key={p.step} delay={i * 0.07}>
-              <li className="group relative pb-12 last:pb-0">
-                <span className="absolute -left-[2.55rem] flex h-7 w-7 items-center justify-center rounded-full border border-border bg-card font-mono text-[10px] transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                  {p.step}
-                </span>
-                <h3 className="font-display text-3xl leading-tight">{p.title}</h3>
-                <p className="mt-3 max-w-lg leading-relaxed text-muted-foreground">{p.body}</p>
-              </li>
-            </Reveal>
-          ))}
-        </ol>
+    <section className="container-lux py-20 md:py-24">
+      <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
+        <SectionHead
+          eyebrow="How we work"
+          title="Five steps from brief to live."
+          className="max-w-xl"
+        />
+        <Link to="/about">
+          <LuxButton variant="ghost">About us <ArrowUpRight className="h-4 w-4" /></LuxButton>
+        </Link>
       </div>
-    </section>
-  );
-}
-
-function Automation() {
-  return (
-    <section className="container-lux pb-24 md:pb-32">
-      <div className="grain relative overflow-hidden rounded-[2.5rem] border border-border bg-surface-2 p-8 md:p-16">
-        <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
-          <div>
-            <SectionHead
-              eyebrow="Business automation"
-              title="Remove the work between the work."
-              body="We map the process, quantify the drag, then orchestrate systems so people stop being the integration layer."
-            />
-            <div className="mt-10 space-y-5">
-              {[
-                { k: "Process mapping", v: "Every handoff, queue and rework loop, measured." },
-                { k: "Orchestration", v: "Event-driven workflows across your existing tools." },
-                { k: "Human-in-the-loop", v: "Approvals and exceptions handled with dignity." },
-              ].map((row, i) => (
-                <Reveal key={row.k} delay={i * 0.08}>
-                  <div className="flex items-start gap-5 border-b border-border pb-5">
-                    <Workflow className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                    <div>
-                      <p className="font-semibold">{row.k}</p>
-                      <p className="text-sm text-muted-foreground">{row.v}</p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {PROCESS.map((p, i) => (
+          <Reveal key={p.step} delay={i * 0.07}>
+            <div className="group rounded-2xl border border-border bg-white p-6 transition-all duration-300 hover:border-primary/40 hover:shadow-lift">
+              <span className="font-mono text-xs font-bold text-primary">{p.step}</span>
+              <h3 className="font-display mt-3 text-lg leading-tight">{p.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
             </div>
-          </div>
-          <Reveal delay={0.15}>
-            <div className="relative">
-              <img
-                src={dashboardImg}
-                alt="Light analytics dashboard interface"
-                loading="lazy"
-                width={1408}
-                height={1008}
-                className="w-full rounded-3xl border border-border shadow-lift"
-              />
-              <div className="animate-float-slow absolute -bottom-6 -right-4 rounded-2xl border border-border bg-card px-5 py-4 shadow-lift">
-                <p className="text-xs text-muted-foreground">Manual hours removed</p>
-                <p className="font-display text-3xl">
-                  <Counter value={11400} suffix="/yr" />
-                </p>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AiSection() {
-  return (
-    <section className="relative overflow-hidden bg-ink py-24 text-background md:py-32">
-      <div className="container-lux">
-        <div className="grid gap-14 lg:grid-cols-[1fr_0.9fr] lg:items-center">
-          <div>
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-primary" />
-              <span className="eyebrow text-background/60">Intelligence practice</span>
-            </div>
-            <TextReveal
-              text="AI that survives contact with production."
-              className="display-lg mt-6 max-w-xl"
-            />
-            <Reveal delay={0.15}>
-              <p className="mt-6 max-w-lg text-lg leading-relaxed text-background/70">
-                Retrieval grounded in your data, evaluation harnesses that catch regressions, and
-                guardrails your compliance team can read. Demos are easy — we build the other 90%.
-              </p>
-            </Reveal>
-            <div className="mt-12 grid gap-px overflow-hidden rounded-3xl bg-background/15 sm:grid-cols-3">
-              {[
-                { icon: Bot, k: "Assistants", v: "Grounded, cited, handoff-aware" },
-                { icon: CloudCog, k: "Pipelines", v: "Evaluated on every deploy" },
-                { icon: ShieldCheck, k: "Guardrails", v: "Policy, PII and audit built in" },
-              ].map((c, i) => (
-                <Reveal key={c.k} delay={i * 0.08}>
-                  <div className="h-full bg-ink px-6 py-7">
-                    <c.icon className="h-5 w-5 text-primary" />
-                    <p className="mt-4 font-semibold">{c.k}</p>
-                    <p className="mt-1 text-sm text-background/55">{c.v}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-          <Reveal delay={0.2}>
-            <img
-              src={aiGraphic}
-              alt="Abstract neural network illustration"
-              loading="lazy"
-              width={1200}
-              height={1200}
-              className="animate-float-slow w-full rounded-[2.5rem]"
-            />
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FeaturedWork() {
-  return (
-    <section className="container-lux py-24 md:py-32">
-      <SectionHead
-        eyebrow="Selected work"
-        title="Three platforms, three very different problems."
-      />
-      <div className="mt-16 space-y-8">
-        {PROJECTS.map((p, i) => (
-          <Reveal key={p.slug} delay={i * 0.06}>
-            <Link
-              to="/case-studies/$slug"
-              params={{ slug: p.slug }}
-              className="group grid items-center gap-8 rounded-[2rem] border border-border bg-card p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-lift md:grid-cols-[1.1fr_1fr] md:p-8"
-            >
-              <div className={i % 2 === 1 ? "md:order-2" : ""}>
-                <div className="overflow-hidden rounded-3xl bg-surface">
-                  <img
-                    src={projectImages[p.image]}
-                    alt={p.title}
-                    loading="lazy"
-                    width={1200}
-                    height={1008}
-                    className="w-full transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-                  />
-                </div>
-              </div>
-              <div className="px-2 md:px-6">
-                <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                  <span>{p.sector}</span>
-                  <span className="h-1 w-1 rounded-full bg-border" />
-                  <span>{p.year}</span>
-                </div>
-                <h3 className="display-md mt-4">{p.title}</h3>
-                <p className="mt-4 max-w-md leading-relaxed text-muted-foreground">{p.summary}</p>
-                <p className="mt-6 inline-block rounded-full bg-accent px-4 py-2 text-xs font-semibold text-accent-foreground">
-                  {p.metric}
-                </p>
-                <span className="mt-8 flex items-center gap-2 text-sm font-semibold text-primary">
-                  Read the case study
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </span>
-              </div>
-            </Link>
           </Reveal>
         ))}
       </div>
@@ -561,227 +309,132 @@ function FeaturedWork() {
   );
 }
 
-function IndustriesStrip() {
-  return (
-    <section className="border-y border-border bg-surface py-24">
-      <div className="container-lux">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHead eyebrow="Industries" title="Domains we know cold." className="max-w-xl" />
-          <Link to="/industries">
-            <LuxButton variant="ghost">Explore industries</LuxButton>
-          </Link>
-        </div>
-        <div className="mt-14">
-          {INDUSTRIES.map((ind, i) => (
-            <Reveal key={ind.name} delay={i * 0.04}>
-              <div className="group flex flex-col justify-between gap-2 border-t border-border py-6 transition-colors hover:bg-card/60 md:flex-row md:items-center">
-                <div className="flex items-baseline gap-6">
-                  <span className="font-mono text-xs text-muted-foreground">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="font-display text-3xl transition-transform duration-500 group-hover:translate-x-2 md:text-4xl">
-                    {ind.name}
-                  </p>
-                </div>
-                <p className="max-w-sm text-sm text-muted-foreground md:text-right">{ind.note}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CaseStudyPreview() {
-  return (
-    <section className="container-lux py-24 md:py-32">
-      <SectionHead
-        eyebrow="Evidence"
-        title="Outcomes, stated plainly."
-        body="Every engagement is measured against numbers agreed before we start."
-        align="center"
-      />
-      <div className="mt-16 grid gap-6 md:grid-cols-3">
-        {CASE_STUDIES.map((c, i) => (
-          <Reveal key={c.slug} delay={i * 0.08}>
-            <Link
-              to="/case-studies/$slug"
-              params={{ slug: c.slug }}
-              className="card-lux group flex h-full flex-col rounded-[1.75rem] p-8 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift"
-            >
-              <p className="eyebrow">{c.client}</p>
-              <h3 className="font-display mt-3 text-2xl leading-tight">{c.title}</h3>
-              <div className="mt-8 space-y-3 border-t border-border pt-6">
-                {c.results.map((r) => (
-                  <div key={r.k} className="flex items-baseline justify-between gap-4">
-                    <span className="font-display text-2xl text-primary">{r.k}</span>
-                    <span className="text-right text-xs text-muted-foreground">{r.v}</span>
-                  </div>
-                ))}
-              </div>
-              <span className="mt-8 flex items-center gap-2 text-sm font-semibold">
-                Full story
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </span>
-            </Link>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
-
+// ─── Why Us (compact) ─────────────────────────────────────────────────────────
 function WhyUs() {
-  const rows = [
-    { k: "Senior-only teams", v: "Median 11 years of experience. No pyramid staffing." },
-    { k: "Fixed monthly capacity", v: "Predictable cost, flexible roadmap, no change-order games." },
-    { k: "You own everything", v: "Code, infrastructure, documentation — in your org from commit one." },
-    { k: "Enablement built in", v: "Your engineers pair with ours. We plan our own redundancy." },
+  const reasons = [
+    "35% below market rates — all prices in CAD",
+    "Senior engineers and AI specialists only",
+    "You own 100% of the code from day one",
+    "Serving Canada, UK and Pakistan",
+    "Partnered with Lepro Trading Inc",
+    "98% client satisfaction rate",
   ];
   return (
-    <section className="container-lux pb-24 md:pb-32">
-      <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:items-center">
-        <div className="order-2 lg:order-1">
-          {rows.map((r, i) => (
-            <Reveal key={r.k} delay={i * 0.07}>
-              <div className="group flex items-start gap-6 border-b border-border py-7">
-                <span className="font-display text-4xl text-primary/25 transition-colors group-hover:text-primary">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <p className="font-display text-2xl">{r.k}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{r.v}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <div className="order-1 lg:order-2">
+    <section className="border-y border-border bg-surface py-16">
+      <div className="container-lux">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center">
           <SectionHead
             eyebrow="Why Solvix Core"
-            title="Premium quality at prices that make sense for your business."
-            body="We deliver 35% below market rates without cutting corners — because we have built efficient processes, a remote-first team and a relentless focus on value."
+            title="Premium quality at prices that make sense."
           />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Testimonials() {
-  return (
-    <section className="border-y border-border bg-surface-2 py-24 md:py-32">
-      <div className="container-lux">
-        <SectionHead eyebrow="Testimonials" title="What partners say when we're not in the room." />
-        <div className="mt-16 grid gap-6 md:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <Reveal key={t.name} delay={i * 0.09}>
-              <figure
-                className={`card-lux flex h-full flex-col rounded-[1.75rem] p-8 ${i === 1 ? "md:-translate-y-6" : ""}`}
-              >
-                <Quote className="h-7 w-7 text-primary/40" />
-                <blockquote className="font-display mt-6 flex-1 text-xl leading-snug">
-                  “{t.quote}”
-                </blockquote>
-                <figcaption className="mt-8 flex items-center gap-3 border-t border-border pt-6">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-xs font-semibold text-accent-foreground">
-                    {t.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold">{t.name}</p>
-                    <p className="text-xs text-muted-foreground">{t.role}</p>
-                  </div>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function GlobalReach() {
-  const cities = [
-    { city: "Lisbon", tz: "GMT+1", x: "44%", y: "48%" },
-    { city: "London", tz: "GMT", x: "47%", y: "36%" },
-    { city: "New York", tz: "GMT-5", x: "24%", y: "44%" },
-    { city: "Singapore", tz: "GMT+8", x: "76%", y: "62%" },
-  ];
-  return (
-    <section className="container-lux py-24 md:py-32">
-      <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <SectionHead
-          eyebrow="Global reach"
-          title="Four studios. Sixteen hours of overlap."
-          body="Follow-the-sun delivery without the follow-the-sun confusion — one backlog, one standard, one team."
-        />
-        <Reveal delay={0.15}>
-          <div className="rule-dots relative aspect-[16/9] overflow-hidden rounded-[2rem] border border-border bg-surface">
-            {cities.map((c, i) => (
-              <div key={c.city} className="absolute" style={{ left: c.x, top: c.y }}>
-                <span className="relative flex h-3 w-3">
-                  <span
-                    className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70"
-                    style={{ animationDelay: `${i * 0.4}s` }}
-                  />
-                  <span className="relative inline-flex h-3 w-3 rounded-full bg-primary" />
-                </span>
-                <div className="mt-2 -translate-x-1/2 whitespace-nowrap rounded-full border border-border bg-card px-3 py-1 text-[10px] font-semibold shadow-soft">
-                  {c.city} · {c.tz}
+          <div className="grid gap-3 sm:grid-cols-2">
+            {reasons.map((r, i) => (
+              <Reveal key={r} delay={i * 0.06}>
+                <div className="flex items-center gap-3 rounded-xl border border-border bg-white px-4 py-3">
+                  <CheckCircle className="h-4 w-4 shrink-0 text-primary" />
+                  <p className="text-sm font-medium">{r}</p>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-function ClientLogos() {
-  return (
-    <section className="border-y border-border py-14">
-      <div className="container-lux">
-        <p className="eyebrow text-center">Partners, platforms and alliances</p>
-        <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-4">
-          {["AWS Advanced", "Google Cloud", "Cloudflare", "Snowflake"].map((p) => (
-            <div
-              key={p}
-              className="flex items-center justify-center bg-card px-6 py-8 font-mono text-xs tracking-widest text-muted-foreground"
-            >
-              {p.toUpperCase()}
-            </div>
-          ))}
         </div>
       </div>
     </section>
   );
 }
+
+// ─── Testimonials (compact) ───────────────────────────────────────────────────
+function Testimonials() {
+  return (
+    <section className="container-lux py-20 md:py-24">
+      <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
+        <SectionHead eyebrow="Clients" title="What our clients say." className="max-w-xl" />
+        <Link to="/contact">
+          <LuxButton variant="ghost">Work with us <ArrowUpRight className="h-4 w-4" /></LuxButton>
+        </Link>
+      </div>
+      <div className="grid gap-6 md:grid-cols-3">
+        {TESTIMONIALS.map((t, i) => (
+          <Reveal key={t.name} delay={i * 0.09}>
+            <figure className="flex h-full flex-col rounded-2xl border border-border bg-white p-7 shadow-sm">
+              <Quote className="h-6 w-6 text-primary/40" />
+              <blockquote className="font-display mt-5 flex-1 text-lg leading-snug">
+                "{t.quote}"
+              </blockquote>
+              <figcaption className="mt-6 flex items-center gap-3 border-t border-border pt-5">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
+                  {t.name.split(" ").map((n) => n[0]).join("")}
+                </span>
+                <div>
+                  <p className="text-sm font-semibold">{t.name}</p>
+                  <p className="text-xs text-muted-foreground">{t.role}</p>
+                </div>
+              </figcaption>
+            </figure>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ─── Lepro Partnership ────────────────────────────────────────────────────────
+function LeproPartnership() {
+  return (
+    <section className="container-lux py-10">
+      <Reveal>
+        <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-r from-primary/5 via-blue-50 to-primary/5 px-8 py-10 md:px-14 md:py-12">
+          <div className="pointer-events-none absolute -right-12 -top-12 h-48 w-48 rounded-full bg-primary/10 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-blue-300/20 blur-2xl" />
+
+          <div className="relative flex flex-col items-center gap-6 text-center md:flex-row md:text-left">
+            {/* Icon badge */}
+            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border-2 border-primary/30 bg-white shadow-md">
+              <svg className="h-9 w-9 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+              </svg>
+            </div>
+
+            <div className="flex-1">
+              <p className="eyebrow text-primary mb-2">Official Partnership</p>
+              <h2 className="font-display text-3xl md:text-4xl leading-tight text-foreground">
+                Proudly Partnered With{" "}
+                <span className="text-primary">Lepro Trading Inc</span>
+              </h2>
+              <p className="mt-3 max-w-xl text-muted-foreground leading-relaxed">
+                A strategic alliance committed to delivering world-class technology solutions across Canada, UK and Pakistan — backed by trust, reliability and shared vision.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center gap-2 shrink-0">
+              <div className="flex gap-2">
+                {["CA", "UK", "PK"].map((c) => (
+                  <span key={c} className="rounded-lg border border-border bg-white px-3 py-1.5 font-mono text-xs font-semibold text-foreground shadow-sm">
+                    {c}
+                  </span>
+                ))}
+              </div>
+              <p className="font-mono text-xs text-muted-foreground">3 Countries · 1 Standard</p>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
 
 function Home() {
   return (
     <>
       <Hero />
       <TrustedBy />
-      <Intro />
-      <StatsBand />
+      <LeproPartnership />
       <FeaturedServices />
-      <TechStack />
-      <ProcessSection />
-      <Automation />
-      <AiSection />
-      <FeaturedWork />
-      <IndustriesStrip />
-      <CaseStudyPreview />
+      <StatsBand />
       <WhyUs />
+      <ProcessSection />
       <Testimonials />
-      <ClientLogos />
-      <GlobalReach />
       <CtaBand />
     </>
   );

@@ -1,0 +1,1 @@
+var e=`/assets/pos-portfolio-BXsnTOeV.jpeg`;export{e as t};

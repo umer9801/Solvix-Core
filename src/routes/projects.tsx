@@ -7,11 +7,12 @@ import { PROJECTS } from "@/lib/site-data";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
-import dashboard from "@/assets/dashboard.jpg";
+import webPortfolio from "@/assets/web-portfolio.png";
+import posPortfolio from "@/assets/pos-portfolio.jpeg";
 
 const images: Record<string, string> = {
-  "project-1": project1,
-  "project-2": project2,
+  "project-1": webPortfolio,
+  "project-2": posPortfolio,
   "project-3": project3,
 };
 
@@ -38,7 +39,29 @@ function Projects() {
         eyebrow="Work"
         title="Systems that carry real businesses."
         body="A small selection. Much of our work sits behind NDAs inside regulated industries — we'll walk you through it in person."
-      />
+        heroNote="Selected projects that show how we make complex operations simpler, safer and more profitable."
+      >
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          <div className="rounded-[2rem] border border-border bg-card p-8">
+            <p className="eyebrow">Real results</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              These case stories are chosen for the real business outcomes they delivered.
+            </p>
+          </div>
+          <div className="rounded-[2rem] border border-border bg-card p-8">
+            <p className="eyebrow">Regulated industries</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              We build systems for clients in sectors where reliability and compliance matter.
+            </p>
+          </div>
+          <div className="rounded-[2rem] border border-border bg-card p-8">
+            <p className="eyebrow">Talk-through</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Most of our work is shown privately — these examples are the ones we can share publicly.
+            </p>
+          </div>
+        </div>
+      </PageHero>
 
       <section className="container-lux pb-24">
         <div className="grid gap-6 lg:grid-cols-12">
