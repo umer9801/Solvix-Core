@@ -9,14 +9,15 @@ import heroAbstract from "@/assets/hero-abstract.jpg";
 export const Route = createFileRoute("/faqs")({
   head: () => ({
     meta: [
-      { title: "FAQs — Working with Solvix Core" },
+      { title: "FAQs — Web Development & AI Services Questions | Solvix Core" },
       {
         name: "description",
         content:
-          "How projects start, how we price, who owns the IP, how quickly we can begin, and what happens after launch — all your questions answered.",
+          "Answers to common questions about our web development, AI, automation and Shopify services — pricing in USD, project timelines, ownership, support and more.",
       },
-      { property: "og:title", content: "FAQs — Working with Solvix Core" },
-      { property: "og:description", content: "Straight answers to the questions we get most." },
+      { name: "keywords", content: "web development FAQ, AI service questions, how much does web development cost, Shopify developer price, automation service FAQ, tech agency questions" },
+      { property: "og:title", content: "FAQs — Your Questions Answered | Solvix Core" },
+      { property: "og:description", content: "Pricing, timelines, ownership and everything else you want to know before starting a project." },
     ],
   }),
   component: Faqs,

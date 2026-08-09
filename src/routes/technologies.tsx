@@ -8,14 +8,15 @@ import project3 from "@/assets/project-3.jpg";
 export const Route = createFileRoute("/technologies")({
   head: () => ({
     meta: [
-      { title: "Technologies — Our Stack | Solvix Core" },
+      { title: "Tech Stack — React, Next.js, AI, Shopify & More | Solvix Core" },
       {
         name: "description",
         content:
-          "The languages, frameworks, AI tooling and cloud infrastructure Solvix Core builds production systems with — serving Canada, UK and Pakistan.",
+          "Solvix Core builds with React, Next.js, TypeScript, Python, OpenAI, LangChain, n8n, Shopify, AWS and more — modern technologies chosen for performance and reliability.",
       },
-      { property: "og:title", content: "Technologies — Our Stack | Solvix Core" },
-      { property: "og:description", content: "Chosen for performance, reliability and long-term value." },
+      { name: "keywords", content: "React developer, Next.js development, TypeScript developer, Python AI developer, OpenAI developer, LangChain developer, Shopify developer, AWS cloud, n8n automation" },
+      { property: "og:title", content: "Our Technology Stack | Solvix Core" },
+      { property: "og:description", content: "React, Next.js, AI, Shopify and cloud technologies — modern stack for modern businesses." },
     ],
   }),
   component: Technologies,

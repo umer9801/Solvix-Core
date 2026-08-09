@@ -1,6 +1,6 @@
 export const COMPANY = {
   name: "Solvix Core",
-  tagline: "Premium technology solutions for modern businesses",
+  tagline: "Premium technology solutions, serving businesses globally",
   email: "info@solvixcore.com",
   emailAdmin: "admin@solvixcore.com",
   phone: {
@@ -271,8 +271,8 @@ export const CLIENTS = [
 export const PRICING = [
   {
     name: "Starter",
-    price: "$1,299",
-    cadence: "CAD / one-time",
+    price: "$299",
+    cadence: "USD / one-time",
     tagline: "Perfect for small businesses and startups.",
     features: [
       "Up to 5-page website",
@@ -285,8 +285,8 @@ export const PRICING = [
   },
   {
     name: "Professional",
-    price: "$3,999",
-    cadence: "CAD / one-time",
+    price: "$799",
+    cadence: "USD / one-time",
     tagline: "Our most popular solution for growing businesses.",
     features: [
       "Up to 15-page website",

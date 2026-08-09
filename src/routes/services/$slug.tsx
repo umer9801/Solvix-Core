@@ -421,10 +421,11 @@ export const Route = createFileRoute("/services/$slug")({
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: `${loaderData?.title ?? "Service"} — Solvix Core` },
-      { name: "description", content: loaderData?.blurb ?? "Solvix Core service." },
-      { property: "og:title", content: `${loaderData?.title ?? "Service"} — Solvix Core` },
-      { property: "og:description", content: loaderData?.blurb ?? "Solvix Core service." },
+      { title: `${loaderData?.title ?? "Service"} — Affordable Service Globally | Solvix Core` },
+      { name: "description", content: `${loaderData?.blurb ?? "Premium tech service"} — Affordable pricing in USD. Serving businesses globally. Get a free quote from Solvix Core.` },
+      { name: "keywords", content: `${loaderData?.title ?? "tech service"}, affordable ${loaderData?.title?.toLowerCase() ?? "service"}, hire ${loaderData?.title?.toLowerCase() ?? "developer"}, ${loaderData?.title?.toLowerCase() ?? "service"} price USD, Solvix Core` },
+      { property: "og:title", content: `${loaderData?.title ?? "Service"} | Solvix Core` },
+      { property: "og:description", content: `${loaderData?.blurb ?? "Solvix Core service."} Serving clients globally.` },
     ],
   }),
   component: ServiceDetail,

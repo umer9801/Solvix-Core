@@ -38,17 +38,18 @@ import homeHero from "@/assets/home-hero.PNG";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Solvix Core — Premium Tech Solutions | Canada, UK & Pakistan" },
+      { title: "Solvix Core — AI Solutions, Web Development & Automation | Serving Globally" },
       {
         name: "description",
         content:
-          "Solvix Core delivers AI solutions, automation, web development, Shopify stores and app development for businesses in Canada, UK and Pakistan.",
+          "Solvix Core delivers affordable AI solutions, web development, automation, Shopify stores and app development worldwide. Prices from $299 USD. Serving Canada, UK, Pakistan and globally.",
       },
-      { property: "og:title", content: "Solvix Core — Premium Tech Solutions" },
+      { name: "keywords", content: "AI solutions, web development agency, automation services, Shopify developer, affordable web design, cheap web development, web developer for hire, AI agency, n8n automation, LangChain developer, OpenAI integration, app development, SEO agency, digital marketing agency" },
+      { property: "og:title", content: "Solvix Core — AI Solutions, Web Development & Automation" },
       {
         property: "og:description",
         content:
-          "AI, automation, web development and e-commerce solutions for businesses in Canada, UK and Pakistan.",
+          "Premium AI, automation, web development and e-commerce services. Affordable pricing from $299 USD. Serving businesses globally.",
       },
     ],
   }),
@@ -95,7 +96,7 @@ function Hero() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
                 </span>
-                Now serving Canada · UK · Pakistan
+                Now serving globally — Canada · UK · Pakistan
               </div>
             </Reveal>
 

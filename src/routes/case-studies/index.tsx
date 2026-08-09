@@ -9,14 +9,15 @@ import dashboard from "@/assets/dashboard.jpg";
 export const Route = createFileRoute("/case-studies/")({
   head: () => ({
     meta: [
-      { title: "Case Studies — Real Results | Solvix Core" },
+      { title: "Case Studies — Real Client Results | Solvix Core" },
       {
         name: "description",
         content:
-          "Detailed accounts of how Solvix Core delivered measurable results for clients in Canada, UK and Pakistan.",
+          "Real case studies from Solvix Core — business website for UK accounting firm, POS system for grocery store, enterprise web platform. See the results we deliver globally.",
       },
-      { property: "og:title", content: "Case Studies | Solvix Core" },
-      { property: "og:description", content: "Challenge, approach and measured results." },
+      { name: "keywords", content: "web development case study, POS system case study, UK business website, grocery store software, AI platform results, tech agency portfolio" },
+      { property: "og:title", content: "Case Studies — Real Results | Solvix Core" },
+      { property: "og:description", content: "Business website, POS system and AI platform case studies with real measurable outcomes." },
     ],
   }),
   component: CaseStudies,

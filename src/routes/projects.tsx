@@ -18,14 +18,15 @@ const images: Record<string, string> = {
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Selected Work | Solvix Core" },
+      { title: "Our Work — Web, AI & POS Projects | Solvix Core" },
       {
         name: "description",
         content:
-          "AI platforms, Shopify stores, web applications and automation systems delivered by Solvix Core for clients in Canada, UK and Pakistan.",
+          "See real projects delivered by Solvix Core — business websites, point of sale systems, AI platforms and web applications for clients in Canada, UK, Pakistan and globally.",
       },
-      { property: "og:title", content: "Selected Work | Solvix Core" },
-      { property: "og:description", content: "AI, e-commerce, automation and web projects." },
+      { name: "keywords", content: "web development portfolio, AI project examples, POS system project, business website examples, Solvix Core portfolio, web developer work" },
+      { property: "og:title", content: "Our Work — Real Projects, Real Results | Solvix Core" },
+      { property: "og:description", content: "Business websites, POS systems and AI platforms delivered for global clients." },
     ],
   }),
   component: Projects,

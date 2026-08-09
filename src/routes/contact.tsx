@@ -9,14 +9,15 @@ import dashboard from "@/assets/dashboard.jpg";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Solvix Core — Start a Project" },
+      { title: "Contact Solvix Core — Hire AI & Web Development Experts Globally" },
       {
         name: "description",
         content:
-          "Contact Solvix Core for AI solutions, web development, automation and Shopify services. Serving Canada, UK and Pakistan via WhatsApp and email.",
+          "Contact Solvix Core to hire expert developers for AI, web development, automation and Shopify projects. Serving clients globally. Fast response within 24 hours.",
       },
-      { property: "og:title", content: "Contact Solvix Core — Start a Project" },
-      { property: "og:description", content: "Tell us about your project — we respond within 24 hours." },
+      { name: "keywords", content: "hire web developer, contact AI agency, web development quote, Shopify developer for hire, affordable web design, hire automation developer" },
+      { property: "og:title", content: "Contact Solvix Core — Get a Free Quote" },
+      { property: "og:description", content: "Get a free project quote. AI, web development, automation and Shopify services worldwide. Response within 24 hours." },
     ],
   }),
   component: Contact,

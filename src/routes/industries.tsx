@@ -6,14 +6,15 @@ import { INDUSTRIES } from "@/lib/site-data";
 export const Route = createFileRoute("/industries")({
   head: () => ({
     meta: [
-      { title: "Industries We Serve | Solvix Core" },
+      { title: "Industries We Serve Globally | Solvix Core" },
       {
         name: "description",
         content:
-          "E-commerce, healthcare, finance, real estate, education and more — industries where Solvix Core delivers proven results in Canada, UK and Pakistan.",
+          "E-commerce, healthcare, finance, real estate, education, logistics and more — Solvix Core delivers proven tech solutions for businesses in every industry worldwide.",
       },
-      { property: "og:title", content: "Industries We Serve | Solvix Core" },
-      { property: "og:description", content: "Sectors where we deliver proven results." },
+      { name: "keywords", content: "e-commerce web development, healthcare software, fintech development, real estate website, education platform, logistics software, retail POS system" },
+      { property: "og:title", content: "Industries We Serve Globally | Solvix Core" },
+      { property: "og:description", content: "Technology solutions for every industry — e-commerce, healthcare, finance, real estate and more." },
     ],
   }),
   component: Industries,

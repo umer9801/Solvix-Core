@@ -11,17 +11,15 @@ import heroAbstract from "@/assets/hero-abstract.jpg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Solvix Core — Premium Tech Solutions for Canada, UK & Pakistan" },
+      { title: "About Solvix Core — AI & Web Development Agency Serving Globally" },
       {
         name: "description",
         content:
-          "Learn about Solvix Core — our mission, team, values and the story behind our premium technology solutions serving Canada, UK and Pakistan.",
+          "Solvix Core is a global technology agency delivering AI solutions, web development, automation and Shopify services. Based in Canada, UK and Pakistan — serving clients worldwide.",
       },
-      { property: "og:title", content: "About Solvix Core" },
-      {
-        property: "og:description",
-        content: "Our story, values, team and the technology that powers our clients' success.",
-      },
+      { name: "keywords", content: "about Solvix Core, AI agency, web development company, technology agency Canada, UK web developer, Pakistan software company, global tech agency" },
+      { property: "og:title", content: "About Solvix Core — AI & Web Development Agency" },
+      { property: "og:description", content: "Global technology agency delivering AI, web development, automation and Shopify services. Serving clients worldwide." },
     ],
   }),
   component: About,

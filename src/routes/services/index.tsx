@@ -11,17 +11,15 @@ const GROUPS = ["All", "Build", "Design", "Intelligence", "Platforms", "Infrastr
 export const Route = createFileRoute("/services/")({
   head: () => ({
     meta: [
-      { title: "Services — AI, Web, Shopify, Automation & More | Solvix Core" },
+      { title: "Services — AI Solutions, Web Dev, Shopify & Automation | Solvix Core" },
       {
         name: "description",
         content:
-          "Nine core services across AI, automation, web development, Shopify, app development and marketing — delivered for businesses in Canada, UK and Pakistan.",
+          "AI solutions, web development, Shopify store design, n8n automation, LangChain, OpenAI integration, mobile apps and SEO — all from $299 USD. Serving businesses globally.",
       },
-      { property: "og:title", content: "Services — AI, Web, Shopify & More | Solvix Core" },
-      {
-        property: "og:description",
-        content: "Twenty-two capabilities, one delivery standard.",
-      },
+      { name: "keywords", content: "AI solutions service, web development service, Shopify store design, n8n automation service, LangChain integration, OpenAI integration, mobile app development, SEO marketing service, affordable tech services" },
+      { property: "og:title", content: "Services — AI, Web, Shopify & Automation | Solvix Core" },
+      { property: "og:description", content: "Nine premium tech services from $299 USD. Serving businesses globally." },
     ],
   }),
   component: Services,
