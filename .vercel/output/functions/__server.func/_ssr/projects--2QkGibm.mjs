@@ -1,16 +1,17 @@
 import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as PROJECTS, b as Reveal } from "./primitives-DL1IYeHP.mjs";
+import { t as project_3_default } from "./project-3-ESm6Vkz6.mjs";
 import { v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { j as ArrowUpRight } from "../_libs/lucide-react.mjs";
-import { t as project_3_default } from "./project-3-ESm6Vkz6.mjs";
+import { i as CtaBand } from "./router-BDz_1BNs.mjs";
 import { t as PageHero } from "./PageHero-CDJ9mRNv.mjs";
-import { r as CtaBand } from "./router-CUTUSDtf.mjs";
+import { t as web_portfolio_default } from "./web-portfolio-ItcxmmE-.mjs";
 import { t as pos_portfolio_default } from "./pos-portfolio-BywQPkOO.mjs";
 import { t as office_team_default } from "./office-team-D7LZnJkD.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/projects-B3OfMl6M.js
+//#region node_modules/.nitro/vite/services/ssr/assets/projects--2QkGibm.js
 var import_jsx_runtime = require_jsx_runtime();
 var images = {
-	"project-1": "/assets/web-portfolio-Du-InA2C.png",
+	"project-1": web_portfolio_default,
 	"project-2": pos_portfolio_default,
 	"project-3": project_3_default
 };

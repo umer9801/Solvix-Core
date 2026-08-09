@@ -3,13 +3,13 @@ import { PageHero } from "@/components/site/PageHero";
 import { CtaBand } from "@/components/site/Footer";
 import { ParallaxImage, Reveal, SectionHead } from "@/components/site/primitives";
 import { CASE_STUDIES, PROJECTS } from "@/lib/site-data";
-import project1 from "@/assets/project-1.jpg";
-import project2 from "@/assets/project-2.jpg";
+import webPortfolio from "@/assets/web-portfolio.png";
+import posPortfolio from "@/assets/pos-portfolio.jpeg";
 import project3 from "@/assets/project-3.jpg";
 
 const images: Record<string, string> = {
-  "project-1": project1,
-  "project-2": project2,
+  "project-1": webPortfolio,
+  "project-2": posPortfolio,
   "project-3": project3,
 };
 
@@ -43,7 +43,6 @@ function CaseStudy() {
         eyebrow={study.client}
         title={study.title}
         body={study.challenge}
-        heroNote="This engagement is described in full — the problem, our approach, and the measurable business result."
         meta={study.results.map((r) => ({ k: r.k, v: r.v }))}
       >
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
@@ -65,7 +64,7 @@ function CaseStudy() {
       {project ? (
         <section className="container-lux pb-24">
           <ParallaxImage
-            src={images[project.image] ?? project1}
+            src={images[project.image] ?? webPortfolio}
             alt={project.title}
             className="aspect-[21/9] rounded-[2.5rem]"
           />

@@ -2,12 +2,11 @@ import { i as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react, t as QueryClientProvider } from "../_libs/react+tanstack__react-query.mjs";
 import { a as useScroll, n as useSpring, s as AnimatePresence } from "../_libs/framer-motion+[...].mjs";
 import { t as motion } from "../_libs/motion.mjs";
-import { a as COMPANY, f as NAV_LINKS, j as cn, n as Blobs, u as Magnetic, x as SERVICES } from "./primitives-DL1IYeHP.mjs";
+import { O as TextReveal, _ as PROJECTS, a as COMPANY, b as Reveal, f as NAV_LINKS, j as cn, n as Blobs, p as OFFICES, r as CASE_STUDIES, u as Magnetic, x as SERVICES } from "./primitives-DL1IYeHP.mjs";
 import { R as notFound, _ as createRootRouteWithContext, d as useRouterState, g as createFileRoute, h as lazyRouteComponent, l as Scripts, m as Outlet, p as createRouter, u as HeadContent, v as Link, y as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
-import { A as ArrowUp, E as CalendarDays, d as Search, g as Menu, j as ArrowUpRight, n as X } from "../_libs/lucide-react.mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
-import { a as logo_default, i as Footer, n as Route$13 } from "./router-CUTUSDtf.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-CUTUSDtf.js
+import { A as ArrowUp, E as CalendarDays, S as Github, a as Twitter, b as Instagram, d as Search, g as Menu, j as ArrowUpRight, n as X, y as Linkedin } from "../_libs/lucide-react.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/router-BDz_1BNs.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var __defProp = Object.defineProperty;
@@ -40,6 +39,7 @@ function reportLovableError(error, context = {}) {
 		filename: window.location.pathname
 	});
 }
+var logo_default = "/assets/logo-DixoYNo1.PNG";
 var GROUPS = [
 	"Build",
 	"Design",
@@ -380,6 +380,216 @@ function Nav() {
 		}) : null })
 	] });
 }
+function CtaBand({ eyebrow = "Ready to start?", title = "Let us build something great together.", body = "Tell us about your project — AI, automation, web development or Shopify. We serve Canada, UK and Pakistan and respond within 24 hours." }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+		className: "container-lux py-24 md:py-32",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "grain relative overflow-hidden rounded-[2.5rem] bg-ink px-8 py-20 text-background md:px-16 md:py-28",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "animate-hue-drift pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary/35 blur-3xl" }),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "animate-hue-drift pointer-events-none absolute -bottom-32 -left-16 h-80 w-80 rounded-full bg-violet/25 blur-3xl",
+					style: { animationDelay: "-6s" }
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "relative max-w-3xl",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-center gap-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "h-px w-8 bg-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "eyebrow text-background/60",
+								children: eyebrow
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TextReveal, {
+							text: title,
+							className: "display-lg mt-6"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+							delay: .15,
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mt-6 max-w-xl text-lg leading-relaxed text-background/70",
+								children: body
+							})
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+							delay: .25,
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "mt-10 flex flex-wrap items-center gap-4",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Magnetic, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+									to: "/contact",
+									className: "group inline-flex items-center gap-2 rounded-full bg-background px-7 py-3.5 text-sm font-semibold text-foreground transition-transform hover:-translate-y-0.5",
+									children: ["Start a conversation", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, { className: "h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" })]
+								}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+									to: "/case-studies",
+									className: "inline-flex items-center gap-2 rounded-full border border-background/25 px-7 py-3.5 text-sm font-semibold text-background/85 transition-colors hover:border-background/60",
+									children: "Read the case studies"
+								})]
+							})
+						})
+					]
+				})
+			]
+		})
+	});
+}
+function Footer() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("footer", {
+		className: "relative overflow-hidden border-t border-border bg-surface",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "container-lux py-20",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "grid gap-14 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-center gap-2.5",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "flex h-11 w-11 overflow-hidden rounded-xl bg-white p-1 shadow-sm",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+									src: logo_default,
+									alt: "Solvix Core Logo",
+									className: "h-full w-full object-contain"
+								})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "font-display text-xl",
+								children: COMPANY.name
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+							className: "mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground",
+							children: [COMPANY.tagline, ". Proudly serving Canada, UK and Pakistan — Partnered with Lepro Trading Inc."]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "mt-7 flex gap-2",
+							children: [
+								Twitter,
+								Linkedin,
+								Github,
+								Instagram
+							].map((Icon, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+								href: "#",
+								"aria-label": "Social link",
+								className: "flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:border-primary hover:text-primary",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, { className: "h-4 w-4" })
+							}, i))
+						})
+					] }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "eyebrow",
+						children: "Company"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+						className: "mt-5 space-y-2.5",
+						children: NAV_LINKS.map((l) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+							to: l.to,
+							className: "text-sm text-foreground/70 transition-colors hover:text-primary",
+							children: l.label
+						}) }, l.to))
+					})] }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "eyebrow",
+						children: "Capabilities"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+						className: "mt-5 space-y-2.5",
+						children: SERVICES.slice(0, 9).map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+							to: `/services/${s.slug}`,
+							className: "text-sm text-foreground/70 transition-colors hover:text-primary",
+							children: s.title
+						}) }, s.slug))
+					})] }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "eyebrow",
+							children: "Newsletter"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "mt-5 text-sm leading-relaxed text-muted-foreground",
+							children: "One considered essay a month on building software worth keeping."
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+							onSubmit: (e) => e.preventDefault(),
+							className: "mt-5 flex items-center gap-2 rounded-full border border-border bg-card p-1.5 pl-5",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+								type: "email",
+								required: true,
+								placeholder: "you@company.com",
+								className: "w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								className: "flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink text-background transition-transform hover:-translate-y-0.5",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, { className: "h-4 w-4" })
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "mt-8 space-y-3",
+							children: [OFFICES.map((o) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "text-sm",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "font-semibold",
+										children: o.city
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-muted-foreground",
+										children: " — "
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+										href: `https://wa.me/${o.phone.replace(/[^0-9]/g, "")}`,
+										target: "_blank",
+										rel: "noopener noreferrer",
+										className: "text-muted-foreground hover:text-primary transition-colors",
+										children: o.phone
+									})
+								]
+							}, o.city)), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "mt-3 space-y-1 text-sm text-muted-foreground",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+									href: `mailto:${COMPANY.email}`,
+									className: "block hover:text-primary transition-colors",
+									children: COMPANY.email
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+									href: `mailto:${COMPANY.emailAdmin}`,
+									className: "block hover:text-primary transition-colors",
+									children: COMPANY.emailAdmin
+								})]
+							})]
+						})
+					] })
+				]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "mt-16 flex flex-col gap-4 border-t border-border pt-8 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
+					"© ",
+					(/* @__PURE__ */ new Date()).getFullYear(),
+					" ",
+					COMPANY.name,
+					" Studio. All rights reserved."
+				] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex gap-6",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "#",
+							className: "transition-colors hover:text-foreground",
+							children: "Privacy"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "#",
+							className: "transition-colors hover:text-foreground",
+							children: "Terms"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: "#",
+							className: "transition-colors hover:text-foreground",
+							children: "Security"
+						})
+					]
+				})]
+			})]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+			className: "font-display pointer-events-none select-none whitespace-nowrap px-4 pb-6 text-center text-[18vw] leading-[0.8] tracking-tighter text-foreground/[0.045]",
+			children: COMPANY.name
+		})]
+	});
+}
 function SmoothScroll() {
 	(0, import_react.useEffect)(() => {
 		let lenis = null;
@@ -616,7 +826,7 @@ function ErrorComponent({ error, reset }) {
 		})
 	});
 }
-var Route$12 = createRootRouteWithContext()({
+var Route$13 = createRootRouteWithContext()({
 	head: () => ({
 		meta: [
 			{ charSet: "utf-8" },
@@ -772,7 +982,7 @@ function RootShell({ children }) {
 	});
 }
 function RootComponent() {
-	const { queryClient } = Route$12.useRouteContext();
+	const { queryClient } = Route$13.useRouteContext();
 	const pathname = useRouterState({ select: (s) => s.location.pathname });
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(QueryClientProvider, {
 		client: queryClient,
@@ -813,8 +1023,8 @@ function RootComponent() {
 		]
 	});
 }
-var $$splitComponentImporter$11 = () => import("./routes-BOx_dP-d.mjs");
-var Route$11 = createFileRoute("/")({
+var $$splitComponentImporter$12 = () => import("./routes-Cz389__i.mjs");
+var Route$12 = createFileRoute("/")({
 	head: () => ({ meta: [
 		{ title: "Solvix Core — AI Solutions, Web Development & Automation | Serving Globally" },
 		{
@@ -834,10 +1044,10 @@ var Route$11 = createFileRoute("/")({
 			content: "Premium AI, automation, web development and e-commerce services. Affordable pricing from $299 USD. Serving businesses globally."
 		}
 	] }),
-	component: lazyRouteComponent($$splitComponentImporter$11, "component")
+	component: lazyRouteComponent($$splitComponentImporter$12, "component")
 });
-var $$splitComponentImporter$10 = () => import("./about-CBJtmW3t.mjs");
-var Route$10 = createFileRoute("/about")({
+var $$splitComponentImporter$11 = () => import("./about-D-F7icVS.mjs");
+var Route$11 = createFileRoute("/about")({
 	head: () => ({ meta: [
 		{ title: "About Solvix Core — AI & Web Development Agency Serving Globally" },
 		{
@@ -857,10 +1067,10 @@ var Route$10 = createFileRoute("/about")({
 			content: "Global technology agency delivering AI, web development, automation and Shopify services. Serving clients worldwide."
 		}
 	] }),
-	component: lazyRouteComponent($$splitComponentImporter$10, "component")
+	component: lazyRouteComponent($$splitComponentImporter$11, "component")
 });
-var $$splitComponentImporter$9 = () => import("./blog-aVypjhOn.mjs");
-var Route$9 = createFileRoute("/blog")({
+var $$splitComponentImporter$10 = () => import("./blog-CdqLUbyv.mjs");
+var Route$10 = createFileRoute("/blog")({
 	head: () => ({ meta: [
 		{ title: "Blog — Tech Insights | Solvix Core" },
 		{
@@ -876,10 +1086,10 @@ var Route$9 = createFileRoute("/blog")({
 			content: "Practical tech insights for modern businesses."
 		}
 	] }),
-	component: lazyRouteComponent($$splitComponentImporter$9, "component")
+	component: lazyRouteComponent($$splitComponentImporter$10, "component")
 });
-var $$splitComponentImporter$8 = () => import("./careers-Dp8SFUn_.mjs");
-var Route$8 = createFileRoute("/careers")({
+var $$splitComponentImporter$9 = () => import("./careers-6rqEctvr.mjs");
+var Route$9 = createFileRoute("/careers")({
 	head: () => ({ meta: [
 		{ title: "Careers — Join Solvix Core" },
 		{
@@ -895,10 +1105,10 @@ var Route$8 = createFileRoute("/careers")({
 			content: "Remote-first roles. Real impact. Competitive pay."
 		}
 	] }),
-	component: lazyRouteComponent($$splitComponentImporter$8, "component")
+	component: lazyRouteComponent($$splitComponentImporter$9, "component")
 });
-var $$splitComponentImporter$7 = () => import("./contact-B5f-TAsq.mjs");
-var Route$7 = createFileRoute("/contact")({
+var $$splitComponentImporter$8 = () => import("./contact-B5f-TAsq.mjs");
+var Route$8 = createFileRoute("/contact")({
 	head: () => ({ meta: [
 		{ title: "Contact Solvix Core — Hire AI & Web Development Experts Globally" },
 		{
@@ -918,10 +1128,10 @@ var Route$7 = createFileRoute("/contact")({
 			content: "Get a free project quote. AI, web development, automation and Shopify services worldwide. Response within 24 hours."
 		}
 	] }),
-	component: lazyRouteComponent($$splitComponentImporter$7, "component")
+	component: lazyRouteComponent($$splitComponentImporter$8, "component")
 });
-var $$splitComponentImporter$6 = () => import("./faqs-CckKaeLC.mjs");
-var Route$6 = createFileRoute("/faqs")({
+var $$splitComponentImporter$7 = () => import("./faqs-Dt4bL7bz.mjs");
+var Route$7 = createFileRoute("/faqs")({
 	head: () => ({ meta: [
 		{ title: "FAQs — Web Development & AI Services Questions | Solvix Core" },
 		{
@@ -941,10 +1151,10 @@ var Route$6 = createFileRoute("/faqs")({
 			content: "Pricing, timelines, ownership and everything else you want to know before starting a project."
 		}
 	] }),
-	component: lazyRouteComponent($$splitComponentImporter$6, "component")
+	component: lazyRouteComponent($$splitComponentImporter$7, "component")
 });
-var $$splitComponentImporter$5 = () => import("./industries-Cah2ABPb.mjs");
-var Route$5 = createFileRoute("/industries")({
+var $$splitComponentImporter$6 = () => import("./industries-moaEgWjh.mjs");
+var Route$6 = createFileRoute("/industries")({
 	head: () => ({ meta: [
 		{ title: "Industries We Serve Globally | Solvix Core" },
 		{
@@ -964,10 +1174,10 @@ var Route$5 = createFileRoute("/industries")({
 			content: "Technology solutions for every industry — e-commerce, healthcare, finance, real estate and more."
 		}
 	] }),
-	component: lazyRouteComponent($$splitComponentImporter$5, "component")
+	component: lazyRouteComponent($$splitComponentImporter$6, "component")
 });
-var $$splitComponentImporter$4 = () => import("./projects-B3OfMl6M.mjs");
-var Route$4 = createFileRoute("/projects")({
+var $$splitComponentImporter$5 = () => import("./projects--2QkGibm.mjs");
+var Route$5 = createFileRoute("/projects")({
 	head: () => ({ meta: [
 		{ title: "Our Work — Web, AI & POS Projects | Solvix Core" },
 		{
@@ -987,10 +1197,10 @@ var Route$4 = createFileRoute("/projects")({
 			content: "Business websites, POS systems and AI platforms delivered for global clients."
 		}
 	] }),
-	component: lazyRouteComponent($$splitComponentImporter$4, "component")
+	component: lazyRouteComponent($$splitComponentImporter$5, "component")
 });
-var $$splitComponentImporter$3 = () => import("./technologies-DuTPUON2.mjs");
-var Route$3 = createFileRoute("/technologies")({
+var $$splitComponentImporter$4 = () => import("./technologies-DwI5xghB.mjs");
+var Route$4 = createFileRoute("/technologies")({
 	head: () => ({ meta: [
 		{ title: "Tech Stack — React, Next.js, AI, Shopify & More | Solvix Core" },
 		{
@@ -1010,10 +1220,10 @@ var Route$3 = createFileRoute("/technologies")({
 			content: "React, Next.js, AI, Shopify and cloud technologies — modern stack for modern businesses."
 		}
 	] }),
-	component: lazyRouteComponent($$splitComponentImporter$3, "component")
+	component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-var $$splitComponentImporter$2 = () => import("./case-studies-BdZqMFBa.mjs");
-var Route$2 = createFileRoute("/case-studies/")({
+var $$splitComponentImporter$3 = () => import("./case-studies-DIgUslMk.mjs");
+var Route$3 = createFileRoute("/case-studies/")({
 	head: () => ({ meta: [
 		{ title: "Case Studies — Real Client Results | Solvix Core" },
 		{
@@ -1033,9 +1243,36 @@ var Route$2 = createFileRoute("/case-studies/")({
 			content: "Business website, POS system and AI platform case studies with real measurable outcomes."
 		}
 	] }),
+	component: lazyRouteComponent($$splitComponentImporter$3, "component")
+});
+var $$splitComponentImporter$2 = () => import("../_slug-Bo_1ibyG.mjs");
+var Route$2 = createFileRoute("/case-studies/$slug")({
+	loader: ({ params }) => {
+		const study = CASE_STUDIES.find((c) => c.slug === params.slug);
+		if (!study) throw notFound();
+		return {
+			study,
+			project: PROJECTS.find((p) => p.slug === params.slug)
+		};
+	},
+	head: ({ loaderData }) => ({ meta: [
+		{ title: `${loaderData?.study.title ?? "Case study"} — Solvix Core` },
+		{
+			name: "description",
+			content: loaderData?.study.challenge ?? "Solvix Core case study."
+		},
+		{
+			property: "og:title",
+			content: `${loaderData?.study.title ?? "Case study"} — Solvix Core`
+		},
+		{
+			property: "og:description",
+			content: loaderData?.study.approach ?? ""
+		}
+	] }),
 	component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
-var $$splitComponentImporter$1 = () => import("./services-zwFgym1T.mjs");
+var $$splitComponentImporter$1 = () => import("./services-c4KdHqne.mjs");
 var Route$1 = createFileRoute("/services/")({
 	head: () => ({ meta: [
 		{ title: "Services — AI Solutions, Web Dev, Shopify & Automation | Solvix Core" },
@@ -1058,7 +1295,7 @@ var Route$1 = createFileRoute("/services/")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-var $$splitComponentImporter = () => import("../_slug-jT3_z95k.mjs");
+var $$splitComponentImporter = () => import("../_slug-CA67s5mM.mjs");
 var Route = createFileRoute("/services/$slug")({
 	loader: ({ params }) => {
 		const service = SERVICES.find((s) => s.slug === params.slug);
@@ -1086,65 +1323,65 @@ var Route = createFileRoute("/services/$slug")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter, "component")
 });
-var IndexRoute = Route$11.update({
+var IndexRoute = Route$12.update({
 	id: "/",
 	path: "/",
-	getParentRoute: () => Route$12
+	getParentRoute: () => Route$13
 });
-var AboutRoute = Route$10.update({
+var AboutRoute = Route$11.update({
 	id: "/about",
 	path: "/about",
-	getParentRoute: () => Route$12
+	getParentRoute: () => Route$13
 });
-var BlogRoute = Route$9.update({
+var BlogRoute = Route$10.update({
 	id: "/blog",
 	path: "/blog",
-	getParentRoute: () => Route$12
+	getParentRoute: () => Route$13
 });
-var CareersRoute = Route$8.update({
+var CareersRoute = Route$9.update({
 	id: "/careers",
 	path: "/careers",
-	getParentRoute: () => Route$12
+	getParentRoute: () => Route$13
 });
-var ContactRoute = Route$7.update({
+var ContactRoute = Route$8.update({
 	id: "/contact",
 	path: "/contact",
-	getParentRoute: () => Route$12
+	getParentRoute: () => Route$13
 });
-var FaqsRoute = Route$6.update({
+var FaqsRoute = Route$7.update({
 	id: "/faqs",
 	path: "/faqs",
-	getParentRoute: () => Route$12
+	getParentRoute: () => Route$13
 });
-var IndustriesRoute = Route$5.update({
+var IndustriesRoute = Route$6.update({
 	id: "/industries",
 	path: "/industries",
-	getParentRoute: () => Route$12
+	getParentRoute: () => Route$13
 });
-var ProjectsRoute = Route$4.update({
+var ProjectsRoute = Route$5.update({
 	id: "/projects",
 	path: "/projects",
-	getParentRoute: () => Route$12
+	getParentRoute: () => Route$13
 });
-var TechnologiesRoute = Route$3.update({
+var TechnologiesRoute = Route$4.update({
 	id: "/technologies",
 	path: "/technologies",
-	getParentRoute: () => Route$12
+	getParentRoute: () => Route$13
 });
-var CaseStudiesIndexRoute = Route$2.update({
+var CaseStudiesIndexRoute = Route$3.update({
 	id: "/case-studies/",
 	path: "/case-studies/",
-	getParentRoute: () => Route$12
+	getParentRoute: () => Route$13
 });
-var CaseStudiesSlugRoute = Route$13.update({
+var CaseStudiesSlugRoute = Route$2.update({
 	id: "/case-studies/$slug",
 	path: "/case-studies/$slug",
-	getParentRoute: () => Route$12
+	getParentRoute: () => Route$13
 });
 var ServicesIndexRoute = Route$1.update({
 	id: "/services/",
 	path: "/services/",
-	getParentRoute: () => Route$12
+	getParentRoute: () => Route$13
 });
 var rootRouteChildren = {
 	IndexRoute,
@@ -1160,12 +1397,12 @@ var rootRouteChildren = {
 	ServicesSlugRoute: Route.update({
 		id: "/services/$slug",
 		path: "/services/$slug",
-		getParentRoute: () => Route$12
+		getParentRoute: () => Route$13
 	}),
 	CaseStudiesIndexRoute,
 	ServicesIndexRoute
 };
-var routeTree = Route$12._addFileChildren(rootRouteChildren)._addFileTypes();
+var routeTree = Route$13._addFileChildren(rootRouteChildren)._addFileTypes();
 var router_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
 var getRouter = () => {
 	const queryClient = new QueryClient();
@@ -1177,4 +1414,4 @@ var getRouter = () => {
 	});
 };
 //#endregion
-export { getRouter as n, router_exports as r, Route as t };
+export { CtaBand as i, Route as n, Route$2 as r, router_exports as t };

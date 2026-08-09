@@ -1,23 +1,24 @@
 import { n as require_jsx_runtime } from "./_libs/react+tanstack__react-query.mjs";
 import { C as SectionHead, b as Reveal, v as ParallaxImage } from "./_ssr/primitives-DL1IYeHP.mjs";
 import { t as project_3_default } from "./_ssr/project-3-ESm6Vkz6.mjs";
+import { i as CtaBand, r as Route$2 } from "./_ssr/router-BDz_1BNs.mjs";
 import { t as PageHero } from "./_ssr/PageHero-CDJ9mRNv.mjs";
-import { n as Route, r as CtaBand } from "./_ssr/router-CUTUSDtf.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/_slug-Dy4-PiBK.js
+import { t as web_portfolio_default } from "./_ssr/web-portfolio-ItcxmmE-.mjs";
+import { t as pos_portfolio_default } from "./_ssr/pos-portfolio-BywQPkOO.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/_slug-Bo_1ibyG.js
 var import_jsx_runtime = require_jsx_runtime();
 var images = {
-	"project-1": "/assets/project-1-C_NWJ2AJ.jpg",
-	"project-2": "/assets/project-2-Bm5nz6lP.jpg",
+	"project-1": web_portfolio_default,
+	"project-2": pos_portfolio_default,
 	"project-3": project_3_default
 };
 function CaseStudy() {
-	const { study, project } = Route.useLoaderData();
+	const { study, project } = Route$2.useLoaderData();
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PageHero, {
 			eyebrow: study.client,
 			title: study.title,
 			body: study.challenge,
-			heroNote: "This engagement is described in full — the problem, our approach, and the measurable business result.",
 			meta: study.results.map((r) => ({
 				k: r.k,
 				v: r.v
@@ -48,7 +49,7 @@ function CaseStudy() {
 		project ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 			className: "container-lux pb-24",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ParallaxImage, {
-				src: images[project.image] ?? "/assets/project-1-C_NWJ2AJ.jpg",
+				src: images[project.image] ?? "/assets/web-portfolio-Du-InA2C.png",
 				alt: project.title,
 				className: "aspect-[21/9] rounded-[2.5rem]"
 			})

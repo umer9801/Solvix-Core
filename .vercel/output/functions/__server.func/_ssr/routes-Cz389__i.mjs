@@ -5,8 +5,8 @@ import { t as motion } from "../_libs/motion.mjs";
 import { C as SectionHead, E as TESTIMONIALS, O as TextReveal, S as STATS, b as Reveal, d as Marquee, g as PROCESS, i as CLIENTS, l as LuxButton, n as Blobs, o as Counter, w as SpotlightCard, x as SERVICES } from "./primitives-DL1IYeHP.mjs";
 import { v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { C as Gauge, D as Brain, M as ArrowRight, O as Bot, c as Smartphone, f as Quote, i as Video, j as ArrowUpRight, l as ShoppingBag, r as Workflow, t as Zap, w as CircleCheckBig } from "../_libs/lucide-react.mjs";
-import { r as CtaBand } from "./router-CUTUSDtf.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-BOx_dP-d.js
+import { i as CtaBand } from "./router-BDz_1BNs.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-Cz389__i.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var home_hero_default = "/assets/home-hero-C7z52xSX.PNG";

@@ -1,96 +1,11 @@
-import { n as __exportAll } from "../_runtime.mjs";
+import "../_runtime.mjs";
 import { n as toResponse, t as H3Event } from "../_libs/h3-v2+rou3+srvx.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { A as invariant, D as resolveManifestCssLink, E as resolveManifestAssetLink, F as isResolvedRedirect, I as rootRouteId, L as isNotFound, O as _getRenderedMatches, P as isRedirect, T as getStylesheetHref, a as isSsrResponse, c as stripSsrResponseBody, f as RouterProvider, i as disposeSsrResponseDetached, k as executeRewriteInput, n as bindSsrResponseToRequest, o as normalizeSsrResponse, r as defineHandlerCallback, s as replaceSsrResponse, t as renderRouterToStream, w as getScriptPreloadAttrs } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as createMemoryHistory } from "../_libs/tanstack__history.mjs";
 import { a as getOrigin, c as createSerializationAdapter, d as toCrossJSONAsync, f as toCrossJSONStream, i as getNormalizedURL, l as makeSerovalPlugin, n as mergeHeaders, o as defaultSerovalPlugins, r as attachRouterServerSsrUtils, s as createRawStreamRPCPlugin, t as waitForRequest, u as fromJSON } from "../_libs/@tanstack/router-core+[...].mjs";
+import { t as createCsrfMiddleware } from "./createCsrfMiddleware-B2To0gPJ.mjs";
 import { AsyncLocalStorage } from "node:async_hooks";
-//#region node_modules/.nitro/vite/services/ssr/assets/createCsrfMiddleware-B2To0gPJ.js
-var createMiddleware = (options, __opts) => {
-	const resolvedOptions = {
-		type: "request",
-		...__opts || options
-	};
-	const setValidator = (validator) => {
-		return createMiddleware({}, Object.assign(resolvedOptions, {
-			validator,
-			inputValidator: validator
-		}));
-	};
-	return {
-		options: resolvedOptions,
-		middleware: (middleware) => {
-			return createMiddleware({}, Object.assign(resolvedOptions, { middleware }));
-		},
-		validator: setValidator,
-		inputValidator: setValidator,
-		client: (client) => {
-			return createMiddleware({}, Object.assign(resolvedOptions, { client }));
-		},
-		server: (server) => {
-			return createMiddleware({}, Object.assign(resolvedOptions, { server }));
-		}
-	};
-};
-var innerCreateCsrfMiddleware = (opts = {}) => {
-	return createMiddleware().server(async (ctx) => {
-		const csrfCtx = ctx;
-		if (opts.filter && !await opts.filter(csrfCtx)) return ctx.next();
-		if (await isCsrfRequestAllowed(opts, csrfCtx)) return ctx.next();
-		return getFailureResponse(opts, csrfCtx);
-	});
-};
-var createCsrfMiddleware = innerCreateCsrfMiddleware;
-async function isCsrfRequestAllowed(opts, ctx) {
-	const result = await getCsrfRequestValidationResult(opts, ctx);
-	return result === true || result === void 0 && opts.allowRequestsWithoutOriginCheck === true;
-}
-async function getCsrfRequestValidationResult(opts, ctx) {
-	const fetchSite = ctx.request.headers.get("Sec-Fetch-Site");
-	if (fetchSite !== null) return matchValue(opts.secFetchSite ?? "same-origin", fetchSite, ctx);
-	const origin = ctx.request.headers.get("Origin");
-	if (origin !== null) {
-		if (opts.origin) return matchValue(opts.origin, origin, ctx);
-		return origin === new URL(ctx.request.url).origin;
-	}
-	const referer = ctx.request.headers.get("Referer");
-	if (referer === null || opts.referer === false) return;
-	if (typeof opts.referer === "function") return opts.referer(referer, ctx);
-	if (opts.origin) {
-		const refererOrigin = getOriginFromUrl(referer);
-		return refererOrigin !== void 0 && matchValue(opts.origin, refererOrigin, ctx);
-	}
-	return isRefererSameOrigin(referer, new URL(ctx.request.url).origin);
-}
-async function matchValue(matcher, value, ctx) {
-	if (typeof matcher === "function") return matcher(value, ctx);
-	if (Array.isArray(matcher)) return matcher.includes(value);
-	return value === matcher;
-}
-function getOriginFromUrl(url) {
-	try {
-		return new URL(url).origin;
-	} catch {
-		return;
-	}
-}
-function isRefererSameOrigin(referer, requestOrigin) {
-	if (referer === requestOrigin) return true;
-	if (!referer.startsWith(requestOrigin)) return false;
-	if (referer.length === requestOrigin.length) return true;
-	const code = referer.charCodeAt(requestOrigin.length);
-	return code === 47 || code === 63 || code === 35;
-}
-async function getFailureResponse(opts, ctx) {
-	if (typeof opts.failureResponse === "function") return opts.failureResponse(ctx);
-	return opts.failureResponse?.clone() ?? new Response("Forbidden", { status: 403 });
-}
-//#endregion
-//#region node_modules/.nitro/vite/services/ssr/assets/server-Mk8aAuZq.js
-var server_Mk8aAuZq_exports = /* @__PURE__ */ __exportAll({
-	createServerEntry: () => createServerEntry,
-	default: () => server_default
-});
 require_react();
 var import_jsx_runtime = require_jsx_runtime();
 function StartServer(props) {
@@ -166,7 +81,7 @@ var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 * the dev styles URL for route-scoped CSS collection.
 */
 async function getStartManifest(matchedRoutes) {
-	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-DF3xM7xC.mjs");
+	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-D69EVZ5G.mjs");
 	const startManifest = tsrStartManifest();
 	let routes = startManifest.routes;
 	routes[rootRouteId];
@@ -1194,7 +1109,7 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
 	const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-		import("./router-CUTUSDtf.mjs").then((n) => n.t),
+		import("./router-BDz_1BNs.mjs").then((n) => n.t),
 		import("./start-RKGGYzjZ.mjs"),
 		import("./empty-plugin-adapters-D9UWiqvJ.mjs")
 	]);
@@ -1640,4 +1555,4 @@ function createServerEntry(entry) {
 }
 var server_default = createServerEntry({ fetch });
 //#endregion
-export { createServerEntry, server_default as default, createCsrfMiddleware as n, createMiddleware as r, server_Mk8aAuZq_exports as t };
+export { createServerEntry, server_default as default };
