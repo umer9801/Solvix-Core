@@ -104,6 +104,13 @@ export const SERVICES: Service[] = [
     blurb: "End-to-end retail and hospitality POS systems with payment workflows, inventory sync and customer insights.",
     accent: "peach",
   },
+  {
+    slug: "crm-development",
+    title: "CRM Development",
+    group: "Platforms",
+    blurb: "Custom CRM systems built around your sales process — lead management, pipeline tracking, client communication and reporting all in one place.",
+    accent: "sage",
+  },
 ];
 
 export const STATS = [

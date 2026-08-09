@@ -7,12 +7,18 @@ import { FAQS, PRICING, PROJECTS, SERVICES, TECHNOLOGIES, PROCESS } from "@/lib/
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
-import aiIntegration from "@/assets/ai-integration.PNG";
-import webDevelopment from "@/assets/web-development.PNG";
+import aiSolutions from "@/assets/ai-solutions.jpeg";
+import appDevelopment from "@/assets/app-development.jpeg";
 import contentCreation from "@/assets/content-creation.PNG";
-import marketingImage from "@/assets/marketing.PNG";
+import crmImage from "@/assets/crm.jpeg";
 import langchainImage from "@/assets/langchain.PNG";
+import marketingImage from "@/assets/marketing.PNG";
+import n8nImage from "@/assets/n8n.jpeg";
+import openAiImage from "@/assets/openAi.jpeg";
 import posPortfolio from "@/assets/pos-portfolio.jpeg";
+import shopifyImage from "@/assets/shopify-store.jpeg";
+import webDevelopment from "@/assets/web-development.PNG";
+import officeTeam from "@/assets/office-team.jpg";
 
 const images: Record<string, string> = {
   "project-1": project1,
@@ -21,13 +27,17 @@ const images: Record<string, string> = {
 };
 
 const heroImages: Record<string, string> = {
-  "ai-solutions": aiIntegration,
+  "ai-solutions": aiSolutions,
+  "n8n-automation": n8nImage,
   "web-development": webDevelopment,
+  "shopify-store-design": shopifyImage,
+  "mobile-app-development": appDevelopment,
   "content-creation": contentCreation,
   "marketing-seo": marketingImage,
   "langchain-integration": langchainImage,
-  "openai-integration": aiIntegration,
+  "openai-integration": openAiImage,
   "pos-systems": posPortfolio,
+  "crm-development": crmImage,
 };
 
 const servicePricing: Record<string, typeof PRICING> = {
@@ -440,10 +450,8 @@ function ServiceDetail() {
         eyebrow={s.group}
         title={s.title}
         body={s.blurb}
-        heroNote={`This service is delivered as a focused capability with clear milestones, production readiness and measurable business impact.`}
-        image={heroImages[s.slug]}
+        image={heroImages[s.slug] ?? officeTeam}
         imageAlt={s.title}
-        imageMode="portrait"
       >
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           <div className="rounded-[2rem] border border-border bg-card p-8">
