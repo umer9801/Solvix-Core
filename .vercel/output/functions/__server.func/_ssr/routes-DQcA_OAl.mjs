@@ -5,13 +5,11 @@ import { t as motion } from "../_libs/motion.mjs";
 import { C as SectionHead, E as TESTIMONIALS, S as STATS, b as Reveal, d as Marquee, g as PROCESS, i as CLIENTS, l as LuxButton, n as Blobs, o as Counter, w as SpotlightCard, x as SERVICES } from "./primitives-C24J9EbA.mjs";
 import { v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { C as Gauge, D as Brain, M as ArrowRight, O as Bot, c as Smartphone, f as Quote, i as Video, j as ArrowUpRight, l as ShoppingBag, r as Workflow, t as Zap, w as CircleCheckBig } from "../_libs/lucide-react.mjs";
-import { n as gsapWithCSS, t as ScrollTrigger } from "../_libs/gsap.mjs";
-import { i as CtaBand } from "./router-B4Ixa73M.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DQ98S3zN.js
+import { i as CtaBand } from "./router-aLZtMv8c.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DQcA_OAl.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var home_hero_default = "/assets/home-hero-C7z52xSX.PNG";
-if (typeof window !== "undefined") gsapWithCSS.registerPlugin(ScrollTrigger);
 var serviceIcons = {
 	"ai-solutions": Brain,
 	"n8n-automation": Workflow,
@@ -67,69 +65,80 @@ function Hero() {
 	const y = useTransform(scrollYProgress, [0, 1], [0, 140]);
 	const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 	(0, import_react.useEffect)(() => {
-		if (typeof window === "undefined") return;
-		const init = setTimeout(() => {
-			const ctx = gsapWithCSS.context(() => {
-				gsapWithCSS.timeline({ defaults: { ease: "power4.out" } }).from("[data-gsap='badge']", {
-					y: -24,
-					opacity: 0,
-					duration: .5
-				}, .1).from("[data-gsap='word']", {
-					yPercent: 110,
-					opacity: 0,
-					rotateX: -30,
-					duration: .75,
-					stagger: .055,
-					transformOrigin: "left center"
-				}, .25).from("[data-gsap='body']", {
-					y: 28,
-					opacity: 0,
-					duration: .6
-				}, .9).from("[data-gsap='tag']", {
-					y: 16,
-					opacity: 0,
-					scale: .88,
-					duration: .45,
-					stagger: .08,
-					ease: "back.out(1.4)"
-				}, 1.05).from("[data-gsap='btns']", {
-					y: 20,
-					opacity: 0,
-					duration: .5
-				}, 1.2).from("[data-gsap='stat']", {
-					x: -24,
-					opacity: 0,
-					duration: .45,
-					stagger: .1
-				}, 1.3).from("[data-gsap='img']", {
-					x: 60,
-					opacity: 0,
-					scale: .96,
-					duration: .9
-				}, .35).from("[data-gsap='card1']", {
-					y: 24,
-					opacity: 0,
-					duration: .6
-				}, 1.4).from("[data-gsap='card2']", {
-					x: 20,
-					opacity: 0,
-					duration: .6
-				}, 1.55);
-				const onMove = (e) => {
-					if (!blobRef.current) return;
-					gsapWithCSS.to(blobRef.current, {
-						x: (e.clientX - window.innerWidth / 2) * .035,
-						y: (e.clientY - window.innerHeight / 2) * .035,
-						duration: 1.8,
-						ease: "power2.out"
-					});
-				};
-				window.addEventListener("mousemove", onMove);
-				return () => window.removeEventListener("mousemove", onMove);
-			}, sectionRef);
-			return () => ctx.revert();
-		}, 100);
-		return () => clearTimeout(init);
+		let cancelled = false;
+		let cleanup;
+		import("../_libs/gsap.mjs").then((n) => n.t).then(({ gsap }) => {
+			if (cancelled || typeof window === "undefined") return;
+			const timer = setTimeout(() => {
+				if (cancelled) return;
+				const ctx = gsap.context(() => {
+					gsap.timeline({ defaults: { ease: "power4.out" } }).from("[data-gsap='badge']", {
+						y: -24,
+						opacity: 0,
+						duration: .5
+					}, .1).from("[data-gsap='word']", {
+						yPercent: 110,
+						opacity: 0,
+						rotateX: -30,
+						duration: .75,
+						stagger: .055,
+						transformOrigin: "left center"
+					}, .25).from("[data-gsap='body']", {
+						y: 28,
+						opacity: 0,
+						duration: .6
+					}, .9).from("[data-gsap='tag']", {
+						y: 16,
+						opacity: 0,
+						scale: .88,
+						duration: .45,
+						stagger: .08,
+						ease: "back.out(1.4)"
+					}, 1.05).from("[data-gsap='btns']", {
+						y: 20,
+						opacity: 0,
+						duration: .5
+					}, 1.2).from("[data-gsap='stat']", {
+						x: -24,
+						opacity: 0,
+						duration: .45,
+						stagger: .1
+					}, 1.3).from("[data-gsap='img']", {
+						x: 60,
+						opacity: 0,
+						scale: .96,
+						duration: .9
+					}, .35).from("[data-gsap='card1']", {
+						y: 24,
+						opacity: 0,
+						duration: .6
+					}, 1.4).from("[data-gsap='card2']", {
+						x: 20,
+						opacity: 0,
+						duration: .6
+					}, 1.55);
+					const onMove = (e) => {
+						if (!blobRef.current) return;
+						gsap.to(blobRef.current, {
+							x: (e.clientX - window.innerWidth / 2) * .035,
+							y: (e.clientY - window.innerHeight / 2) * .035,
+							duration: 1.8,
+							ease: "power2.out"
+						});
+					};
+					window.addEventListener("mousemove", onMove);
+					cleanup = () => {
+						window.removeEventListener("mousemove", onMove);
+						ctx.revert();
+					};
+				}, sectionRef);
+			}, 120);
+			return () => clearTimeout(timer);
+		});
+		return () => {
+			cancelled = true;
+			cleanup?.();
+		};
 	}, []);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 		ref: sectionRef,
@@ -305,12 +314,6 @@ function Hero() {
 		]
 	});
 }
-var { scrollYProgress } = useScroll({
-	target: sectionRef,
-	offset: ["start start", "end start"]
-});
-useTransform(scrollYProgress, [0, 1], [0, 140]);
-useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 function TrustedBy() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 		className: "border-y border-border bg-surface-2 py-8",
@@ -380,7 +383,7 @@ function FeaturedServices() {
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 									className: `mt-5 inline-flex items-center gap-1.5 text-xs font-semibold ${style.icon}`,
-									children: ["Learn more", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, { className: "h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" })]
+									children: ["Learn more ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, { className: "h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" })]
 								})
 							]
 						})
@@ -475,10 +478,10 @@ function WhyUs() {
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 					className: "grid gap-3 sm:grid-cols-2",
 					children: [
-						"35% below market rates — all prices in CAD",
+						"35% below market rates — all prices in USD",
 						"Senior engineers and AI specialists only",
 						"You own 100% of the code from day one",
-						"Serving Canada, UK and Pakistan",
+						"Serving Canada, UK, Pakistan and globally",
 						"Partnered with Lepro Trading Inc",
 						"98% client satisfaction rate"
 					].map((r, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
@@ -582,14 +585,10 @@ function LeproPartnership() {
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", {
 									className: "font-display text-3xl md:text-4xl leading-tight text-foreground",
-									children: [
-										"Proudly Partnered With",
-										" ",
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "text-primary",
-											children: "Lepro Trading Inc"
-										})
-									]
+									children: ["Proudly Partnered With ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-primary",
+										children: "Lepro Trading Inc"
+									})]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "mt-3 max-w-xl text-muted-foreground leading-relaxed",

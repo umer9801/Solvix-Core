@@ -1,13 +1,12 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react, t as QueryClientProvider } from "../_libs/react+tanstack__react-query.mjs";
-import { a as useScroll, n as useSpring, r as useTransform, s as AnimatePresence } from "../_libs/framer-motion+[...].mjs";
+import { a as useScroll, n as useSpring, s as AnimatePresence } from "../_libs/framer-motion+[...].mjs";
 import { t as motion } from "../_libs/motion.mjs";
 import { O as TextReveal, _ as PROJECTS, a as COMPANY, b as Reveal, f as NAV_LINKS, j as cn, n as Blobs, p as OFFICES, r as CASE_STUDIES, u as Magnetic, x as SERVICES } from "./primitives-C24J9EbA.mjs";
 import { R as notFound, _ as createRootRouteWithContext, d as useRouterState, g as createFileRoute, h as lazyRouteComponent, l as Scripts, m as Outlet, p as createRouter, u as HeadContent, v as Link, y as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { A as ArrowUp, S as Github, T as ChevronRight, a as Twitter, b as Instagram, d as Search, g as Menu, h as MessageCircle, j as ArrowUpRight, n as X, y as Linkedin } from "../_libs/lucide-react.mjs";
-import { n as gsapWithCSS, t as ScrollTrigger } from "../_libs/gsap.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-B4Ixa73M.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-aLZtMv8c.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var __defProp = Object.defineProperty;
@@ -1136,18 +1135,17 @@ function RootComponent() {
 		]
 	});
 }
-var $$splitComponentImporter$12 = () => import("./routes-DQ98S3zN.mjs");
-if (typeof window !== "undefined") gsapWithCSS.registerPlugin(ScrollTrigger);
+var $$splitComponentImporter$12 = () => import("./routes-DQcA_OAl.mjs");
 var Route$12 = createFileRoute("/")({
 	head: () => ({ meta: [
 		{ title: "Solvix Core — AI Solutions, Web Development & Automation | Serving Globally" },
 		{
 			name: "description",
-			content: "Solvix Core delivers affordable AI solutions, web development, automation, Shopify stores and app development worldwide. Prices from $299 USD. Serving Canada, UK, Pakistan and globally."
+			content: "Solvix Core delivers affordable AI solutions, web development, automation, Shopify stores and app development worldwide. Serving Canada, UK, Pakistan and globally."
 		},
 		{
 			name: "keywords",
-			content: "AI solutions, web development agency, automation services, Shopify developer, affordable web design, cheap web development, web developer for hire, AI agency, n8n automation, LangChain developer, OpenAI integration, app development, SEO agency, digital marketing agency"
+			content: "AI solutions, web development agency, automation services, Shopify developer, affordable web design, n8n automation, LangChain developer, OpenAI integration, app development, SEO agency"
 		},
 		{
 			property: "og:title",
@@ -1155,112 +1153,12 @@ var Route$12 = createFileRoute("/")({
 		},
 		{
 			property: "og:description",
-			content: "Premium AI, automation, web development and e-commerce services. Affordable pricing from $299 USD. Serving businesses globally."
+			content: "Premium AI, automation, web development and e-commerce services. Serving businesses globally."
 		}
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$12, "component")
 });
-var { scrollYProgress } = useScroll({
-	target: sectionRef,
-	offset: ["start start", "end start"]
-});
-useTransform(scrollYProgress, [0, 1], [0, 140]);
-useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-(0, import_react.useEffect)(() => {
-	if (typeof window === "undefined") return;
-	const ctx = gsapWithCSS.context(() => {
-		gsapWithCSS.from(badgeRef.current, {
-			y: -20,
-			opacity: 0,
-			duration: .6,
-			ease: "power3.out",
-			delay: .1
-		});
-		if (headlineRef.current) {
-			const words = headlineRef.current.querySelectorAll(".word");
-			gsapWithCSS.from(words, {
-				y: 60,
-				opacity: 0,
-				rotateX: -40,
-				duration: .8,
-				stagger: .07,
-				ease: "power4.out",
-				delay: .3,
-				transformOrigin: "0% 50% -50px"
-			});
-		}
-		gsapWithCSS.from(bodyRef.current, {
-			y: 30,
-			opacity: 0,
-			duration: .7,
-			ease: "power3.out",
-			delay: .85
-		});
-		if (tagsRef.current) {
-			const tags = tagsRef.current.querySelectorAll("span");
-			gsapWithCSS.from(tags, {
-				y: 20,
-				opacity: 0,
-				scale: .9,
-				duration: .5,
-				stagger: .1,
-				ease: "back.out(1.5)",
-				delay: 1
-			});
-		}
-		gsapWithCSS.from(btnsRef.current, {
-			y: 20,
-			opacity: 0,
-			duration: .6,
-			ease: "power3.out",
-			delay: 1.15
-		});
-		if (statsRef.current) {
-			const items = statsRef.current.querySelectorAll("div");
-			gsapWithCSS.from(items, {
-				x: -30,
-				opacity: 0,
-				duration: .6,
-				stagger: .12,
-				ease: "power3.out",
-				delay: 1.25
-			});
-		}
-		gsapWithCSS.from(imgRef.current, {
-			x: 80,
-			opacity: 0,
-			scale: .95,
-			duration: 1,
-			ease: "power4.out",
-			delay: .4
-		});
-		const onMove = (e) => {
-			if (!blobRef.current) return;
-			gsapWithCSS.to(blobRef.current, {
-				x: (e.clientX - window.innerWidth / 2) * .04,
-				y: (e.clientY - window.innerHeight / 2) * .04,
-				duration: 1.5,
-				ease: "power2.out"
-			});
-		};
-		window.addEventListener("mousemove", onMove);
-		ScrollTrigger.create({
-			trigger: sectionRef.current,
-			start: "top top",
-			end: "bottom top",
-			scrub: true,
-			onUpdate: (self) => {
-				if (imgRef.current) gsapWithCSS.set(imgRef.current, {
-					y: self.progress * 80,
-					scale: 1 + self.progress * .05
-				});
-			}
-		});
-		return () => window.removeEventListener("mousemove", onMove);
-	}, sectionRef);
-	return () => ctx.revert();
-}, []);
-var $$splitComponentImporter$11 = () => import("./about-DDIxrnAT.mjs");
+var $$splitComponentImporter$11 = () => import("./about-DYrOXvdc.mjs");
 var Route$11 = createFileRoute("/about")({
 	head: () => ({ meta: [
 		{ title: "About Solvix Core — AI & Web Development Agency Serving Globally" },
@@ -1283,7 +1181,7 @@ var Route$11 = createFileRoute("/about")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$11, "component")
 });
-var $$splitComponentImporter$10 = () => import("./blog-CeSVhdmj.mjs");
+var $$splitComponentImporter$10 = () => import("./blog-BQ_N7fa6.mjs");
 var Route$10 = createFileRoute("/blog")({
 	head: () => ({ meta: [
 		{ title: "Blog — Tech Insights | Solvix Core" },
@@ -1302,7 +1200,7 @@ var Route$10 = createFileRoute("/blog")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$10, "component")
 });
-var $$splitComponentImporter$9 = () => import("./careers-R5EztchG.mjs");
+var $$splitComponentImporter$9 = () => import("./careers-DRekUuJJ.mjs");
 var Route$9 = createFileRoute("/careers")({
 	head: () => ({ meta: [
 		{ title: "Careers — Join Solvix Core" },
@@ -1340,7 +1238,7 @@ var Route$8 = createFileRoute("/contact")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$8, "component")
 });
-var $$splitComponentImporter$7 = () => import("./faqs-CRA7T7HL.mjs");
+var $$splitComponentImporter$7 = () => import("./faqs-CK1hoy5w.mjs");
 var Route$7 = createFileRoute("/faqs")({
 	head: () => ({ meta: [
 		{ title: "FAQs — Web Development & AI Services Questions | Solvix Core" },
@@ -1363,7 +1261,7 @@ var Route$7 = createFileRoute("/faqs")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$7, "component")
 });
-var $$splitComponentImporter$6 = () => import("./industries-PXGLQyWZ.mjs");
+var $$splitComponentImporter$6 = () => import("./industries-BdlDef6y.mjs");
 var Route$6 = createFileRoute("/industries")({
 	head: () => ({ meta: [
 		{ title: "Industries We Serve Globally | Solvix Core" },
@@ -1386,7 +1284,7 @@ var Route$6 = createFileRoute("/industries")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$6, "component")
 });
-var $$splitComponentImporter$5 = () => import("./projects-D1MUj39g.mjs");
+var $$splitComponentImporter$5 = () => import("./projects-BFrxwTmQ.mjs");
 var Route$5 = createFileRoute("/projects")({
 	head: () => ({ meta: [
 		{ title: "Our Work — Web, AI & POS Projects | Solvix Core" },
@@ -1409,7 +1307,7 @@ var Route$5 = createFileRoute("/projects")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$5, "component")
 });
-var $$splitComponentImporter$4 = () => import("./technologies-CMqOPPzE.mjs");
+var $$splitComponentImporter$4 = () => import("./technologies-DdClJP5O.mjs");
 var Route$4 = createFileRoute("/technologies")({
 	head: () => ({ meta: [
 		{ title: "Tech Stack — React, Next.js, AI, Shopify & More | Solvix Core" },
@@ -1432,7 +1330,7 @@ var Route$4 = createFileRoute("/technologies")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-var $$splitComponentImporter$3 = () => import("./case-studies-C65UPMO-.mjs");
+var $$splitComponentImporter$3 = () => import("./case-studies-DBaRFPPc.mjs");
 var Route$3 = createFileRoute("/case-studies/")({
 	head: () => ({ meta: [
 		{ title: "Case Studies — Real Client Results | Solvix Core" },
@@ -1455,7 +1353,7 @@ var Route$3 = createFileRoute("/case-studies/")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
-var $$splitComponentImporter$2 = () => import("../_slug-cHpVCqsp.mjs");
+var $$splitComponentImporter$2 = () => import("../_slug-nAM95q52.mjs");
 var Route$2 = createFileRoute("/case-studies/$slug")({
 	loader: ({ params }) => {
 		const study = CASE_STUDIES.find((c) => c.slug === params.slug);
@@ -1482,7 +1380,7 @@ var Route$2 = createFileRoute("/case-studies/$slug")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
-var $$splitComponentImporter$1 = () => import("./services-TgttVW8i.mjs");
+var $$splitComponentImporter$1 = () => import("./services-DZzaSQ15.mjs");
 var Route$1 = createFileRoute("/services/")({
 	head: () => ({ meta: [
 		{ title: "Services — AI Solutions, Web Dev, Shopify & Automation | Solvix Core" },
@@ -1505,7 +1403,7 @@ var Route$1 = createFileRoute("/services/")({
 	] }),
 	component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-var $$splitComponentImporter = () => import("../_slug-D5sWfgvj.mjs");
+var $$splitComponentImporter = () => import("../_slug-DgA65w4b.mjs");
 var Route = createFileRoute("/services/$slug")({
 	loader: ({ params }) => {
 		const service = SERVICES.find((s) => s.slug === params.slug);

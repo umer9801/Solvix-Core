@@ -1,9 +1,9 @@
 import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.mjs";
 import { b as Reveal, m as POSTS } from "./primitives-C24J9EbA.mjs";
 import { j as ArrowUpRight } from "../_libs/lucide-react.mjs";
-import { i as CtaBand } from "./router-B4Ixa73M.mjs";
+import { i as CtaBand } from "./router-aLZtMv8c.mjs";
 import { t as PageHero } from "./PageHero-0EBhvYmV.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/blog-CeSVhdmj.js
+//#region node_modules/.nitro/vite/services/ssr/assets/blog-BQ_N7fa6.js
 var import_jsx_runtime = require_jsx_runtime();
 function Blog() {
 	const lead = POSTS[0];
