@@ -1,0 +1,637 @@
+import { i as __toESM } from "../_runtime.mjs";
+import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
+import { a as useScroll, r as useTransform } from "../_libs/framer-motion+[...].mjs";
+import { t as motion } from "../_libs/motion.mjs";
+import { C as SectionHead, E as TESTIMONIALS, S as STATS, b as Reveal, d as Marquee, g as PROCESS, i as CLIENTS, l as LuxButton, n as Blobs, o as Counter, w as SpotlightCard, x as SERVICES } from "./primitives-C24J9EbA.mjs";
+import { v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
+import { C as Gauge, D as Brain, M as ArrowRight, O as Bot, c as Smartphone, f as Quote, i as Video, j as ArrowUpRight, l as ShoppingBag, r as Workflow, t as Zap, w as CircleCheckBig } from "../_libs/lucide-react.mjs";
+import { n as gsapWithCSS, t as ScrollTrigger } from "../_libs/gsap.mjs";
+import { i as CtaBand } from "./router-B4Ixa73M.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DQ98S3zN.js
+var import_react = /* @__PURE__ */ __toESM(require_react());
+var import_jsx_runtime = require_jsx_runtime();
+var home_hero_default = "/assets/home-hero-C7z52xSX.PNG";
+if (typeof window !== "undefined") gsapWithCSS.registerPlugin(ScrollTrigger);
+var serviceIcons = {
+	"ai-solutions": Brain,
+	"n8n-automation": Workflow,
+	"web-development": Zap,
+	"shopify-store-design": ShoppingBag,
+	"mobile-app-development": Smartphone,
+	"content-creation": Video,
+	"marketing-seo": ArrowUpRight,
+	"langchain-integration": Bot,
+	"openai-integration": Brain,
+	"pos-systems": ShoppingBag
+};
+var accentStyles = {
+	primary: {
+		bg: "bg-blue-50",
+		icon: "text-blue-600",
+		border: "group-hover:border-blue-300",
+		grad: "from-blue-50/50 to-white"
+	},
+	violet: {
+		bg: "bg-violet-50",
+		icon: "text-violet-600",
+		border: "group-hover:border-violet-300",
+		grad: "from-violet-50/50 to-white"
+	},
+	sage: {
+		bg: "bg-emerald-50",
+		icon: "text-emerald-600",
+		border: "group-hover:border-emerald-300",
+		grad: "from-emerald-50/50 to-white"
+	},
+	peach: {
+		bg: "bg-orange-50",
+		icon: "text-orange-600",
+		border: "group-hover:border-orange-300",
+		grad: "from-orange-50/50 to-white"
+	},
+	coral: {
+		bg: "bg-red-50",
+		icon: "text-red-600",
+		border: "group-hover:border-red-300",
+		grad: "from-red-50/50 to-white"
+	}
+};
+function Hero() {
+	const sectionRef = (0, import_react.useRef)(null);
+	const imgRef = (0, import_react.useRef)(null);
+	const blobRef = (0, import_react.useRef)(null);
+	const { scrollYProgress } = useScroll({
+		target: sectionRef,
+		offset: ["start start", "end start"]
+	});
+	const y = useTransform(scrollYProgress, [0, 1], [0, 140]);
+	const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+	(0, import_react.useEffect)(() => {
+		if (typeof window === "undefined") return;
+		const init = setTimeout(() => {
+			const ctx = gsapWithCSS.context(() => {
+				gsapWithCSS.timeline({ defaults: { ease: "power4.out" } }).from("[data-gsap='badge']", {
+					y: -24,
+					opacity: 0,
+					duration: .5
+				}, .1).from("[data-gsap='word']", {
+					yPercent: 110,
+					opacity: 0,
+					rotateX: -30,
+					duration: .75,
+					stagger: .055,
+					transformOrigin: "left center"
+				}, .25).from("[data-gsap='body']", {
+					y: 28,
+					opacity: 0,
+					duration: .6
+				}, .9).from("[data-gsap='tag']", {
+					y: 16,
+					opacity: 0,
+					scale: .88,
+					duration: .45,
+					stagger: .08,
+					ease: "back.out(1.4)"
+				}, 1.05).from("[data-gsap='btns']", {
+					y: 20,
+					opacity: 0,
+					duration: .5
+				}, 1.2).from("[data-gsap='stat']", {
+					x: -24,
+					opacity: 0,
+					duration: .45,
+					stagger: .1
+				}, 1.3).from("[data-gsap='img']", {
+					x: 60,
+					opacity: 0,
+					scale: .96,
+					duration: .9
+				}, .35).from("[data-gsap='card1']", {
+					y: 24,
+					opacity: 0,
+					duration: .6
+				}, 1.4).from("[data-gsap='card2']", {
+					x: 20,
+					opacity: 0,
+					duration: .6
+				}, 1.55);
+				const onMove = (e) => {
+					if (!blobRef.current) return;
+					gsapWithCSS.to(blobRef.current, {
+						x: (e.clientX - window.innerWidth / 2) * .035,
+						y: (e.clientY - window.innerHeight / 2) * .035,
+						duration: 1.8,
+						ease: "power2.out"
+					});
+				};
+				window.addEventListener("mousemove", onMove);
+				return () => window.removeEventListener("mousemove", onMove);
+			}, sectionRef);
+			return () => ctx.revert();
+		}, 100);
+		return () => clearTimeout(init);
+	}, []);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+		ref: sectionRef,
+		className: "relative overflow-hidden pb-20 pt-10 md:pb-28",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				ref: blobRef,
+				className: "pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/7 blur-[120px]"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute -top-16 -left-16 -z-10 h-64 w-64 rounded-full bg-primary/7 blur-[80px]" }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute top-0 right-0 -z-10 h-48 w-48 rounded-full bg-violet/5 blur-[60px]" }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Blobs, {}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "container-lux",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-gsap": "badge",
+							className: "inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-medium",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+								className: "relative flex h-2 w-2",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "relative inline-flex h-2 w-2 rounded-full bg-primary" })]
+							}), "Taking on new projects — Canada · UK · Pakistan · Globally"]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
+							className: "display-xl mt-7",
+							style: { perspective: "800px" },
+							children: [
+								[
+									"Your",
+									"competitors",
+									"are",
+									"already",
+									"using"
+								].map((w, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "inline-block overflow-hidden align-bottom mr-[0.22em]",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-gsap": "word",
+										className: "inline-block",
+										children: w
+									})
+								}, i)),
+								" ",
+								[
+									"AI",
+									"and",
+									"automation."
+								].map((w, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "inline-block overflow-hidden align-bottom mr-[0.22em]",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-gsap": "word",
+										className: "inline-block text-primary italic",
+										children: w
+									})
+								}, i)),
+								" ",
+								["Are", "you?"].map((w, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "inline-block overflow-hidden align-bottom mr-[0.22em]",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										"data-gsap": "word",
+										className: "inline-block",
+										children: w
+									})
+								}, i))
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							"data-gsap": "body",
+							className: "mt-7 max-w-lg text-lg leading-relaxed text-muted-foreground",
+							children: "We build AI systems, automation workflows, web platforms, Shopify stores and mobile apps that give your business an unfair advantage — delivered in weeks, not months, at 35% below market rates."
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "mt-5 flex flex-wrap gap-3",
+							children: [
+								"35% below market rates",
+								"Delivered in weeks",
+								"You own the code 100%"
+							].map((tag) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+								"data-gsap": "tag",
+								className: "inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-semibold text-primary",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "h-1.5 w-1.5 rounded-full bg-primary" }), tag]
+							}, tag))
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							"data-gsap": "btns",
+							className: "mt-10 flex flex-wrap items-center gap-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								to: "/contact",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(LuxButton, { children: ["Start a project ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "h-4 w-4" })] })
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								to: "/services",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LuxButton, {
+									variant: "ghost",
+									children: "Explore services"
+								})
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dl", {
+							className: "mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8",
+							children: STATS.slice(0, 3).map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-gsap": "stat",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", {
+									className: "font-display text-3xl",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Counter, {
+										value: s.value,
+										suffix: s.suffix
+									})
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", {
+									className: "mt-1 text-xs text-muted-foreground",
+									children: s.label
+								})]
+							}, s.label))
+						})
+					] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						ref: imgRef,
+						"data-gsap": "img",
+						className: "relative hidden lg:block",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+								style: {
+									y,
+									scale
+								},
+								className: "relative overflow-hidden rounded-[2.5rem] border border-border shadow-lift",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+									src: home_hero_default,
+									alt: "Solvix Core",
+									width: 1408,
+									height: 1200,
+									className: "h-full w-full object-cover"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent" })]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-gsap": "card1",
+								className: "absolute -bottom-8 -left-6 w-64 rounded-3xl border border-border bg-card/95 p-5 shadow-lift backdrop-blur-xl",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center gap-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Gauge, { className: "h-4 w-4 text-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-xs font-semibold",
+											children: "Client satisfaction"
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "font-display mt-3 text-4xl",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Counter, {
+											value: 98,
+											suffix: "%"
+										})
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "mt-1 text-xs text-muted-foreground",
+										children: "Across all delivered projects"
+									})
+								]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								"data-gsap": "card2",
+								className: "absolute -top-4 -right-4 rounded-2xl border border-border bg-card/95 px-4 py-3 shadow-lift backdrop-blur-xl",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-xs font-semibold text-primary",
+									children: "35% below market"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-[10px] text-muted-foreground mt-0.5",
+									children: "Guaranteed pricing"
+								})]
+							})
+						]
+					})]
+				})
+			})
+		]
+	});
+}
+var { scrollYProgress } = useScroll({
+	target: sectionRef,
+	offset: ["start start", "end start"]
+});
+useTransform(scrollYProgress, [0, 1], [0, 140]);
+useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+function TrustedBy() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+		className: "border-y border-border bg-surface-2 py-8",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "container-lux flex flex-col gap-6 md:flex-row md:items-center",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "eyebrow shrink-0 md:w-44",
+				children: "Serving teams in"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Marquee, {
+				items: CLIENTS,
+				className: "flex-1",
+				itemClassName: "font-display text-xl tracking-tight text-foreground/35"
+			})]
+		})
+	});
+}
+function FeaturedServices() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+		className: "container-lux py-20 md:py-24",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "mb-12 flex flex-wrap items-end justify-between gap-6",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SectionHead, {
+				eyebrow: "What we do",
+				title: "Nine services. One team. Zero hand-offs.",
+				className: "max-w-xl"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+				to: "/services",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(LuxButton, {
+					variant: "ghost",
+					children: ["All services ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, { className: "h-4 w-4" })]
+				})
+			})]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "grid gap-4 sm:grid-cols-2 lg:grid-cols-3",
+			children: SERVICES.map((s, i) => {
+				const Icon = serviceIcons[s.slug] ?? Zap;
+				const style = accentStyles[s.accent] ?? accentStyles.primary;
+				return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+					delay: i * .05,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SpotlightCard, {
+						className: `group relative h-full overflow-hidden rounded-2xl border border-border bg-gradient-to-br ${style.grad} p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift ${style.border}`,
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+							to: `/services/${s.slug}`,
+							className: "flex h-full flex-col",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: `absolute -right-6 -top-6 h-24 w-24 rounded-full ${style.bg} opacity-60 blur-2xl transition-all duration-500 group-hover:opacity-100` }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "relative",
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: `inline-flex h-11 w-11 items-center justify-center rounded-xl ${style.bg}`,
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, { className: `h-5 w-5 ${style.icon}` })
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: `eyebrow mt-5 ${style.icon}`,
+											children: s.group
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+											className: "font-display mt-1.5 text-xl leading-tight text-foreground",
+											children: s.title
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "mt-3 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-3",
+											children: s.blurb
+										})
+									]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+									className: `mt-5 inline-flex items-center gap-1.5 text-xs font-semibold ${style.icon}`,
+									children: ["Learn more", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, { className: "h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" })]
+								})
+							]
+						})
+					})
+				}, s.slug);
+			})
+		})]
+	});
+}
+function StatsBand() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+		className: "relative overflow-hidden bg-ink py-20 text-background",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute -left-20 top-0 h-96 w-96 rounded-full bg-primary/15 blur-3xl" }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute right-0 bottom-0 h-64 w-64 rounded-full bg-primary/10 blur-3xl" }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "container-lux relative",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "grid gap-10 md:grid-cols-4",
+					children: STATS.map((s, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+						delay: i * .08,
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "border-l border-background/15 pl-6",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "font-display text-5xl md:text-6xl",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Counter, {
+									value: s.value,
+									suffix: s.suffix
+								})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mt-3 text-sm text-background/60",
+								children: s.label
+							})]
+						})
+					}, s.label))
+				})
+			})
+		]
+	});
+}
+function ProcessSection() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+		className: "container-lux py-20 md:py-24",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "mb-12 flex flex-wrap items-end justify-between gap-6",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SectionHead, {
+				eyebrow: "How we work",
+				title: "Five steps from brief to live.",
+				className: "max-w-xl"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+				to: "/about",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(LuxButton, {
+					variant: "ghost",
+					children: ["About us ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, { className: "h-4 w-4" })]
+				})
+			})]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "grid gap-4 sm:grid-cols-2 lg:grid-cols-5",
+			children: PROCESS.map((p, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+				delay: i * .07,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "group rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lift",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "font-mono text-xs font-bold text-primary",
+							children: p.step
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+							className: "font-display mt-3 text-lg leading-tight",
+							children: p.title
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "mt-2 text-sm leading-relaxed text-muted-foreground",
+							children: p.body
+						})
+					]
+				})
+			}, p.step))
+		})]
+	});
+}
+function WhyUs() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+		className: "border-y border-border bg-surface py-16",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "container-lux",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SectionHead, {
+					eyebrow: "Why Solvix Core",
+					title: "Premium quality at prices that make sense."
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "grid gap-3 sm:grid-cols-2",
+					children: [
+						"35% below market rates — all prices in CAD",
+						"Senior engineers and AI specialists only",
+						"You own 100% of the code from day one",
+						"Serving Canada, UK and Pakistan",
+						"Partnered with Lepro Trading Inc",
+						"98% client satisfaction rate"
+					].map((r, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+						delay: i * .06,
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-center gap-3 rounded-xl border border-border bg-white px-4 py-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheckBig, { className: "h-4 w-4 shrink-0 text-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-sm font-medium",
+								children: r
+							})]
+						})
+					}, r))
+				})]
+			})
+		})
+	});
+}
+function Testimonials() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+		className: "container-lux py-20 md:py-24",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "mb-12 flex flex-wrap items-end justify-between gap-6",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SectionHead, {
+				eyebrow: "Clients",
+				title: "What our clients say.",
+				className: "max-w-xl"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+				to: "/contact",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(LuxButton, {
+					variant: "ghost",
+					children: ["Work with us ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, { className: "h-4 w-4" })]
+				})
+			})]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "grid gap-6 md:grid-cols-3",
+			children: TESTIMONIALS.map((t, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
+				delay: i * .09,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("figure", {
+					className: "flex h-full flex-col rounded-2xl border border-border bg-card p-7 shadow-sm transition-all duration-300 hover:shadow-lift",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Quote, { className: "h-6 w-6 text-primary/40" }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("blockquote", {
+							className: "font-display mt-5 flex-1 text-lg leading-snug",
+							children: [
+								"\"",
+								t.quote,
+								"\""
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("figcaption", {
+							className: "mt-6 flex items-center gap-3 border-t border-border pt-5",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary",
+								children: t.name.split(" ").map((n) => n[0]).join("")
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-sm font-semibold",
+								children: t.name
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-xs text-muted-foreground",
+								children: t.role
+							})] })]
+						})
+					]
+				})
+			}, t.name))
+		})]
+	});
+}
+function LeproPartnership() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+		className: "container-lux py-10",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "relative overflow-hidden rounded-3xl border border-primary/15 bg-primary/5 px-8 py-10 md:px-14 md:py-12",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute -right-12 -top-12 h-48 w-48 rounded-full bg-primary/8 blur-3xl" }),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-primary/6 blur-2xl" }),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "relative flex flex-col items-center gap-6 text-center md:flex-row md:text-left",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border-2 border-primary/30 bg-white shadow-md",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
+								className: "h-9 w-9 text-primary",
+								fill: "none",
+								viewBox: "0 0 24 24",
+								stroke: "currentColor",
+								strokeWidth: 1.5,
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+									strokeLinecap: "round",
+									strokeLinejoin: "round",
+									d: "M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+								})
+							})
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex-1",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "eyebrow text-primary mb-2",
+									children: "Official Partnership"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h2", {
+									className: "font-display text-3xl md:text-4xl leading-tight text-foreground",
+									children: [
+										"Proudly Partnered With",
+										" ",
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-primary",
+											children: "Lepro Trading Inc"
+										})
+									]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "mt-3 max-w-xl text-muted-foreground leading-relaxed",
+									children: "A strategic alliance committed to delivering world-class technology solutions across Canada, UK and Pakistan — backed by trust, reliability and shared vision."
+								})
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex flex-col items-center gap-2 shrink-0",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "flex gap-2",
+								children: [
+									"CA",
+									"UK",
+									"PK"
+								].map((c) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "rounded-lg border border-border bg-white px-3 py-1.5 font-mono text-xs font-semibold text-foreground shadow-sm",
+									children: c
+								}, c))
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "font-mono text-xs text-muted-foreground",
+								children: "3 Countries · 1 Standard"
+							})]
+						})
+					]
+				})
+			]
+		}) })
+	});
+}
+function Home() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Hero, {}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrustedBy, {}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeproPartnership, {}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FeaturedServices, {}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(StatsBand, {}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(WhyUs, {}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProcessSection, {}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Testimonials, {}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CtaBand, {})
+	] });
+}
+//#endregion
+export { Home as component };

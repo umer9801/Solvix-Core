@@ -1,0 +1,1 @@
+var e=`/assets/web-portfolio-Du-InA2C.png`;export{e as t};

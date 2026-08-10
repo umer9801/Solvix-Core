@@ -3,23 +3,19 @@ import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 import {
   ArrowRight,
   ArrowUpRight,
   Bot,
   Brain,
   Gauge,
-  Quote,
   ShoppingBag,
   Smartphone,
   Video,
   Workflow,
   Zap,
   CheckCircle,
+  Quote,
 } from "lucide-react";
 import {
   Blobs,
@@ -29,17 +25,14 @@ import {
   Reveal,
   SectionHead,
   SpotlightCard,
-  TextReveal,
 } from "@/components/site/primitives";
 import { CtaBand } from "@/components/site/Footer";
-import {
-  CLIENTS,
-  SERVICES,
-  STATS,
-  PROCESS,
-  TESTIMONIALS,
-} from "@/lib/site-data";
+import { CLIENTS, SERVICES, STATS, PROCESS, TESTIMONIALS } from "@/lib/site-data";
 import homeHero from "@/assets/home-hero.PNG";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -380,140 +373,6 @@ function Hero() {
 
     return () => ctx.revert();
   }, []);
-
-  // Split headline into word spans for GSAP
-  const headlineWords = [
-    "Your", "competitors", "are", "already", "using"
-  ];
-  const headlineHighlight = ["AI", "and", "automation."];
-  const headlineEnd = ["Are", "you?"];
-
-  return (
-    <section ref={sectionRef} className="relative overflow-hidden pb-20 pt-10 md:pb-28">
-      {/* Mouse-tracking gradient blob */}
-      <div
-        ref={blobRef}
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/8 blur-[120px]"
-      />
-      <div className="pointer-events-none absolute -top-16 -left-16 -z-10 h-72 w-72 rounded-full bg-primary/8 blur-[80px]" />
-      <div className="pointer-events-none absolute top-0 right-0 -z-10 h-56 w-56 rounded-full bg-violet/5 blur-[60px]" />
-      <Blobs />
-
-      <div className="container-lux">
-        <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div>
-            {/* Badge */}
-            <div ref={badgeRef} className="inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-medium">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-              </span>
-              Taking on new projects — Canada · UK · Pakistan · Globally
-            </div>
-
-            {/* Headline — each word wrapped for GSAP */}
-            <h1 ref={headlineRef} className="display-xl mt-7" style={{ perspective: "600px" }}>
-              {headlineWords.map((w) => (
-                <span key={w} className="word mr-[0.25em] inline-block">{w}</span>
-              ))}{" "}
-              {headlineHighlight.map((w) => (
-                <span key={w} className="word mr-[0.25em] inline-block text-primary italic">{w}</span>
-              ))}{" "}
-              {headlineEnd.map((w) => (
-                <span key={w} className="word mr-[0.25em] inline-block">{w}</span>
-              ))}
-            </h1>
-
-            {/* Body */}
-            <p ref={bodyRef} className="mt-7 max-w-lg text-lg leading-relaxed text-muted-foreground">
-              We build AI systems, automation workflows, web platforms, Shopify stores and mobile apps that give your business an unfair advantage — delivered in weeks, not months, at 35% below market rates.
-            </p>
-
-            {/* Tags */}
-            <div ref={tagsRef} className="mt-5 flex flex-wrap gap-3">
-              {["35% below market rates", "Delivered in weeks", "You own the code 100%"].map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-semibold text-primary"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Buttons */}
-            <div ref={btnsRef} className="mt-10 flex flex-wrap items-center gap-4">
-              <Link to="/contact">
-                <LuxButton>
-                  Start a project <ArrowRight className="h-4 w-4" />
-                </LuxButton>
-              </Link>
-              <Link to="/services">
-                <LuxButton variant="ghost">Explore services</LuxButton>
-              </Link>
-            </div>
-
-            {/* Stats */}
-            <dl ref={statsRef} className="mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8">
-              {STATS.slice(0, 3).map((s) => (
-                <div key={s.label}>
-                  <dt className="font-display text-3xl">
-                    <Counter value={s.value} suffix={s.suffix} />
-                  </dt>
-                  <dd className="mt-1 text-xs text-muted-foreground">{s.label}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          {/* Hero image */}
-          <div ref={imgRef} className="relative hidden lg:block">
-            <motion.div style={{ y, scale }} className="relative overflow-hidden rounded-[2.5rem] border border-border shadow-lift">
-              <img
-                src={homeHero}
-                alt="Solvix Core"
-                width={1408}
-                height={1200}
-                className="h-full w-full object-cover"
-              />
-              {/* Shimmer overlay */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent" />
-            </motion.div>
-
-            {/* Floating card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute -bottom-8 -left-6 w-64 rounded-3xl border border-border bg-card/95 p-5 shadow-lift backdrop-blur-xl"
-            >
-              <div className="flex items-center gap-2">
-                <Gauge className="h-4 w-4 text-primary" />
-                <p className="text-xs font-semibold">Client satisfaction</p>
-              </div>
-              <p className="font-display mt-3 text-4xl">
-                <Counter value={98} suffix="%" />
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">Across all delivered projects</p>
-            </motion.div>
-
-            {/* Second floating badge */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.5, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute -top-6 -right-4 rounded-2xl border border-border bg-card/95 px-4 py-3 shadow-lift backdrop-blur-xl"
-            >
-              <p className="text-xs font-semibold text-primary">35% below market</p>
-              <p className="text-[10px] text-muted-foreground mt-0.5">Guaranteed pricing</p>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ─── Trusted By ───────────────────────────────────────────────────────────────
 function TrustedBy() {
