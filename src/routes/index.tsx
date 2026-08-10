@@ -87,14 +87,208 @@ const accentStyles: Record<string, { bg: string; icon: string; border: string; g
 // ─── Hero ────────────────────────────────────────────────────────────────────
 function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
-  const bodyRef = useRef<HTMLParagraphElement>(null);
-  const tagsRef = useRef<HTMLDivElement>(null);
-  const btnsRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDListElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
   const blobRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    // Small delay to ensure DOM is ready after SSR hydration
+    const init = setTimeout(() => {
+      const ctx = gsap.context(() => {
+
+        const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+        // Badge
+        tl.from("[data-gsap='badge']", { y: -24, opacity: 0, duration: 0.5 }, 0.1)
+
+          // Each word clip reveal
+          .from("[data-gsap='word']", {
+            yPercent: 110,
+            opacity: 0,
+            rotateX: -30,
+            duration: 0.75,
+            stagger: 0.055,
+            transformOrigin: "left center",
+          }, 0.25)
+
+          // Body
+          .from("[data-gsap='body']", { y: 28, opacity: 0, duration: 0.6 }, 0.9)
+
+          // Tags
+          .from("[data-gsap='tag']", {
+            y: 16, opacity: 0, scale: 0.88,
+            duration: 0.45, stagger: 0.08,
+            ease: "back.out(1.4)",
+          }, 1.05)
+
+          // Buttons
+          .from("[data-gsap='btns']", { y: 20, opacity: 0, duration: 0.5 }, 1.2)
+
+          // Stats
+          .from("[data-gsap='stat']", {
+            x: -24, opacity: 0, duration: 0.45, stagger: 0.1,
+          }, 1.3)
+
+          // Image
+          .from("[data-gsap='img']", {
+            x: 60, opacity: 0, scale: 0.96, duration: 0.9,
+          }, 0.35)
+
+          // Floating cards
+          .from("[data-gsap='card1']", { y: 24, opacity: 0, duration: 0.6 }, 1.4)
+          .from("[data-gsap='card2']", { x: 20, opacity: 0, duration: 0.6 }, 1.55);
+
+        // Mouse tracking blob
+        const onMove = (e: MouseEvent) => {
+          if (!blobRef.current) return;
+          gsap.to(blobRef.current, {
+            x: (e.clientX - window.innerWidth / 2) * 0.035,
+            y: (e.clientY - window.innerHeight / 2) * 0.035,
+            duration: 1.8, ease: "power2.out",
+          });
+        };
+        window.addEventListener("mousemove", onMove);
+
+        return () => window.removeEventListener("mousemove", onMove);
+
+      }, sectionRef);
+
+      return () => ctx.revert();
+    }, 100);
+
+    return () => clearTimeout(init);
+  }, []);
+
+  const words1 = ["Your", "competitors", "are", "already", "using"];
+  const words2 = ["AI", "and", "automation."];
+  const words3 = ["Are", "you?"];
+
+  return (
+    <section ref={sectionRef} className="relative overflow-hidden pb-20 pt-10 md:pb-28">
+      {/* Mouse blob */}
+      <div ref={blobRef} className="pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/7 blur-[120px]" />
+      <div className="pointer-events-none absolute -top-16 -left-16 -z-10 h-64 w-64 rounded-full bg-primary/7 blur-[80px]" />
+      <div className="pointer-events-none absolute top-0 right-0 -z-10 h-48 w-48 rounded-full bg-violet/5 blur-[60px]" />
+      <Blobs />
+
+      <div className="container-lux">
+        <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div>
+            {/* Badge */}
+            <div data-gsap="badge" className="inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-medium">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              </span>
+              Taking on new projects — Canada · UK · Pakistan · Globally
+            </div>
+
+            {/* Headline — each word has overflow-hidden wrapper for clip */}
+            <h1 className="display-xl mt-7" style={{ perspective: "800px" }}>
+              {words1.map((w, i) => (
+                <span key={i} className="inline-block overflow-hidden align-bottom mr-[0.22em]">
+                  <span data-gsap="word" className="inline-block">{w}</span>
+                </span>
+              ))}
+              {" "}
+              {words2.map((w, i) => (
+                <span key={i} className="inline-block overflow-hidden align-bottom mr-[0.22em]">
+                  <span data-gsap="word" className="inline-block text-primary italic">{w}</span>
+                </span>
+              ))}
+              {" "}
+              {words3.map((w, i) => (
+                <span key={i} className="inline-block overflow-hidden align-bottom mr-[0.22em]">
+                  <span data-gsap="word" className="inline-block">{w}</span>
+                </span>
+              ))}
+            </h1>
+
+            {/* Body */}
+            <p data-gsap="body" className="mt-7 max-w-lg text-lg leading-relaxed text-muted-foreground">
+              We build AI systems, automation workflows, web platforms, Shopify stores and mobile apps that give your business an unfair advantage — delivered in weeks, not months, at 35% below market rates.
+            </p>
+
+            {/* Tags */}
+            <div className="mt-5 flex flex-wrap gap-3">
+              {["35% below market rates", "Delivered in weeks", "You own the code 100%"].map((tag) => (
+                <span
+                  key={tag}
+                  data-gsap="tag"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-semibold text-primary"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {/* Buttons */}
+            <div data-gsap="btns" className="mt-10 flex flex-wrap items-center gap-4">
+              <Link to="/contact">
+                <LuxButton>
+                  Start a project <ArrowRight className="h-4 w-4" />
+                </LuxButton>
+              </Link>
+              <Link to="/services">
+                <LuxButton variant="ghost">Explore services</LuxButton>
+              </Link>
+            </div>
+
+            {/* Stats */}
+            <dl className="mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8">
+              {STATS.slice(0, 3).map((s) => (
+                <div key={s.label} data-gsap="stat">
+                  <dt className="font-display text-3xl">
+                    <Counter value={s.value} suffix={s.suffix} />
+                  </dt>
+                  <dd className="mt-1 text-xs text-muted-foreground">{s.label}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          {/* Image */}
+          <div ref={imgRef} data-gsap="img" className="relative hidden lg:block">
+            <motion.div style={{ y, scale }} className="relative overflow-hidden rounded-[2.5rem] border border-border shadow-lift">
+              <img src={homeHero} alt="Solvix Core" width={1408} height={1200} className="h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent" />
+            </motion.div>
+
+            {/* Floating card 1 */}
+            <div
+              data-gsap="card1"
+              className="absolute -bottom-8 -left-6 w-64 rounded-3xl border border-border bg-card/95 p-5 shadow-lift backdrop-blur-xl"
+            >
+              <div className="flex items-center gap-2">
+                <Gauge className="h-4 w-4 text-primary" />
+                <p className="text-xs font-semibold">Client satisfaction</p>
+              </div>
+              <p className="font-display mt-3 text-4xl">
+                <Counter value={98} suffix="%" />
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">Across all delivered projects</p>
+            </div>
+
+            {/* Floating card 2 */}
+            <div
+              data-gsap="card2"
+              className="absolute -top-4 -right-4 rounded-2xl border border-border bg-card/95 px-4 py-3 shadow-lift backdrop-blur-xl"
+            >
+              <p className="text-xs font-semibold text-primary">35% below market</p>
+              <p className="text-[10px] text-muted-foreground mt-0.5">Guaranteed pricing</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [0, 140]);

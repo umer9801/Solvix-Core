@@ -1,1 +1,0 @@
-var e=`/assets/office-team-D_d1SaTh.jpg`;export{e as t};

@@ -1,1 +1,0 @@
-var e=`/assets/project-3-BCxR7Dse.jpg`;export{e as t};
