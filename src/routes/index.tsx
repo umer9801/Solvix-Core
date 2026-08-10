@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -78,39 +78,6 @@ const accentStyles: Record<string, { bg: string; icon: string; border: string; g
 };
 
 // ─── Cycling word animation ──────────────────────────────────────────────────
-const cyclingWords = [
-  "AI That Works",
-  "Automation Systems",
-  "Web Platforms",
-  "Shopify Stores",
-  "Mobile Apps",
-  "CRM Systems",
-];
-
-function CyclingWord() {
-  const [index, setIndex] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setIndex((i) => (i + 1) % cyclingWords.length), 2500);
-    return () => clearInterval(t);
-  }, []);
-  return (
-    <span className="relative block overflow-hidden h-[1.15em]">
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={cyclingWords[index]}
-          initial={{ y: "100%", opacity: 0, filter: "blur(8px)" }}
-          animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
-          exit={{ y: "-100%", opacity: 0, filter: "blur(8px)" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="block text-primary"
-        >
-          {cyclingWords[index]}
-        </motion.span>
-      </AnimatePresence>
-    </span>
-  );
-}
-
 // ─── Hero ────────────────────────────────────────────────────────────────────
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -139,33 +106,24 @@ function Hero() {
               </div>
             </Reveal>
 
-            <h1 className="display-xl mt-7">
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="block text-foreground/50 text-[0.65em] font-normal tracking-tight mb-1"
-              >
-                We Build
-              </motion.span>
-              <CyclingWord />
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="block text-foreground text-[0.62em] font-normal tracking-tight mt-1"
-              >
-                For Ambitious Businesses
-              </motion.span>
-            </h1>
+            <motion.h1
+              className="display-xl mt-7"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Your competitors are already using{" "}
+              <span className="text-primary italic">AI and automation.</span>{" "}
+              <span className="text-foreground">Are you?</span>
+            </motion.h1>
 
-            <Reveal delay={0.5}>
-              <p className="mt-8 max-w-lg text-lg leading-relaxed text-muted-foreground">
-                Most agencies take 3 months and charge double. We deliver production-ready technology in weeks — at prices that actually make sense. AI, automation, web apps, Shopify, mobile and CRM — all under one roof.
+            <Reveal delay={0.4}>
+              <p className="mt-7 max-w-lg text-lg leading-relaxed text-muted-foreground">
+                We build AI systems, automation workflows, web platforms, Shopify stores and mobile apps that give your business an unfair advantage — delivered in weeks, not months, at 35% below market rates.
               </p>
             </Reveal>
 
-            <Reveal delay={0.6}>
+            <Reveal delay={0.55}>
               <div className="mt-5 flex flex-wrap gap-3">
                 {["35% below market rates", "Delivered in weeks", "You own the code 100%"].map((tag, i) => (
                   <motion.span

@@ -2,10 +2,10 @@ import { n as require_jsx_runtime } from "./_libs/react+tanstack__react-query.mj
 import { C as SectionHead, b as Reveal, g as PROCESS, h as PRICING, s as FAQS } from "./_ssr/primitives-C24J9EbA.mjs";
 import { v as Link } from "./_libs/@tanstack/react-router+[...].mjs";
 import { E as Check, j as ArrowUpRight } from "./_libs/lucide-react.mjs";
-import { i as CtaBand, n as Route } from "./_ssr/router-Df1P-54n.mjs";
+import { i as CtaBand, n as Route } from "./_ssr/router-Cx3hVQpZ.mjs";
 import { t as PageHero } from "./_ssr/PageHero-0EBhvYmV.mjs";
 import { t as pos_portfolio_default } from "./_ssr/pos-portfolio-BywQPkOO.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/_slug-34KDRLYe.js
+//#region node_modules/.nitro/vite/services/ssr/assets/_slug-DDffmeNc.js
 var import_jsx_runtime = require_jsx_runtime();
 var heroImages = {
 	"ai-solutions": "/assets/ai-solutions-CnUBFx81.jpeg",

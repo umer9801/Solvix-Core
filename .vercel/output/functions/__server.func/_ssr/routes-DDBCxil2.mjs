@@ -1,12 +1,12 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
-import { a as useScroll, r as useTransform, s as AnimatePresence } from "../_libs/framer-motion+[...].mjs";
+import { a as useScroll, r as useTransform } from "../_libs/framer-motion+[...].mjs";
 import { t as motion } from "../_libs/motion.mjs";
 import { C as SectionHead, E as TESTIMONIALS, S as STATS, b as Reveal, d as Marquee, g as PROCESS, i as CLIENTS, l as LuxButton, n as Blobs, o as Counter, w as SpotlightCard, x as SERVICES } from "./primitives-C24J9EbA.mjs";
 import { v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { C as Gauge, D as Brain, M as ArrowRight, O as Bot, c as Smartphone, f as Quote, i as Video, j as ArrowUpRight, l as ShoppingBag, r as Workflow, t as Zap, w as CircleCheckBig } from "../_libs/lucide-react.mjs";
-import { i as CtaBand } from "./router-Df1P-54n.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-C0QqZWM-.js
+import { i as CtaBand } from "./router-Cx3hVQpZ.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DDBCxil2.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var home_hero_default = "/assets/home-hero-C7z52xSX.PNG";
@@ -54,55 +54,6 @@ var accentStyles = {
 		grad: "from-red-50/50 to-white"
 	}
 };
-var cyclingWords = [
-	"AI That Works",
-	"Automation Systems",
-	"Web Platforms",
-	"Shopify Stores",
-	"Mobile Apps",
-	"CRM Systems"
-];
-function CyclingWord() {
-	const [index, setIndex] = (0, import_react.useState)(0);
-	(0, import_react.useEffect)(() => {
-		const t = setInterval(() => setIndex((i) => (i + 1) % cyclingWords.length), 2500);
-		return () => clearInterval(t);
-	}, []);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-		className: "relative block overflow-hidden h-[1.15em]",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, {
-			mode: "wait",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-				initial: {
-					y: "100%",
-					opacity: 0,
-					filter: "blur(8px)"
-				},
-				animate: {
-					y: "0%",
-					opacity: 1,
-					filter: "blur(0px)"
-				},
-				exit: {
-					y: "-100%",
-					opacity: 0,
-					filter: "blur(8px)"
-				},
-				transition: {
-					duration: .5,
-					ease: [
-						.16,
-						1,
-						.3,
-						1
-					]
-				},
-				className: "block text-primary",
-				children: cyclingWords[index]
-			}, cyclingWords[index])
-		})
-	});
-}
 function Hero() {
 	const ref = (0, import_react.useRef)(null);
 	const { scrollYProgress } = useScroll({
@@ -132,64 +83,49 @@ function Hero() {
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "relative inline-flex h-2 w-2 rounded-full bg-primary" })]
 							}), "Taking on new projects — Canada · UK · Pakistan · Globally"]
 						}) }),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.h1, {
 							className: "display-xl mt-7",
+							initial: {
+								opacity: 0,
+								y: 30
+							},
+							animate: {
+								opacity: 1,
+								y: 0
+							},
+							transition: {
+								duration: .8,
+								delay: .1,
+								ease: [
+									.16,
+									1,
+									.3,
+									1
+								]
+							},
 							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-									initial: {
-										opacity: 0,
-										y: 20
-									},
-									animate: {
-										opacity: 1,
-										y: 0
-									},
-									transition: {
-										duration: .6,
-										ease: [
-											.16,
-											1,
-											.3,
-											1
-										]
-									},
-									className: "block text-foreground/50 text-[0.65em] font-normal tracking-tight mb-1",
-									children: "We Build"
+								"Your competitors are already using",
+								" ",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "text-primary italic",
+									children: "AI and automation."
 								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CyclingWord, {}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
-									initial: {
-										opacity: 0,
-										y: 20
-									},
-									animate: {
-										opacity: 1,
-										y: 0
-									},
-									transition: {
-										duration: .6,
-										delay: .3,
-										ease: [
-											.16,
-											1,
-											.3,
-											1
-										]
-									},
-									className: "block text-foreground text-[0.62em] font-normal tracking-tight mt-1",
-									children: "For Ambitious Businesses"
+								" ",
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "text-foreground",
+									children: "Are you?"
 								})
 							]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
-							delay: .5,
+							delay: .4,
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "mt-8 max-w-lg text-lg leading-relaxed text-muted-foreground",
-								children: "Most agencies take 3 months and charge double. We deliver production-ready technology in weeks — at prices that actually make sense. AI, automation, web apps, Shopify, mobile and CRM — all under one roof."
+								className: "mt-7 max-w-lg text-lg leading-relaxed text-muted-foreground",
+								children: "We build AI systems, automation workflows, web platforms, Shopify stores and mobile apps that give your business an unfair advantage — delivered in weeks, not months, at 35% below market rates."
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
-							delay: .6,
+							delay: .55,
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 								className: "mt-5 flex flex-wrap gap-3",
 								children: [
