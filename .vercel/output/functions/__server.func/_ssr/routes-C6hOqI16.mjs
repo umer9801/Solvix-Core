@@ -5,11 +5,13 @@ import { t as motion } from "../_libs/motion.mjs";
 import { C as SectionHead, E as TESTIMONIALS, S as STATS, b as Reveal, d as Marquee, g as PROCESS, i as CLIENTS, l as LuxButton, n as Blobs, o as Counter, w as SpotlightCard, x as SERVICES } from "./primitives-C24J9EbA.mjs";
 import { v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { C as Gauge, D as Brain, M as ArrowRight, O as Bot, c as Smartphone, f as Quote, i as Video, j as ArrowUpRight, l as ShoppingBag, r as Workflow, t as Zap, w as CircleCheckBig } from "../_libs/lucide-react.mjs";
-import { i as CtaBand } from "./router-Cx3hVQpZ.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DDBCxil2.js
+import { n as gsapWithCSS, t as ScrollTrigger } from "../_libs/gsap.mjs";
+import { i as CtaBand } from "./router-D3-EAdY2.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-C6hOqI16.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var home_hero_default = "/assets/home-hero-C7z52xSX.PNG";
+if (typeof window !== "undefined") gsapWithCSS.registerPlugin(ScrollTrigger);
 var serviceIcons = {
 	"ai-solutions": Brain,
 	"n8n-automation": Workflow,
@@ -55,186 +57,303 @@ var accentStyles = {
 	}
 };
 function Hero() {
-	const ref = (0, import_react.useRef)(null);
+	const sectionRef = (0, import_react.useRef)(null);
+	const headlineRef = (0, import_react.useRef)(null);
+	const badgeRef = (0, import_react.useRef)(null);
+	const bodyRef = (0, import_react.useRef)(null);
+	const tagsRef = (0, import_react.useRef)(null);
+	const btnsRef = (0, import_react.useRef)(null);
+	const statsRef = (0, import_react.useRef)(null);
+	const imgRef = (0, import_react.useRef)(null);
+	const blobRef = (0, import_react.useRef)(null);
 	const { scrollYProgress } = useScroll({
-		target: ref,
+		target: sectionRef,
 		offset: ["start start", "end start"]
 	});
 	const y = useTransform(scrollYProgress, [0, 1], [0, 140]);
 	const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+	(0, import_react.useEffect)(() => {
+		if (typeof window === "undefined") return;
+		const ctx = gsapWithCSS.context(() => {
+			gsapWithCSS.from(badgeRef.current, {
+				y: -20,
+				opacity: 0,
+				duration: .6,
+				ease: "power3.out",
+				delay: .1
+			});
+			if (headlineRef.current) {
+				const words = headlineRef.current.querySelectorAll(".word");
+				gsapWithCSS.from(words, {
+					y: 60,
+					opacity: 0,
+					rotateX: -40,
+					duration: .8,
+					stagger: .07,
+					ease: "power4.out",
+					delay: .3,
+					transformOrigin: "0% 50% -50px"
+				});
+			}
+			gsapWithCSS.from(bodyRef.current, {
+				y: 30,
+				opacity: 0,
+				duration: .7,
+				ease: "power3.out",
+				delay: .85
+			});
+			if (tagsRef.current) {
+				const tags = tagsRef.current.querySelectorAll("span");
+				gsapWithCSS.from(tags, {
+					y: 20,
+					opacity: 0,
+					scale: .9,
+					duration: .5,
+					stagger: .1,
+					ease: "back.out(1.5)",
+					delay: 1
+				});
+			}
+			gsapWithCSS.from(btnsRef.current, {
+				y: 20,
+				opacity: 0,
+				duration: .6,
+				ease: "power3.out",
+				delay: 1.15
+			});
+			if (statsRef.current) {
+				const items = statsRef.current.querySelectorAll("div");
+				gsapWithCSS.from(items, {
+					x: -30,
+					opacity: 0,
+					duration: .6,
+					stagger: .12,
+					ease: "power3.out",
+					delay: 1.25
+				});
+			}
+			gsapWithCSS.from(imgRef.current, {
+				x: 80,
+				opacity: 0,
+				scale: .95,
+				duration: 1,
+				ease: "power4.out",
+				delay: .4
+			});
+			const onMove = (e) => {
+				if (!blobRef.current) return;
+				gsapWithCSS.to(blobRef.current, {
+					x: (e.clientX - window.innerWidth / 2) * .04,
+					y: (e.clientY - window.innerHeight / 2) * .04,
+					duration: 1.5,
+					ease: "power2.out"
+				});
+			};
+			window.addEventListener("mousemove", onMove);
+			ScrollTrigger.create({
+				trigger: sectionRef.current,
+				start: "top top",
+				end: "bottom top",
+				scrub: true,
+				onUpdate: (self) => {
+					if (imgRef.current) gsapWithCSS.set(imgRef.current, {
+						y: self.progress * 80,
+						scale: 1 + self.progress * .05
+					});
+				}
+			});
+			return () => window.removeEventListener("mousemove", onMove);
+		}, sectionRef);
+		return () => ctx.revert();
+	}, []);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-		ref,
+		ref: sectionRef,
 		className: "relative overflow-hidden pb-20 pt-10 md:pb-28",
 		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "pointer-events-none absolute inset-0 -z-10",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -top-16 -left-16 h-72 w-72 rounded-full bg-primary/10 blur-[80px]" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-0 right-0 h-56 w-56 rounded-full bg-primary/6 blur-[60px]" })]
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				ref: blobRef,
+				className: "pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/8 blur-[120px]"
 			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute -top-16 -left-16 -z-10 h-72 w-72 rounded-full bg-primary/8 blur-[80px]" }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute top-0 right-0 -z-10 h-56 w-56 rounded-full bg-violet/5 blur-[60px]" }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Blobs, {}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "container-lux",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							ref: badgeRef,
 							className: "inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-medium",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 								className: "relative flex h-2 w-2",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "relative inline-flex h-2 w-2 rounded-full bg-primary" })]
 							}), "Taking on new projects — Canada · UK · Pakistan · Globally"]
-						}) }),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.h1, {
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
+							ref: headlineRef,
 							className: "display-xl mt-7",
-							initial: {
-								opacity: 0,
-								y: 30
-							},
-							animate: {
-								opacity: 1,
-								y: 0
-							},
-							transition: {
-								duration: .8,
-								delay: .1,
-								ease: [
-									.16,
-									1,
-									.3,
-									1
-								]
-							},
+							style: { perspective: "600px" },
 							children: [
-								"Your competitors are already using",
+								[
+									"Your",
+									"competitors",
+									"are",
+									"already",
+									"using"
+								].map((w) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "word mr-[0.25em] inline-block",
+									children: w
+								}, w)),
 								" ",
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-primary italic",
-									children: "AI and automation."
-								}),
+								[
+									"AI",
+									"and",
+									"automation."
+								].map((w) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "word mr-[0.25em] inline-block text-primary italic",
+									children: w
+								}, w)),
 								" ",
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-foreground",
-									children: "Are you?"
-								})
+								["Are", "you?"].map((w) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "word mr-[0.25em] inline-block",
+									children: w
+								}, w))
 							]
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
-							delay: .4,
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "mt-7 max-w-lg text-lg leading-relaxed text-muted-foreground",
-								children: "We build AI systems, automation workflows, web platforms, Shopify stores and mobile apps that give your business an unfair advantage — delivered in weeks, not months, at 35% below market rates."
-							})
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							ref: bodyRef,
+							className: "mt-7 max-w-lg text-lg leading-relaxed text-muted-foreground",
+							children: "We build AI systems, automation workflows, web platforms, Shopify stores and mobile apps that give your business an unfair advantage — delivered in weeks, not months, at 35% below market rates."
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
-							delay: .55,
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "mt-5 flex flex-wrap gap-3",
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							ref: tagsRef,
+							className: "mt-5 flex flex-wrap gap-3",
+							children: [
+								"35% below market rates",
+								"Delivered in weeks",
+								"You own the code 100%"
+							].map((tag) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+								className: "inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-semibold text-primary",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "h-1.5 w-1.5 rounded-full bg-primary" }), tag]
+							}, tag))
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							ref: btnsRef,
+							className: "mt-10 flex flex-wrap items-center gap-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								to: "/contact",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(LuxButton, { children: ["Start a project ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "h-4 w-4" })] })
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+								to: "/services",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LuxButton, {
+									variant: "ghost",
+									children: "Explore services"
+								})
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dl", {
+							ref: statsRef,
+							className: "mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8",
+							children: STATS.slice(0, 3).map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", {
+								className: "font-display text-3xl",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Counter, {
+									value: s.value,
+									suffix: s.suffix
+								})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", {
+								className: "mt-1 text-xs text-muted-foreground",
+								children: s.label
+							})] }, s.label))
+						})
+					] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						ref: imgRef,
+						className: "relative hidden lg:block",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+								style: {
+									y,
+									scale
+								},
+								className: "relative overflow-hidden rounded-[2.5rem] border border-border shadow-lift",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+									src: home_hero_default,
+									alt: "Solvix Core",
+									width: 1408,
+									height: 1200,
+									className: "h-full w-full object-cover"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent" })]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+								initial: {
+									opacity: 0,
+									y: 20
+								},
+								animate: {
+									opacity: 1,
+									y: 0
+								},
+								transition: {
+									delay: 1.2,
+									duration: .8,
+									ease: [
+										.16,
+										1,
+										.3,
+										1
+									]
+								},
+								className: "absolute -bottom-8 -left-6 w-64 rounded-3xl border border-border bg-card/95 p-5 shadow-lift backdrop-blur-xl",
 								children: [
-									"35% below market rates",
-									"Delivered in weeks",
-									"You own the code 100%"
-								].map((tag, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.span, {
-									initial: {
-										opacity: 0,
-										scale: .9
-									},
-									animate: {
-										opacity: 1,
-										scale: 1
-									},
-									transition: { delay: .7 + i * .1 },
-									className: "inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-semibold text-primary",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "h-1.5 w-1.5 rounded-full bg-primary" }), tag]
-								}, tag))
-							})
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
-							delay: .76,
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "mt-10 flex flex-wrap items-center gap-4",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-									to: "/contact",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(LuxButton, { children: ["Start a project ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "h-4 w-4" })] })
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
-									to: "/services",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LuxButton, {
-										variant: "ghost",
-										children: "Explore services"
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center gap-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Gauge, { className: "h-4 w-4 text-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-xs font-semibold",
+											children: "Client satisfaction"
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "font-display mt-3 text-4xl",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Counter, {
+											value: 98,
+											suffix: "%"
+										})
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "mt-1 text-xs text-muted-foreground",
+										children: "Across all delivered projects"
 									})
+								]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
+								initial: {
+									opacity: 0,
+									x: 20
+								},
+								animate: {
+									opacity: 1,
+									x: 0
+								},
+								transition: {
+									delay: 1.5,
+									duration: .7,
+									ease: [
+										.16,
+										1,
+										.3,
+										1
+									]
+								},
+								className: "absolute -top-6 -right-4 rounded-2xl border border-border bg-card/95 px-4 py-3 shadow-lift backdrop-blur-xl",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-xs font-semibold text-primary",
+									children: "35% below market"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-[10px] text-muted-foreground mt-0.5",
+									children: "Guaranteed pricing"
 								})]
 							})
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Reveal, {
-							delay: .74,
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dl", {
-								className: "mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8",
-								children: STATS.slice(0, 3).map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", {
-									className: "font-display text-3xl",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Counter, {
-										value: s.value,
-										suffix: s.suffix
-									})
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", {
-									className: "mt-1 text-xs text-muted-foreground",
-									children: s.label
-								})] }, s.label))
-							})
-						})
-					] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
-						style: {
-							y,
-							scale
-						},
-						className: "relative hidden lg:block",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "relative overflow-hidden rounded-[2.5rem] border border-border shadow-lift",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-								src: home_hero_default,
-								alt: "Solvix Core home hero",
-								width: 1408,
-								height: 1200,
-								className: "h-full w-full object-cover"
-							})
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion.div, {
-							initial: {
-								opacity: 0,
-								y: 20
-							},
-							animate: {
-								opacity: 1,
-								y: 0
-							},
-							transition: {
-								delay: 1,
-								duration: .8,
-								ease: [
-									.16,
-									1,
-									.3,
-									1
-								]
-							},
-							className: "absolute -bottom-8 -left-6 w-64 rounded-3xl border border-border bg-card/90 p-5 shadow-lift backdrop-blur-xl",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex items-center gap-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Gauge, { className: "h-4 w-4 text-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "text-xs font-semibold",
-										children: "Client satisfaction"
-									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "font-display mt-3 text-4xl",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Counter, {
-										value: 98,
-										suffix: "%"
-									})
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "mt-1 text-xs text-muted-foreground",
-									children: "Across all delivered projects"
-								})
-							]
-						})]
+						]
 					})]
 				})
 			})

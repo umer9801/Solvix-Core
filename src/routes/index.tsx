@@ -1,6 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 import {
   ArrowRight,
   ArrowUpRight,
@@ -80,108 +86,213 @@ const accentStyles: Record<string, { bg: string; icon: string; border: string; g
 // ─── Cycling word animation ──────────────────────────────────────────────────
 // ─── Hero ────────────────────────────────────────────────────────────────────
 function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const sectionRef = useRef<HTMLElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLParagraphElement>(null);
+  const tagsRef = useRef<HTMLDivElement>(null);
+  const btnsRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDListElement>(null);
+  const imgRef = useRef<HTMLDivElement>(null);
+  const blobRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [0, 140]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const ctx = gsap.context(() => {
+      // ── 1. Badge slides down ─────────────────────────
+      gsap.from(badgeRef.current, {
+        y: -20, opacity: 0, duration: 0.6, ease: "power3.out", delay: 0.1,
+      });
+
+      // ── 2. Headline words stagger in from bottom ─────
+      if (headlineRef.current) {
+        // Split words manually
+        const words = headlineRef.current.querySelectorAll(".word");
+        gsap.from(words, {
+          y: 60, opacity: 0, rotateX: -40,
+          duration: 0.8, stagger: 0.07, ease: "power4.out", delay: 0.3,
+          transformOrigin: "0% 50% -50px",
+        });
+      }
+
+      // ── 3. Body paragraph ────────────────────────────
+      gsap.from(bodyRef.current, {
+        y: 30, opacity: 0, duration: 0.7, ease: "power3.out", delay: 0.85,
+      });
+
+      // ── 4. Tags stagger ──────────────────────────────
+      if (tagsRef.current) {
+        const tags = tagsRef.current.querySelectorAll("span");
+        gsap.from(tags, {
+          y: 20, opacity: 0, scale: 0.9, duration: 0.5,
+          stagger: 0.1, ease: "back.out(1.5)", delay: 1.0,
+        });
+      }
+
+      // ── 5. Buttons ───────────────────────────────────
+      gsap.from(btnsRef.current, {
+        y: 20, opacity: 0, duration: 0.6, ease: "power3.out", delay: 1.15,
+      });
+
+      // ── 6. Stats count up from left ──────────────────
+      if (statsRef.current) {
+        const items = statsRef.current.querySelectorAll("div");
+        gsap.from(items, {
+          x: -30, opacity: 0, duration: 0.6,
+          stagger: 0.12, ease: "power3.out", delay: 1.25,
+        });
+      }
+
+      // ── 7. Image slides in from right ────────────────
+      gsap.from(imgRef.current, {
+        x: 80, opacity: 0, scale: 0.95, duration: 1.0,
+        ease: "power4.out", delay: 0.4,
+      });
+
+      // ── 8. Parallax blob follows mouse ───────────────
+      const onMove = (e: MouseEvent) => {
+        if (!blobRef.current) return;
+        gsap.to(blobRef.current, {
+          x: (e.clientX - window.innerWidth / 2) * 0.04,
+          y: (e.clientY - window.innerHeight / 2) * 0.04,
+          duration: 1.5, ease: "power2.out",
+        });
+      };
+      window.addEventListener("mousemove", onMove);
+
+      // ── 9. ScrollTrigger — image scale on scroll ─────
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+        onUpdate: (self) => {
+          if (imgRef.current) {
+            gsap.set(imgRef.current, {
+              y: self.progress * 80,
+              scale: 1 + self.progress * 0.05,
+            });
+          }
+        },
+      });
+
+      return () => window.removeEventListener("mousemove", onMove);
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Split headline into word spans for GSAP
+  const headlineWords = [
+    "Your", "competitors", "are", "already", "using"
+  ];
+  const headlineHighlight = ["AI", "and", "automation."];
+  const headlineEnd = ["Are", "you?"];
+
   return (
-    <section ref={ref} className="relative overflow-hidden pb-20 pt-10 md:pb-28">
-      {/* Subtle gradient blobs */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-16 -left-16 h-72 w-72 rounded-full bg-primary/10 blur-[80px]" />
-        <div className="absolute top-0 right-0 h-56 w-56 rounded-full bg-primary/6 blur-[60px]" />
-      </div>
+    <section ref={sectionRef} className="relative overflow-hidden pb-20 pt-10 md:pb-28">
+      {/* Mouse-tracking gradient blob */}
+      <div
+        ref={blobRef}
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/8 blur-[120px]"
+      />
+      <div className="pointer-events-none absolute -top-16 -left-16 -z-10 h-72 w-72 rounded-full bg-primary/8 blur-[80px]" />
+      <div className="pointer-events-none absolute top-0 right-0 -z-10 h-56 w-56 rounded-full bg-violet/5 blur-[60px]" />
       <Blobs />
+
       <div className="container-lux">
         <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
-            <Reveal>
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-medium">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+            {/* Badge */}
+            <div ref={badgeRef} className="inline-flex items-center gap-2.5 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-medium">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              </span>
+              Taking on new projects — Canada · UK · Pakistan · Globally
+            </div>
+
+            {/* Headline — each word wrapped for GSAP */}
+            <h1 ref={headlineRef} className="display-xl mt-7" style={{ perspective: "600px" }}>
+              {headlineWords.map((w) => (
+                <span key={w} className="word mr-[0.25em] inline-block">{w}</span>
+              ))}{" "}
+              {headlineHighlight.map((w) => (
+                <span key={w} className="word mr-[0.25em] inline-block text-primary italic">{w}</span>
+              ))}{" "}
+              {headlineEnd.map((w) => (
+                <span key={w} className="word mr-[0.25em] inline-block">{w}</span>
+              ))}
+            </h1>
+
+            {/* Body */}
+            <p ref={bodyRef} className="mt-7 max-w-lg text-lg leading-relaxed text-muted-foreground">
+              We build AI systems, automation workflows, web platforms, Shopify stores and mobile apps that give your business an unfair advantage — delivered in weeks, not months, at 35% below market rates.
+            </p>
+
+            {/* Tags */}
+            <div ref={tagsRef} className="mt-5 flex flex-wrap gap-3">
+              {["35% below market rates", "Delivered in weeks", "You own the code 100%"].map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-semibold text-primary"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  {tag}
                 </span>
-                Taking on new projects — Canada · UK · Pakistan · Globally
-              </div>
-            </Reveal>
+              ))}
+            </div>
 
-            <motion.h1
-              className="display-xl mt-7"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            >
-              Your competitors are already using{" "}
-              <span className="text-primary italic">AI and automation.</span>{" "}
-              <span className="text-foreground">Are you?</span>
-            </motion.h1>
+            {/* Buttons */}
+            <div ref={btnsRef} className="mt-10 flex flex-wrap items-center gap-4">
+              <Link to="/contact">
+                <LuxButton>
+                  Start a project <ArrowRight className="h-4 w-4" />
+                </LuxButton>
+              </Link>
+              <Link to="/services">
+                <LuxButton variant="ghost">Explore services</LuxButton>
+              </Link>
+            </div>
 
-            <Reveal delay={0.4}>
-              <p className="mt-7 max-w-lg text-lg leading-relaxed text-muted-foreground">
-                We build AI systems, automation workflows, web platforms, Shopify stores and mobile apps that give your business an unfair advantage — delivered in weeks, not months, at 35% below market rates.
-              </p>
-            </Reveal>
-
-            <Reveal delay={0.55}>
-              <div className="mt-5 flex flex-wrap gap-3">
-                {["35% below market rates", "Delivered in weeks", "You own the code 100%"].map((tag, i) => (
-                  <motion.span
-                    key={tag}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.7 + i * 0.1 }}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-semibold text-primary"
-                  >
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                    {tag}
-                  </motion.span>
-                ))}
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.76}>
-              <div className="mt-10 flex flex-wrap items-center gap-4">
-                <Link to="/contact">
-                  <LuxButton>
-                    Start a project <ArrowRight className="h-4 w-4" />
-                  </LuxButton>
-                </Link>
-                <Link to="/services">
-                  <LuxButton variant="ghost">Explore services</LuxButton>
-                </Link>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.74}>
-              <dl className="mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8">
-                {STATS.slice(0, 3).map((s) => (
-                  <div key={s.label}>
-                    <dt className="font-display text-3xl">
-                      <Counter value={s.value} suffix={s.suffix} />
-                    </dt>
-                    <dd className="mt-1 text-xs text-muted-foreground">{s.label}</dd>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
+            {/* Stats */}
+            <dl ref={statsRef} className="mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8">
+              {STATS.slice(0, 3).map((s) => (
+                <div key={s.label}>
+                  <dt className="font-display text-3xl">
+                    <Counter value={s.value} suffix={s.suffix} />
+                  </dt>
+                  <dd className="mt-1 text-xs text-muted-foreground">{s.label}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
-          <motion.div style={{ y, scale }} className="relative hidden lg:block">
-            <div className="relative overflow-hidden rounded-[2.5rem] border border-border shadow-lift">
+          {/* Hero image */}
+          <div ref={imgRef} className="relative hidden lg:block">
+            <motion.div style={{ y, scale }} className="relative overflow-hidden rounded-[2.5rem] border border-border shadow-lift">
               <img
                 src={homeHero}
-                alt="Solvix Core home hero"
+                alt="Solvix Core"
                 width={1408}
                 height={1200}
                 className="h-full w-full object-cover"
               />
-            </div>
+              {/* Shimmer overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent" />
+            </motion.div>
+
+            {/* Floating card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute -bottom-8 -left-6 w-64 rounded-3xl border border-border bg-card/90 p-5 shadow-lift backdrop-blur-xl"
+              transition={{ delay: 1.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute -bottom-8 -left-6 w-64 rounded-3xl border border-border bg-card/95 p-5 shadow-lift backdrop-blur-xl"
             >
               <div className="flex items-center gap-2">
                 <Gauge className="h-4 w-4 text-primary" />
@@ -192,7 +303,18 @@ function Hero() {
               </p>
               <p className="mt-1 text-xs text-muted-foreground">Across all delivered projects</p>
             </motion.div>
-          </motion.div>
+
+            {/* Second floating badge */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1.5, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute -top-6 -right-4 rounded-2xl border border-border bg-card/95 px-4 py-3 shadow-lift backdrop-blur-xl"
+            >
+              <p className="text-xs font-semibold text-primary">35% below market</p>
+              <p className="text-[10px] text-muted-foreground mt-0.5">Guaranteed pricing</p>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
